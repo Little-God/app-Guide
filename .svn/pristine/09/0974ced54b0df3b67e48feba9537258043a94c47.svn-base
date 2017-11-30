@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<style>
+			.mui-content {
+				margin-bottom: 30px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title" style="color: #333333;" id="pageTitle">盘点数据</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" id="inStorageData">
+				<!--<li class="mui-table-view-cell">
+					<div class="mui-table">
+						<div class="mui-table-cell mui-col-xs-8">
+							<h4>条码：ADFADFDAF</h4>
+							<p class="mui-h6 mui-ellipsis">货号:123adk-a 尺码：XL 颜色：蓝色</p>
+						</div>
+						<div class="mui-table-cell mui-col-xs-4 mui-text-right">
+							<h5>数量：1</h5>
+							<p class="mui-h6 mui-ellipsis">2017-05-22 15:28</p>
+						</div>
+					</div>
+				</li>-->
+			</ul>
+		</div>
+		<div class="mui-bar mui-bar-footer">
+			<div class="mui-flex">
+				<div class="mui-flex1 txm" id="uploadData">
+					<span class="mui-icon mui-icon-upload" style="font-size: 20px;top:1px;"></span>上传数据
+				</div>
+				<div class="" style="height: 30px;width: 1px;border-left: 1px solid #AAAAAA;margin-top: 6px;"></div>
+				<div class="mui-flex1 txm" id="clearHis">
+					<span class="mui-icon mui-icon-trash" style="font-size: 16px;"></span>清空记录
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var view = null;
+			var areaId = null,
+				areaName = null;
+			mui.init({
+				beforeback: function() {
+					//获得列表界面的webview  
+					var list = plus.webview.currentWebview().opener();
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新  
+					mui.fire(list, 'refresh');
+					//返回true，继续页面关闭逻辑  
+					return true;
+				}
+			});
+			mui.plusReady(function() {
+				view = new App();
+				loadInStorageData();
+					var self = plus.webview.currentWebview();
+				areaId = self.areaId;
+				areaName = self.areaName
+				document.getElementById('pageTitle').innerHTML = self.areaName + "-盘点数据";
+			});
+			//加载购物车列表
+			function loadInStorageData() {
+				//加载扫描数据
+				view.DBquery('select * from stockInventory', function(len, inStorageData) {
+					var datahtml = "";
+					mui.each(inStorageData, function(index, _data) {
+						console.log("拿到数据了:" + JSON.stringify(_data));
+						datahtml += '<li class="mui-table-view-cell">' +
+							'<div class="mui-table">' +
+							'<div class="mui-table-cell mui-col-xs-8">' +
+							'<h4>条码:' + _data['barCode'] + '</h4>' +
+							'<p class="mui-h6 mui-ellipsis">货号:' + _data['stockSku'] + ' 尺码:' + _data['size'] + ' 颜色:' + _data['goodsColor'] + '</p>' +
+							'</div>' +
+							'<div class="mui-table-cell mui-col-xs-4 mui-text-right">' +
+							'<h5>数量:' + _data['num'] + '</h5>' +
+							'<p class="mui-h6 mui-ellipsis">区域:' + _data['areaName'] + '</p>' +
+							'</div>' +
+							'</div>' +
+							'</li>';
+					});
+					document.getElementById("inStorageData").innerHTML = datahtml;
+				}, function(error) {
+					console.log(error.message);
+				});
+			}
+			document.getElementById("clearHis").addEventListener('tap', function(e) {
+				view.DBDML('delete from stockInventory', function(res) {
+					mui.toast("清空历史记录成功！");
+					loadInStorageData();
+				}, function(error) {
+					console.log(error.message);
+				});
+			});
+			document.getElementById("uploadData").addEventListener('tap', function(e) {
+				var uinfo = plus.storage.getItem("uinfo");
+				uarr = JSON.parse(uinfo);
+				var sql = "select * from stockInventory;";
+				view.DBquery(sql, function(len, stocksData) {
+					view.AppHttpService({
+						action: 'Goods/store_inventory_sure',
+						data: {
+							guideId: uarr.guideId,
+							userToken: uarr.userToken,
+							storeId: uarr.userBelong,
+							areaId: areaId,
+							lists: stocksData
+						}
+					}, function(response) {
+						if(response.code == '200') {
+                             mui.toast("上传成功!");
+						}else{
+							mui.toast(response.message);
+						}
+					});
+				}, function(error) {
+					console.log(error.message);
+				});
+			});
+		</script>
+	</body>
+
+</html>

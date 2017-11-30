@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			body,.mui-content,.mui-grid-view.mui-grid-9{background: white;}
+			li{height: 100px;line-height: 44px;}
+			.iconfont{font-size: 50px;position: relative;}
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell,.mui-grid-view.mui-grid-9{border: none;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		    <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+			</button>
+			<h1 class="mui-title">分享中心</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+		    <ul class="mui-table-view mui-grid-view mui-grid-9">
+				<li class="mui-table-view-cell mui-media mui-col-xs-4">
+					
+						<span class="iconfont icon-fenxiang2" style="font-size: 46px;color: #ff821c;"></span>
+						<div class="mui-media-body">分享店铺</div>
+					
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4">
+					
+						<span class="iconfont icon-liulan" style="font-size: 52px;top: 2px;color: #3bc993;"></span>
+						<div class="mui-media-body">预览店铺</div>
+					
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4" tourl="activityshare.html">
+					
+						<span class="iconfont icon-huodong" style="font-size: 54px;top: 4px;color: #f96245;"></span>
+						<div class="mui-media-body">店铺活动</div>
+					
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4">
+					
+						<span class="iconfont icon-youhuiquan-copy" style="color: #fcaf17;"></span>
+						<div class="mui-media-body">优惠券</div>
+					
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4" tourl="showimg.html">
+					
+						<span class="iconfont icon-zhutu" style="font-size: 52px;color: #f04336;"></span>
+						<div class="mui-media-body">晒图</div>
+					
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-4">
+					
+						<span class="iconfont icon-shangpinguanli" style="font-size: 45px;top: -4px;color: #4a95f1;"></span>
+						<div class="mui-media-body">商品</div>
+					
+				</li>
+			</ul>
+
+		</div>
+		
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+		        view=new App();
+		        //主列表点击事件
+				mui('body').on('tap', 'li', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				
+		    });
+		</script>
+	</body>
+
+</html>

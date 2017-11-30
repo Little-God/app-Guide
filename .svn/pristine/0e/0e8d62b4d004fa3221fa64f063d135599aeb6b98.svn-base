@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.mui-table-view-cell.mui-checkbox input[type=checkbox] {
+				top: 28px;
+			}
+			
+			.confirmbtn {
+				color: white;
+				background: #AAAAAA;
+				line-height: 28px;
+				border-radius: 3px;
+				padding: 0 8px;
+				margin-top: 8px;
+			}
+			
+			.mui-bar-footer {
+				background: white;
+				box-shadow: none;
+			}
+			
+			.mui-table-view:after {
+				height: 0px;
+			}
+			
+			.editshop:last-of-type {
+				color: #AAAAAA;
+				font-size: 14px;
+			}
+			
+			.checkedbox {
+				border: none !important;
+			}
+			
+			.billing {
+				background: #ff5b0f;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+			</button>
+			<h1 class="mui-title">收银开单</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="cashier">立即开单</button>
+		</header>
+		<div class="mui-content">
+			<!--中间添加按钮-->
+			<div class="addshopbox" style="display: none;">
+				<div class="addshop">
+					<span class="iconfont icon-plus" style="color: #AAAAAA;"></span>
+				</div>
+				<p>查询列表中添加</p>
+			</div>
+			<!--商品详情-->
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-checkbox mui-left  mui-media">
+					<input name="checkbox" type="checkbox">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="../images/dfgoods.png">
+						<div class="mui-media-body">
+							<p class="mui-pull-right cl-orang">￥121.00<br><span class="mui-pull-right cl-gray">x1</span></p>
+							<p class='mui-col-xs-8 buy-shoptitle'>2017春季新款童装17111753男童弧形分皇嘉富豪家纺</p>
+							<h6>尺寸：100cm<br>颜色：牛仔蓝</h6>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-checkbox mui-left  mui-media">
+					<input name="checkbox" type="checkbox">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="../images/dfgoods.png">
+						<div class="mui-media-body">
+							<p class="mui-pull-right cl-orang">￥121.00<br><span class="mui-pull-right cl-gray">x1</span></p>
+							<p class='mui-col-xs-8 buy-shoptitle'>2017春季新款童装17111753男童弧形分皇嘉富豪家纺</p>
+							<h6>尺寸：100cm<br>颜色：牛仔蓝</h6>
+						</div>
+					</a>
+				</li>
+			</ul>
+			<!--底部按钮-->
+			<div class="mui-bar mui-bar-footer">
+				<div class="mui-flex">
+					<div class="mui-flex1 footernav" id="scanBarcode">
+						<div class="iconfont icon-saoma2" style="font-size: 20px;height: 16px;"></div>
+						<div class="cashiernavtxt">
+							扫码添加
+						</div>
+					</div>
+					<div class="cashierline"></div>
+					<div class="mui-flex1 footernav" id="addGoods">
+						<div class="iconfont icon-plus" style="font-size: 16px;height: 18px;margin-top: -2px;"></div>
+						<div class="cashiernavtxt">
+							添加商品
+						</div>
+					</div>
+					<div class="cashierline"></div>
+					<div class="mui-flex1 footernav" id="editgoods">
+						<div class="iconfont icon-bianji" style="font-size:18px;margin-top: -2px;height: 18px;"></div>
+						<div class="cashiernavtxt">
+							编辑商品
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				//主列表点击事件
+				document.getElementById("cashier").addEventListener('tap', function(e) {
+					view.AppCreateWindow("confirmOrder.html");
+				});
+			//主列表点击事件
+				document.getElementById("scanBarcode").addEventListener('tap', function(e) {
+						var extras = {
+						scanType:'cashier'
+					};
+					view.AppCreateWindow("../scan/simpleScan.html", null, null, extras);
+				});
+				//主列表点击事件
+				document.getElementById("addGoods").addEventListener('tap', function(e) {
+					view.AppCreateWindow("confirmOrder.html");
+				});
+				//主列表点击事件
+				document.getElementById("editgoods").addEventListener('tap', function(e) {
+					view.AppCreateWindow("editgoods.html");
+				});
+			});
+		</script>
+	</body>
+
+</html>

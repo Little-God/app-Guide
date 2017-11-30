@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.confirmbtn{text-decoration: none;}
+			.mui-title{height: 40px !important;width: 40px !important;border-radius: 20px !important;background: url(../images/arclist/face.png)no-repeat;background-size: cover;margin-top: 2px !important;}
+			.del{color: red;text-decoration: underline;}
+			.mui-backdrop{display: none;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+			<div class="mui-title"></div>
+			<span class="mui-pull-right orange confirmbtn ">分享</div>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+		    <div class="infoimg">
+		    	<img src="http://dcloudio.github.io/mui/assets/img/yuantiao.jpg"/>
+			</div>
+			<div class="sharetext">
+				<span class=""></span>晒图说明介绍啊
+				<div class="deldiv"><span class="iconfont icon-shanchu"></span><span class="del">删除</span></div>
+			</div>
+			<ul class="mui-table-view shoplist">
+				<li class="mui-table-view-cell  mui-flex">
+					<!--商品图片-->
+					<div class="allshopimgsrc">
+						<img src="../images/arclist/face.png"/>
+					</div>
+					<!--右半部分详情-->
+					<div class="allshopinfobox mui-flex1">
+						<div class="allshoptitle">
+							2017春季新款童装  X17111908男童贰胎假两件裤
+						</div>
+						<div class="pricebox">
+							<span class="price mui-pull-left">￥:74.00</span>
+						</div>
+						
+					</div>
+				</li>
+				<li class="mui-table-view-cell  mui-flex">
+					<!--商品图片-->
+					<div class="allshopimgsrc">
+						<img src="../images/arclist/face.png"/>
+					</div>
+					<!--右半部分详情-->
+					<div class="allshopinfobox mui-flex1">
+						<div class="allshoptitle">
+							2017春季新款童装  X17111908男童贰胎假两件裤
+						</div>
+						<div class="pricebox">
+							<span class="price mui-pull-left">￥:74.00</span>
+						</div>
+						
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!--分享遮罩层-->
+		<div class="mui-backdrop">
+			<div class="sharebox">
+				<div class="bgbox">
+					<p class="mui-text-center">分享</p>
+					<ul class="shareicon">
+						<li>
+							<div class="iconfont icon-weixin" style="background: #09bb07;">
+								
+							</div>
+							微信好友
+						</li>
+						<li>
+							<div class="iconfont icon-pengyouquan" style="background: #09bb07;">
+								
+							</div>
+							朋友圈
+						</li>
+						<li>
+							<div class="iconfont icon-qq" style="background: #4a90e2;">
+								
+							</div>
+							QQ好友
+						</li>
+						<li>
+							<div class="iconfont icon-kongjian" style="background: #f3d82b;">
+								
+							</div>
+							QQ空间
+						</li>
+						<li>
+							<div class="iconfont icon-lianjie" style="background: #fb6622;">
+								
+							</div>
+							复制链接
+						</li>
+						<li> 
+							<div class="iconfont icon-102" style="background:#4a90e2;">
+								
+							</div>
+							我的客户
+						</li>
+					</ul>	
+				</div>
+				<button type="button" class="mui-btn shareqx">取消</button>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var abc=false;
+			mui('body').on('tap','.confirmbtn',function(){
+				$('.mui-backdrop').fadeIn(); 
+				$('.sharebox').animate({'bottom':'0px'},300);
+			});
+			$('.bgbox').click(function(){
+				abc=true;
+			});
+			$('.mui-backdrop').on('click',function(){		
+				if(abc==false){
+					$('.mui-backdrop').fadeOut();
+					$('.sharebox').animate({'bottom':'-300px'},300);
+				}else{
+					abc=false;
+				}
+			});
+			mui.plusReady(function(){
+				var oldback = mui.back;
+				mui.back=function(){
+					if(!$('.mui-backdrop').is(":hidden")){
+						$('.mui-backdrop').fadeOut();
+						$('.sharebox').animate({'bottom':'-300px'},300);
+					}else{
+						oldback ();
+					}
+				};
+			})
+		</script>
+	</body>
+
+</html>

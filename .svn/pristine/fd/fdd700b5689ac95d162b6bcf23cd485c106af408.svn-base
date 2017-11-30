@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>钱包充值</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<style type="text/css">
+			header {
+				background: white !important;
+			}
+			.mui-content{
+				width: 95%;
+				margin: 0 auto;
+			}
+			.mui-btn-block{
+				width: 95%;
+			}
+			.iconfont{
+				margin-right: 10px;
+			}
+			.mui-input-group {
+			     background-color: inherit; 
+			}
+			.mui-input-group:before {
+			     height: 0px; 
+			}
+			.mui-input-group .mui-input-row:after {
+			     height: 0px; 
+			}
+			.mui-input-group:after {
+			     height: 0px; 
+			}
+			.mui-btn-block {
+			    padding: 10px 0;
+			}
+			.protocol{
+				font-size: 13px;
+				text-align: center;
+			}
+			.protocol span{
+				color: #dd524d;
+				margin-left: 3px;
+			}
+			.mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before {
+			    font-size: 20px;
+			    line-height: 1.6;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">钱包充值</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<div style="padding: 10px;">充值金额</div>
+			<div class="mui-col-xs-6 mui-pull-left">
+				<button type="button" class="mui-btn mui-btn-danger mui-btn-block recharge btn-money">100元</button>
+			</div>
+			<div class="mui-col-xs-6 mui-pull-right">
+				<button type="button" class="mui-btn mui-btn-block recharge btn-money">50元</button>
+			</div>
+			<div class="mui-col-xs-6 mui-pull-left">
+				<button type="button" class="mui-btn mui-btn-block recharge btn-money">20元</button>
+			</div>
+			<div class="mui-col-xs-6 mui-pull-left">
+				<button type="button" class="mui-btn mui-btn-block recharge btn-money">10元</button>
+			</div>
+			<div class="mui-col-xs-6 mui-pull-left">
+				<button type="button" class="mui-btn mui-btn-block recharge btn-money">5元</button>
+			</div>
+			<div class="clear"></div>
+			<!--选择支付方式-->
+			<form class="mui-input-group">
+				<div class="mui-input-row mui-radio">
+					<label><i class="iconfont" style="color: #00c801;">&#xe6cf;</i>微信</label>
+					<input name="radio1" type="radio">
+				</div>
+				<div class="mui-input-row mui-radio">
+					<label for="2"><i class="iconfont" style="color: #0699e1;">&#xe623;</i>支付宝</label>
+					<input name="radio1" type="radio" id="2" checked>
+				</div>
+			</form>
+				
+			
+			
+			<div class="btn-bottom">
+				<p class="protocol">点击去充值，即表示已阅读并同意<span>充值协议</span></p>
+				<button type="button" class="mui-btn mui-btn-danger mui-btn-block recharge" style="width: 100%;margin-top: 20px;">充值</button>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+				
+			mui('body').on('tap', '.btn-money', function() {
+				var btn = document.getElementsByClassName("btn-money");
+				for(var i=0;i<btn.length;i++){
+					btn[i].setAttribute("class","mui-btn mui-btn-block recharge btn-money");
+				}
+				this.setAttribute("class","mui-btn mui-btn-danger mui-btn-block recharge btn-money");
+				});	
+			
+			
+		</script>
+	</body>
+
+</html>

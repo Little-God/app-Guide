@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的权限</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			header {
+				background: white !important;
+			}
+			
+			.evaluate-banner {
+				position: relative;
+			}
+			
+			.evaluate-content {
+				padding:0px 15px 15px 15px;
+			}
+			.evaluate-content button{
+				margin-right: 5px;
+				position: relative;
+				float: left;
+			}
+			.banner-text {
+				position: absolute;
+				top: 40%;
+				width: 100%;
+			}
+			
+			.banner-text p {
+				text-align: center;
+				margin-bottom: 5px;
+			}
+			
+			.now {
+				font-size: 30px;
+				color: #bbb;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">我的评价</h1>
+
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<div class="evaluate-banner">
+				<div style="width: 100%;"><img src="../images/myevaluate.jpg" alt="" class="img-resposive" /></div>
+				<div class="banner-text">
+					<p>钻石数</p>
+					<p class="now">1</p>
+					<p>/500</p>
+				</div>
+			</div>
+			<div class="mui-content-padded">
+				<h5 >他们对我的印象：<a class="mui-pull-right" id="evaluateDetail">评价明细</a></h5>
+			</div>
+			<div class="evaluate-content" id="evaluateData">
+
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var view=null;
+			mui.init();
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('#FF5607');
+				view = new App();
+				loadData();
+			});
+			function loadData() {
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+				view.AppHttpService({
+					action: 'Guide/evalute',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						var datahtml = "";
+					     mui.each(response.data, function(index, _data) {
+						datahtml += '<button type="button" class="mui-btn cl-gray">'+_data.evaluation_label+"  "+_data.count+'</button>';
+					});
+					console.log(datahtml);
+					document.getElementById("evaluateData").innerHTML = datahtml;
+					} else {
+						plus.nativeUI.toast(response.message);
+					}
+				});
+			}
+			document.getElementById("evaluateDetail").addEventListener('tap', function(e) {
+				view.AppCreateWindow("evaluateDetail.html");
+			});
+		</script>
+	</body>
+
+</html>

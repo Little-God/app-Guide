@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			html,
+			body,
+			.mui-content {
+				height: 100%;
+				background: #fc0 url(https://qncdn.qiakr.com/mobile/numberbg.jpg) no-repeat;
+				background-size: 100% 100%;
+			}
+			
+			.storename {
+				color: #AAAAAA;
+				font-size: 14px;
+				text-align: center;
+			}
+			
+			#imgcode {
+				width: 100%;
+				height: auto;
+				margin-top: 10px;
+			}
+			
+			.other {
+				display: inline-block;
+				border-radius: 15px;
+				background: red;
+				padding: 4px 15px;
+				line-height: 30px;
+				color: white;
+			}
+			
+			.mui-backdrop {
+				display: none;
+			}
+			
+			.orderinfobox {
+				width: 80%;
+				margin: 15% auto;
+				padding: 15% 15%;
+			}
+			
+			.orderinfobox .avatar {
+				position: absolute;
+				top: -30px;
+				left: 50%;
+				margin-left: -30px;
+				border: solid 2px #fff;
+			}
+			
+			.orderinfobox .uname {
+				text-align: center;
+				font-size: 14px;
+			}
+			
+			.orderinfobox .qrcode {
+				width: 100%;
+			}
+			
+			.orderinfobox .wave {
+				position: absolute;
+				bottom: -18px;
+				height: 20px;
+				background: url(https://qncdn.qiakr.com/mobile/wavebackup.png?v=2) repeat-x;
+				width: 100%;
+				left: 0;
+			}
+			
+			.mui-table-view.mui-grid-view {
+				padding: 0 40px 10px 0;
+			}
+			
+			.mui-popover .mui-media-body {
+				font-size: 12px!important;
+				color: #999!important;
+			}
+			
+			.mui-popover.mui-popover-action .mui-table-view .mui-table-view-cell::after {
+				height: 0px;
+			}
+			
+			.iconfont {
+				font-size: 35px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">邀请会员</h1>
+			<a class="iconfont icon-fenxiang1 mui-pull-right" style="font-size: 26px;margin-top: 10px;" href="#sharepop"></a>
+		</header>
+		<div class="mui-content">
+			<div class="orderinfobox">
+				<img class="orderimgbox" id="userHead" src="../images/arclist/face.png" />
+				<div class="uname bold" id="userName">
+					黄瑶
+				</div>
+				<div class="storename" id="userStoreName">
+					喵果先生1号店
+				</div>
+				<div class="qrcode">
+					<img src="http://www.juketz.com/./data/two_code_short/short_qrcode_4.png" id="imgcode" />
+				</div>
+				<div style="color: #AAAAAA;text-align: center;">
+					扫一扫添加专属导购
+				</div>
+				<div class="wave"></div>
+			</div>
+			<div style="text-align: center;">
+				<div class="other">
+					更换导购
+				</div>
+			</div>
+		</div>
+
+		<!--分享弹出框-->
+		<div id="sharepop" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<p class="sharetitle">分享</p>
+				<ul class=" mui-table-view mui-grid-view">
+					<li class="mui-table-view-cell mui-media mui-col-xs-3" id="weixin" ex="WXSceneSession">
+						<a href="#">
+							<div class="mui-obj" style="background: #10BD0E;"><i class="iconfont">&#xe610;</i></div>
+							<div class="mui-media-body">微信好友</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3" id="weixin" ex="WXSceneTimeline">
+						<a href="#">
+							<div class="mui-obj" style="background: #10BD0E"><i class="iconfont">&#xe644;</i></div>
+							<div class="mui-media-body">朋友圈</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3" id="qq" ex="">
+						<a href="#">
+							<div class="mui-obj" style="background: #2C91FF"><i class="iconfont">&#xe668;</i></div>
+							<div class="mui-media-body">QQ好友</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3" id="qq" ex="">
+						<a href="#">
+							<div class="mui-obj" style="background: #FFCF00;"><i class="iconfont">&#xe643;</i></div>
+							<div class="mui-media-body">QQ空间</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3" id="copy">
+						<a href="#">
+							<div class="mui-obj" style="background: #EC971F;"><i class="iconfont" style="font-size: 25px;">&#xe617;</i></div>
+							<div class="mui-media-body">复制链接</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-3" id="myUser">
+						<a href="#">
+							<div class="mui-obj" style="background: #2C91FF;"><i class="iconfont">&#xe62d;</i></div>
+							<div class="mui-media-body">我的客户</div>
+						</a>
+					</li>
+				</ul>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#sharepop"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/main.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			var shares = {};
+			mui.plusReady(function() {
+				view = new App();
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+				console.log(uinfo);
+				document.getElementById('userHead').src = uarr.userHead;
+				document.getElementById('userName').innerHTML = uarr.userName ? uarr.userName : '';
+				document.getElementById('userStoreName').innerHTML = uarr.userStoreName ? uarr.userStoreName : '';
+				document.getElementById('imgcode').src = uarr.ousEwm;
+				plus.share.getServices(function(s) {
+					if(s && s.length > 0) {
+						for(var i = 0; i < s.length; i++) {
+							var t = s[i];
+							shares[t.id] = t;
+						}
+					}
+					console.log(JSON.stringify(shares));
+				}, function() {
+					console.log("获取分享服务列表失败");
+				});
+				//分享链接点击事件
+				mui('#sharepop').on('tap', 'li', function() {
+					var id = this.getAttribute('id');
+					var ex = this.getAttribute('ex');
+					if(id == "weixin" || id == "qq") {
+						var share = shares[id];
+						console.log(share);
+						if(share) {
+							if(share.authenticated) {
+								shareMessage(share, view.commodUri + "vmall.php/Store/qrCodeOfSales?salesId=" + uarr.guideId, uarr.userStoreName, uarr.userNike, "_www/images/psb.jpg", ex);
+							} else {
+								share.authorize(function() {
+									shareMessage(share, view.commodUri + "vmall.php/Store/qrCodeOfSales?salesId=" + uarr.guideId, uarr.userStoreName, uarr.userNike, "_www/images/psb.jpg", ex);
+								}, function(e) {
+									console.log("认证授权失败：" + e.code + " - " + e.message);
+								});
+							}
+						} else {
+							mui.toast("无法获取分享服务，请检查参数配置，并重新打包")
+						}
+					} else if(id == "copy") {
+						//获取剪切板
+						var UIPasteboard = plus.ios.importClass("UIPasteboard");
+						var generalPasteboard = UIPasteboard.generalPasteboard();
+						// 设置/获取文本内容:
+						generalPasteboard.setValueforPasteboardType(view.commodUri + "vmall.php/Store/qrCodeOfSales?salesId=" + uarr.guideId, "public.utf8-plain-text");
+						var value = generalPasteboard.valueForPasteboardType("public.utf8-plain-text");
+						console.log("粘贴板的内容"+value);
+						mui.toast("已经复制,快去粘贴吧!");
+					}
+					console.log(id);
+				});
+			});
+		</script>
+	</body>
+
+</html>

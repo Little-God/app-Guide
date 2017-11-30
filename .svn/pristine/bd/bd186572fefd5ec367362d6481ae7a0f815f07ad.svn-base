@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			html {
+				height: 100%;
+			}
+			
+			body,
+			.mui-content {
+				background: #f9f9f9;
+				height: 100%;
+			}
+			
+			header {
+				border-bottom: 1px solid #EEEEEE !important;
+			}
+			
+			.mui-bar-footer {
+				background: white;
+				box-shadow: none;
+			}
+			
+			.mui-table-view:after {
+				height: 0px;
+			}
+			
+			.checkedbox {
+				border: none !important;
+			}
+			
+			.titlebox {
+				width: 34%;
+			}
+			
+			.shopnum {
+				border-left: 1px solid #CCCCCC;
+				border-right: 1px solid #CCCCCC;
+				line-height: 37px;
+				padding: 0 12px;
+			}
+			
+			.mui-bar-footer {
+				padding: 0 20px;
+			}
+			
+			.goodsnum {
+				position: absolute;
+				right: 0px;
+				top: 0px;
+			}
+			
+			.mui-table-view-cell.mui-checkbox input[type=checkbox] {
+				top: 28px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cl-orang"></span><span class="vipitem orange mui-action-back backsize cl-orang">取消</span>
+			<h1 class="mui-title bold">编辑收银台</h1>
+			<span class="mui-pull-right confirmbtn cl-orang">保存</span>
+		</header>
+		<div class="mui-content">
+			<!--商品详情-->
+			<ul class="mui-table-view" id="shopCartData">
+				<!--<li class="mui-table-view-cell mui-checkbox mui-left mui-media">
+		    		<div class="mui-numbox mui-pull-right" data-numbox-min='0'>
+						<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+						<input class="mui-input-numbox" type="number" />
+						<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+					</div>
+					<input name="checkbox" type="checkbox">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="../images/dfgoods.png">
+						<div class="mui-media-body">
+							<p class='mui-col-xs-10 buy-shoptitle'>2017春季新款童装17111753男童弧形分皇嘉富豪家纺</p>
+							<h6>尺寸：100cm<br>颜色：牛仔蓝</h6>
+						</div>
+					</a>
+				</li>-->
+				<!--总共价格-->
+				<li class="editshop"><span class="mui-pull-right allprice">121.00</span><span class="mui-pull-right">共计￥</span></li>
+			</ul>
+
+			<!--底部全选-->
+			<div class="mui-bar mui-bar-footer">
+				<div class="mui-row">
+					<div class="mui-col-xs-6">
+						<div class="mui-input-row mui-checkbox mui-left cl-orang" id="allcheck">
+							<label for="all">全选</label>
+							<input value="Item 1" type="checkbox" id="all">
+						</div>
+					</div>
+					<div class="mui-col-xs-6">
+						<div class="delbtn mui-pull-right backsize" id="removecheck">
+							<div id="delicon" class="iconfont icon-shanchu cl-orang"></div>
+							<div class="deltxt">
+								删除
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var view = null;
+			mui.init();
+			window.onload = function() {
+				//				全选功能
+				var allcheck = document.getElementById("allcheck");
+				var removecheck = document.getElementById("removecheck");
+				var goodsitem = document.getElementsByClassName("mui-table-view")[0];
+				var checkbox = document.getElementsByName("checkbox");
+				var goods = document.getElementsByClassName("mui-media");
+				var minus = document.getElementsByClassName("mui-btn-numbox-minus");
+				var add = document.getElementsByClassName("mui-btn-numbox-plus");
+				var ischeck = true;
+				allcheck.onclick = function() {
+					if(ischeck) {
+						for(var i = 0; i < checkbox.length; i++) {
+							checkbox[i].checked = true;
+							ischeck = false;
+						}
+					} else {
+						for(var i = 0; i < checkbox.length; i++) {
+							checkbox[i].checked = false;
+							ischeck = true;
+						}
+					}
+				}
+
+				//				删除选中的商品
+				removecheck.onclick = function() {
+					for(var i = 0; i < checkbox.length; i++) {
+						if(checkbox[i].checked) {
+							goodsitem.removeChild(goods[i]);
+						}
+					}
+					for(var i = 0; i < checkbox.length; i++) {
+						if(checkbox[i].checked) {
+							goodsitem.removeChild(goods[i]);
+						}
+					}
+				}
+
+				//点击货物数量商品始终被选中状态
+				
+//								for(var i = 0; i < add.length; i++) {
+//									add[i].onclick = function() {
+//										this.parentNode.nextSibling.nextSibling.checked = true;
+//									}
+//									minus[i].onclick = function() {
+//										this.parentNode.nextSibling.nextSibling.checked = true;
+//										if(this.nextSibling.nextSibling.value == 0) {
+//											this.parentNode.nextSibling.nextSibling.checked = false;
+//										}
+//									}
+//								}
+			}
+			mui.plusReady(function() {
+				view = new App();
+				loadShopCartData();
+			});
+			//加载购物车列表
+			function loadShopCartData() {
+				//加载扫描数据
+				view.DBquery('select * from shopCart', function(len, shopCartData) {
+					var datahtml = '';
+					mui.each(shopCartData, function(index, _data) {
+						console.log("拿到数据了:" + JSON.stringify(_data));
+						datahtml += '<li class="mui-table-view-cell mui-checkbox mui-left  mui-media">' +
+							'<div class="mui-numbox mui-pull-right" data-numbox-min="0">' +
+							'<button class="mui-btn mui-btn-numbox-minus minus" type="button">-</button>' +
+							'<input id="test" class="mui-input-numbox" type="number" value="' + _data['goodsNum'] + '" />' +
+							'<button class="mui-btn mui-btn-numbox-plus add" type="button">+</button>' +
+							'</div>' +
+							'<input name="checkbox" type="checkbox">' +
+							'<a href="javascript:;">' +
+							'<img class="mui-media-object mui-pull-left" src="' + _data['goodsImage'] + '">' +
+							'<div class="mui-media-body">' +
+							'<p class="mui-col-xs-10 buy-shoptitle">' + _data['goodName'] + '</p>' +
+							'<h6>尺寸：' + _data['goodsSpec'] + '<br>颜色：' + _data['goodsColor'] + '</h6>' +
+							'</div>' +
+							'</a>' +
+							'</li>';
+					});
+					
+			
+				
+				
+					document.getElementById("shopCartData").innerHTML = datahtml;
+				}, function(error) {
+					console.log(error.message);
+				});
+			}
+			
+			mui('.mui-table-view').on('tap', '.mui-btn-numbox-plus', function() {
+				var c = this.parentNode.childNodes[1].value;
+				this.parentNode.childNodes[1].value = parseInt(c)+1
+			});
+			mui('.mui-table-view').on('tap', '.mui-btn-numbox-minus', function() {
+				var c = this.parentNode.childNodes[1].value;
+				this.parentNode.childNodes[1].value = parseInt(c)-1;
+			});
+		
+		</script>
+	</body>
+
+</html>

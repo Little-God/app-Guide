@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>分类尺码</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+		<style type="text/css">
+			.mui-segmented-control-positive.mui-segmented-control-inverted .mui-control-item.mui-active {
+				border-bottom: 2px solid #ff821c;
+				color: #ff821c;
+				font-weight: bold;
+			}
+			
+			.mui-control-content {
+				height: 680px;
+			}
+			
+			.df-nodata {
+				margin: auto;
+				width: 90PX;
+				text-align: center;
+				top: 10px;
+				height: 200px;
+				position: relative;
+			}
+			
+			.df-nodata div {
+				width: 80px;
+				height: 80px;
+				padding-top: 30px;
+				background-color: #DDDDDD;
+				border-radius: 40px;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>取消
+			</button>
+			<h1 class="mui-title">尺码选择</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="submit">确定</button>
+		</header>
+		<div class="mui-content">
+			<div>
+				<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-positive">
+					<a class="mui-control-item mui-active" href="#item1">中国码</a>
+					<a class="mui-control-item" href="#item2">美国码</a>
+					<a class="mui-control-item" href="#item3">英国码</a>
+				</div>
+			</div>
+			<div>
+				<div id="item1" class="mui-control-content mui-active">
+					<div id="scroll" class="mui-scroll-wrapper">
+						<div class="mui-scroll" id='item1Data'>
+						</div>
+					</div>
+				</div>
+				<div id="item2" class="mui-control-content">
+
+				</div>
+				<div id="item3" class="mui-control-content">
+					<!--<div class="df-nodata">
+						<div>
+							<span class="ft40 clFFFFFF iconfont icon-dingdan"></span>
+						</div>
+						<p>没有订单记录</p>
+					</div>-->
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var view = null;
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			mui.plusReady(function() {
+				view = new App();
+				loadData();
+			});
+			document.getElementById("submit").addEventListener('tap', function(e) {
+				var selectSize=new Array();
+				var size = document.getElementsByName("checkbox1");
+				for(var i = 0; i < size.length; i++) {
+					if(size[i].checked) {
+						selectSize.push(size[i].value);
+						console.log(size[i].value);
+					}
+				}
+				parentView = plus.webview.currentWebview().opener();
+				parentView.evalJS("getSelect('" + selectSize + "','selectsize')");
+				mui.back();
+			});
+
+			function loadData() {
+				var uinfo = plus.storage.getItem("uinfo");
+				uarr = JSON.parse(uinfo);
+				var self = plus.webview.currentWebview();
+				var cid = self.cateId;
+				console.log(cid);
+				view.AppHttpService({
+					action: 'Goods/class_size',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						classId: '100058'
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						console.log(typeof(response.data.china) != 'undefined');
+						if(typeof(response.data.china) != 'undefined') {
+							var html = '<form class="mui-input-group">';
+							mui.each(response.data.china, function(index, _data) {
+								html += '<div class="mui-input-row mui-checkbox">' +
+									'<label>' + _data + '</label>' +
+									'<input name="checkbox1" value="' + _data + '" type="checkbox">' +
+									'</div>';
+							});
+							document.getElementById('item1Data').innerHTML = html + '</form>';
+						} else {
+							document.getElementById('item1Data').innerHTML = '<div class="df-nodata"><div>' +
+								'<span class="ft40 clFFFFFF iconfont icon-dingdan"></span></div>' +
+								'<p>此分类下不支持此尺码</p>' +
+								'</div>';
+						}
+						if(typeof(response.data.usa) != 'undefined') {
+							var html = '<form class="mui-input-group">';
+							mui.each(response.data.china, function(index, _data) {
+								html += '<div class="mui-input-row mui-checkbox">' +
+									'<label>' + _data + '</label>' +
+									'<input name="checkbox1" value="' + _data + '" type="checkbox">' +
+									'</div>';
+							});
+							document.getElementById('item2').innerHTML = html + '</ul>';
+						} else {
+							document.getElementById('item2').innerHTML = '<div class="df-nodata"><div>' +
+								'<span class="ft40 clFFFFFF iconfont icon-dingdan"></span></div>' +
+								'<p>此分类下不支持此尺码</p>' +
+								'</div>';
+						}
+						if(typeof(response.data.england) != 'undefined') {
+							var html = '<form class="mui-input-group">';
+							mui.each(response.data.china, function(index, _data) {
+								html += '<div class="mui-input-row mui-checkbox">' +
+									'<label>' + _data + '</label>' +
+									'<input name="checkbox1" value="' + _data + '" type="checkbox">' +
+									'</div>';
+							});
+							document.getElementById('item3').innerHTML = html + '</ul>';
+						} else {
+							document.getElementById('item3').innerHTML = '<div class="df-nodata"><div>' +
+								'<span class="ft40 clFFFFFF iconfont icon-dingdan"></span></div>' +
+								'<p>分类下不支持</p>' +
+								'</div>';
+						}
+
+						//document.getElementById("colorData").innerHTML = Html;
+					} else {
+						mui.toast(response.message);
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

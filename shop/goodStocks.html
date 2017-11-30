@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.red {
+				color: red;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+			</button>
+			<h1 class="mui-title">查看库存</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<ul class="mui-table-view" id="stocksAmountData">
+				<!--<li class="mui-table-view-cell">红色-80cm<span class="mui-pull-right red">20</span></li>
+				<li class="mui-table-view-cell">红色-90cm<span class="mui-pull-right red">20</span></li>
+				<li class="mui-table-view-cell">红色-100cm<span class="mui-pull-right red">20</span></li>
+				<li class="mui-table-view-cell">红色-110cm<span class="mui-pull-right red">20</span></li>
+				<li class="mui-table-view-cell">红色-120cm<span class="mui-pull-right red">20</span></li>
+				<li class="mui-table-view-cell">红色-130cm<span class="mui-pull-right red">20</span></li>-->
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var goodId = null;
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('');
+				view = new App();
+				var self = plus.webview.currentWebview();
+				goodId = self.goodId;
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+				view.AppHttpService({
+					action: 'Goods/goods_amount',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						storeId: uarr.userBelong,
+						goodsId: goodId,
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						mui.each(response.data, function(index, _data) {
+							var color=_data['color'];
+							mui.each(_data.size_amount, function(i, v) {
+								document.getElementById("stocksAmountData").innerHTML +='<li class="mui-table-view-cell">' +color+'-'+ v['size'] + '<span class="mui-pull-right red">' + v['amount'] + '</span></li>';
+							});
+						});
+					} else {
+						plus.nativeUI.toast("更新失败," + response.message);
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

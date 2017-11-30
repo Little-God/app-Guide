@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<!--<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>-->
+		<style type="text/css">
+			body,.mui-content{background: #F9F9F9;}
+			p{text-align: center;font-size: 16px;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+			</button>
+			<h1 class="mui-title">姓名备注</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="done">完成</button>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+		    <input type="text" name="remark" oninput="remark()" id="remark" value="" maxlength="16"/>
+		    <p><span class="writed">0</span>/16</p>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			function remark(){
+				document.getElementsByClassName("writed")[0].innerHTML=document.getElementById("remark").value.length;
+			}
+		</script>
+	</body>
+
+</html>

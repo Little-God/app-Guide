@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			html{height: 100%;}
+			body,.mui-content{background: #f9f9f9;height: 100%;}
+			.confirmbtn{color: white;background: #AAAAAA;line-height: 28px;border-radius: 3px;padding:0 8px;margin-top: 8px;}
+			.mui-bar-footer{background: white;box-shadow: none;}
+			.mui-table-view:after{height: 0px;}
+			.editshop:last-of-type{color: #AAAAAA;font-size: 14px;}
+			.checkedbox{border: none !important;}
+			.billing{background: #ff5b0f;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   	<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">收银台</h1>
+		    <span class="mui-pull-right confirmbtn" tourl="billing.html">立即开单</span>
+		</header>
+		<div class="mui-content">
+			<!--中间添加按钮-->
+			<div class="addshopbox" style="display: none;">
+			    <div class="addshop">
+			    	<span class="iconfont icon-plus" style="color: #AAAAAA;"></span>
+			    </div>
+			    <p>查询列表中添加</p>
+		   </div>
+		    <!--商品详情-->
+		    <ul class="mui-table-view">
+				<li class="editshop">
+					<!--勾-->
+					<div id="checkbtn" class="iconfont icon-dagou mui-pull-left goubtn"></div>
+					<!--商品图片-->
+					<div class="shopimgbox mui-pull-left">
+						<img src="../images/arclist/face.png"/>
+					</div>
+					<!--商品标题盒子-->
+					<div class="titlebox mui-pull-left">
+						<div class="buy-shoptitle">2017春季新款童装17111753男童弧形分皇嘉富豪家纺</div>
+						<div class="shopsize">
+							尺寸:<span class="">100cm</span>
+						</div>
+						<div class="shopsize">
+							颜色:<span class="">牛仔蓝</span>
+						</div>
+					</div>
+					<div class="mui-pull-right">
+						<div class="shopprice">￥121.00</div>
+						<div class="mui-pull-right">x<span class="shopnum">1</span></div>
+					</div>
+				</li>
+				<li class="editshop">
+					<!--勾-->
+					<div id="checkbtn" class="iconfont icon-dagou mui-pull-left goubtn"></div>
+					<!--商品图片-->
+					<div class="shopimgbox mui-pull-left">
+						<img src="../images/arclist/face.png"/>
+					</div>
+					<!--商品标题盒子-->
+					<div class="titlebox mui-pull-left">
+						<div class="buy-shoptitle">2017春季新款童装17111753男童弧形分皇嘉富豪家纺</div>
+						<div class="shopsize">
+							尺寸:<span class="">100cm</span>
+						</div>
+						<div class="shopsize">
+							颜色:<span class="">牛仔蓝</span>
+						</div>
+					</div>
+					<div class="mui-pull-right">
+						<div class="shopprice">￥121.00</div>
+						<div class="mui-pull-right">x<span class="shopnum">1</span></div>
+					</div>
+				</li>
+				<!--总共价格-->
+				<li class="editshop"><span class="mui-pull-right allprice">121.00</span><span class="mui-pull-right">共计￥</span></li>
+		    </ul>
+		    
+		    
+		     <!--底部按钮-->
+		    <div class="mui-bar mui-bar-footer">
+		    	<div class="mui-flex">
+		    		<div class="mui-flex1 footernav">
+		    			<div class="iconfont icon-saoma2" style="font-size: 20px;height: 16px;"></div>
+		    			<div class="cashiernavtxt">
+		    				扫码添加
+		    			</div>
+		    		</div>
+		    		<div class="cashierline" ></div>
+		    		<div class="mui-flex1 footernav">
+		    			<div class="iconfont icon-plus" style="font-size: 16px;height: 18px;margin-top: -2px;"></div>
+		    			<div class="cashiernavtxt">
+		    				添加商品
+		    			</div>
+		    		</div>
+		    		<div class="cashierline"></div>
+		    		<div class="mui-flex1 footernav" tourl="editgoods.html">
+		    			<div class="iconfont icon-bianji" style="font-size:18px;margin-top: -2px;height: 18px;"></div>
+		    			<div class="cashiernavtxt">
+		    				编辑商品
+		    			</div>
+		    		</div>
+		    	</div>
+		    </div>
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+		        view=new App(); 
+		        //主列表点击事件
+				mui('body').on('tap', '.footernav', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				mui('body').on('tap', '.billing', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+		    });
+			mui("body").on("click","#checkbtn",function(){
+				//循环判断是能否开单
+				for(var i=0;i<$(".goubtn").length;i++){
+					if($(".goubtn").eq(i).hasClass("checkedbox")==false){
+						var fal=false; 
+					}
+				}
+				if(fal!==false){
+					$(".confirmbtn").addClass('billing');
+				}else{
+					$(".confirmbtn").removeClass('billing');
+				}
+				//判断勾选
+				if($(this).hasClass("checkedbox")){
+					$(this).removeClass("checkedbox");
+					for(var i=0;i<$(".goubtn").length;i++){
+						if($(".goubtn").eq(i).hasClass("checkedbox")==false){
+							var fal=false; 
+						}
+					}
+					if(fal!==false){
+						$(".confirmbtn").removeClass('billing');
+					}
+				}
+				else{ 
+					$(this).addClass("checkedbox");
+					$(".confirmbtn").addClass('billing');
+				}
+			});
+		</script>
+	</body>
+
+</html>

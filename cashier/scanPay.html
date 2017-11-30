@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>扫码付款</title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style>
+			body {
+				background: #ff5607;
+			}
+			.paytitle {
+				color: #fff;
+				padding: 15px;
+			}
+			
+			.text-center {
+				text-align: center;
+			}
+			
+			#renovate {
+				font-size: 14px;
+				text-align: right;
+			}
+			
+			.pay-title {
+				width: 100%;
+				height: 90px;
+				padding: 23px;
+			}
+			
+			.pay-content {
+				background: #Dfdfdf;
+				height: 240px;
+			}
+			
+			.pay-title-price {
+				color: #d6023d;
+				text-align: center;
+				font-size: 26px;
+			}
+			
+			.revisepay {
+				text-align: center;
+				font-size: 14px;
+				text-decoration: underline;
+			}
+			
+			.revisepay span {
+				color: #d6023d;
+				text-decoration: underline;
+			}
+			
+			.QRcode {
+				width: 160px;
+				height: 160px;
+			}
+			
+			#changepaystyle {
+				color: #fff;
+				text-align: center;
+				text-decoration: underline;
+			}
+			
+			.QRimg {
+				margin: 0 auto;
+				width: 160px;
+				padding-top: 35px;
+			}
+			
+			.mui-segmented-control {
+				width: 89%;
+			}
+			
+			.mui-segmented-control .mui-control-item {
+				border-left: 0px!important;
+			}
+			
+			#payCash {
+				width: 100%;
+				line-height: 240px;
+				text-align: center;
+				float: left;
+				color: #F64848;
+				text-decoration: underline;
+				font-size: 12pt;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-row paytitle">
+			<div class="mui-col-xs-4" id="cancePay">取消</div>
+			<div class="mui-col-xs-4 text-center">收款</div>
+			<div class="mui-col-xs-4 " id="renovate">刷新支付结果</div>
+		</div>
+		<div class="mui-content" style="width: 90%;height: 330px;margin: 20px auto;">
+			<div class="pay-title">
+				<p class="pay-title-price">￥<span id="orderprice">108.00</span></p>
+				<p class="revisepay">实际应收，<span id="changePirce">改价</span></p>
+			</div>
+			<div class="pay-content" id="paycontent">
+				<span id="payCash">点击确认支付完成</span>
+				<!--<div class="QRimg"><img src="../images/QRcode.jpg" id="payEwCode" class="QRcode" /></div>-->
+			</div>
+		</div>
+		<p id="changepaystyle"><span id="payTypeTxt">支付宝</span>支付，更换</p>
+
+		<!--修改价格弹出框-->
+		<div class="setpricebox" id="changPirceBox">
+			<div class="setprice">
+				<dl>
+					<dd>修改订单价格</dd>
+					<dd>订单原价:￥<span class="oldprice" id="oldprice">0.00</span></dd>
+					<dd>改后价格:￥<span class="newprice" id="newprice">0.00</span></dd>
+				</dl>
+				<div class="conditionset mui-segmented-control" id="segmentedControl">
+					<a placeholder="请输入修改的价格" unit="元" href="#changebynum" class="mui-control-item mui-active">按金额修改</a>
+					<a placeholder="请输入修折扣" unit="折" href="#changebyidscount" class="mui-control-item">按折扣修改</a>
+				</div>
+				<div class="setinputbox">
+					<div id="changebynum" class="mui-control-content mui-active">
+						<input type="number" name="setbox" id="setPrice" value="" placeholder="请输入修改的价格" />
+						<span style="border-left: 1px solid #A3A3A3;height: 20px;display: inline-block;position: relative;top: 5px;"></span>
+						<span class="unit">
+			    				元
+			    			</span>
+					</div>
+					<div id="changebyidscount" class="mui-control-content">
+						<input type="number" name="setbox" id="setDiscount" value="" placeholder="请输入修改的价格" />
+						<span style="border-left: 1px solid #A3A3A3;height: 20px;display: inline-block;position: relative;top: 5px;"></span>
+						<span class="unit">
+			    				折
+			    			</span>
+					</div>
+				</div>
+				<div class="setbuttom">
+					<div class="mui-flex">
+						<div class="mui-flex1 qx" id="canceChangePirce">
+							取消
+						</div>
+						<div class="" style="height: 35px;width: 1px;border-left: 1px solid #CCCCCC;"></div>
+						<div class="mui-flex1" id="subChangePirce">
+							确定
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--支付方式弹出框-->
+		<div class="mui-popup mui-popup-in" style="display:none" id="changePayType">
+			<div class="mui-popup-inner">
+				<div class="mui-popup-title">请选择支付方式</div>
+				<div class="mui-popup-text">
+					<ul class="mui-table-view mui-table-view-radio">
+						<li class="mui-table-view-cell mui-media removepadd">
+							<a class="mui-navigate-right">
+								<img class="mui-media-object mui-pull-left" src="../images/unionpay.png">
+								<div class="mui-media-body  mui-row">
+									<div class="mui-pull-left mui-col-xs-4">现金支付</div><br>
+									<p class="mui-ellipsis mui-col-xs- mui-pull-left">使用门店pos机收银</p>
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media removepadd">
+							<a class="mui-navigate-right">
+								<img class="mui-media-object mui-pull-left" src="../images/weipay.png">
+								<div class="mui-media-body">
+									<div class="mui-pull-left">微信支付</div>
+									<p class="mui-ellipsis mui-col-xs-10 mui-pull-left">使用微信扫描二维码支付</p>
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media removepadd">
+							<a class="mui-navigate-right">
+								<img class="mui-media-object mui-pull-left" src="../images/alypay.png">
+								<div class="mui-media-body">
+									<div class="mui-pull-left">支付宝支付</div>
+									<p class="mui-ellipsis mui-col-xs-11 mui-pull-left">使用支付宝扫描二维码支付</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="mui-popup-buttons">
+				<span class="mui-popup-button" id="paycancel">取消</span>
+				<span class="mui-popup-button mui-popup-button-bold">確定</span>
+			</div>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		var view = null,
+			self = null,
+			uarr = null,
+			orderPrice = null,
+			scan = null;
+		mui.init();
+		mui.plusReady(function() {
+			plus.navigator.setStatusBarBackground('#ff5607');
+			view = new App();
+			var uinfo = plus.storage.getItem("uinfo");
+			uarr = JSON.parse(uinfo);
+			self = plus.webview.currentWebview();
+			orderPrice = self.paydata.price;
+			//displayPay(uarr.casherType);
+			displayPay(1,1);
+			displayPayTxt(self.paydata.payType);
+			displayOrderPrice(self.paydata.price);
+
+		});
+		//改价弹出框
+		document.getElementById("changePirce").addEventListener('tap', function(e) {
+			if(scan)
+			{
+				scan.close();
+			}
+			document.getElementById("changPirceBox").style.display = "block";
+		});
+
+		document.getElementById("canceChangePirce").addEventListener('tap', function(e) {
+			document.getElementById("changPirceBox").style.display = "none";
+			displayPay(uarr.casherType);
+		});
+		document.getElementById("subChangePirce").addEventListener('tap', function(e) {
+			document.getElementById("changPirceBox").style.display = "none";
+			var newPrice = document.getElementById("newprice").innerText;
+			view.AppHttpService({
+				action: 'Order/change_price',
+				data: {
+					guideId: uarr.guideId,
+					userToken: uarr.userToken,
+					orderId: self.paydata.orderId,
+					price: newPrice
+				}
+			}, function(response) {
+				if(response.code == '200') {
+					displayOrderPrice(response.data.price);
+					displayPay(uarr.casherType);
+				} else {
+					mui.toast(response.message);
+
+				}
+			});
+		});
+		//更换支付方式
+		document.getElementById("changepaystyle").addEventListener('tap', function(e) {
+			if(scan)
+			{
+				scan.close();
+			}
+			document.getElementById("changePayType").style.display = "block";
+		});
+		//取消支付
+		document.getElementById("paycancel").addEventListener('tap', function(e) {
+			document.getElementById("changePayType").style.display = "none";
+			displayPay(uarr.casherType);
+		});
+		//点击刷新支付结果
+		document.getElementById("renovate").addEventListener('tap', function() {
+			mui.toast('正在更新支付结果');
+			setTimeout(function() {
+				mui.toast('微信未支付');
+			}, 2000)
+		});
+		//取消支付
+		document.getElementById("cancePay").addEventListener('tap', function(e) {
+			view.AppCreateWindow("../index.html");
+		});
+		document.getElementById("setPrice").addEventListener('input', function() {
+			document.getElementById("newprice").innerText = this.value;
+		});
+		document.getElementById("setDiscount").addEventListener('input', function() {
+			document.getElementById("newprice").innerText = orderPrice * (this.value / 10);
+		});
+		document.getElementById("payCash").addEventListener('tap', function() {
+			var ComfirmCashArray = [{
+				title: "我已经收到现金"
+			}];
+			plus.nativeUI.actionSheet({
+				title: "请确保你已经收到现金",
+				cancel: "取消",
+				buttons: ComfirmCashArray
+			}, function(event) {
+				switch(event.index) {
+					case 1:
+						payDone();
+						break;
+				}
+			});
+		});
+
+		function getPayEw(orderSn, casherType) {
+			view.AppHttpService({
+				action: 'Order/pay_ewcode',
+				data: {
+					guideId: uarr.guideId,
+					userToken: uarr.userToken,
+					orderId: orderSn,
+					casherType: casherType
+				}
+			}, function(response) {
+				if(response.code == '200') {
+					document.getElementById('paycontent').innerHTML = '<div class="QRimg"><img src="'+response.data.payCode+'" id="payEwCode" class="QRcode" /></div>';
+				} else {
+					mui.toast(response.message);
+
+				}
+			});
+		}
+
+		function displayPayTxt(payType) {
+			if(payType == 1) {
+				document.getElementById("payTypeTxt").innerText = "微信";
+			} else if(payType == 4) {
+				document.getElementById("payTypeTxt").innerText = "支付宝";
+			} else if(payType == 2) {
+				document.getElementById("payTypeTxt").innerText = "线下POS收银";
+			}
+		}
+
+		function displayOrderPrice(price) {
+			document.getElementById("orderprice").innerText = price;
+			document.getElementById("oldprice").innerText = price;
+			document.getElementById("newprice").innerText = price;
+		}
+
+		function displayPay(payType, carshType) {
+			if(payType == 3) {
+				document.getElementById('paycontent').innerHTML = '<span id="payCash">点击确认支付完成</span>';
+			}
+			if(carshType == 1) {
+				getPayEw(self.paydata.orderId, uarr.casherType);  
+			} else {
+				startRecognize();
+			}
+		}
+
+		function onmarked(type, result) {
+			console.log(result + "条码类型:" + type);
+			view.AppHttpService({
+				action: 'Order/payed',
+				data: {
+					guideId: uarr.guideId,
+					userToken: uarr.userToken,
+					orderId: self.paydata.orderId,
+					payType: casherType,
+					code: result
+				}
+			}, function(response) {
+				if(response.code == '200') {
+					mui.toast("支付成功!");
+					view.AppCreateWindow("../workbench/workbench.html");
+				} else {
+					mui.toast(response.message);
+					scan.start();
+				}
+			});
+		}
+
+		function startRecognize() {
+			var filter = [
+				plus.barcode.QR,
+				plus.barcode.EAN13,
+				plus.barcode.EAN8,
+				plus.barcode.CODE39,
+				plus.barcode.AZTEC,
+				plus.barcode.DATAMATRIX,
+				plus.barcode.UPCA,
+				plus.barcode.UPCE,
+				plus.barcode.CODABAR,
+				plus.barcode.CODE39,
+				plus.barcode.CODE93,
+				plus.barcode.CODE128,
+				plus.barcode.ITF,
+				plus.barcode.MAXICODE,
+				plus.barcode.PDF417,
+				plus.barcode.RSS14,
+				plus.barcode.RSSEXPANDED
+			];
+			scan = new plus.barcode.Barcode('paycontent', filter);
+			scan.onmarked = onmarked;
+			scan.start();
+		}
+
+		function payDone() {
+			view.AppHttpService({
+				action: 'Order/payed',
+				data: {
+					guideId: uarr.guideId,
+					userToken: uarr.userToken,
+					orderId: self.paydata.orderId,
+					payType: '2',
+					casherType: uarr.casherType,
+					code:""
+				}
+			}, function(response) {
+				if(response.code == '200') {
+					mui.toast("支付成功!");
+					view.AppCreateWindow("../workbench/workbench.html");
+				} else {
+					mui.toast(response.message);
+				}
+			});
+		}
+	</script>
+
+</html>

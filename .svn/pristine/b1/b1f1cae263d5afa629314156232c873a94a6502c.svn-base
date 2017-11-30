@@ -1,0 +1,253 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">发布商品-确认</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="nextStep">发布商品</button>
+		</header>
+		<div class="mui-content" id="goodInfo">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>名称</label>
+					<input type="text" id="goodsName" placeholder="建议15字以内(必填)">
+				</div>
+				<div class="mui-input-row">
+					<label>品类</label>
+					<h4 id="procate" data-id="100055">请选择分类</h4>
+				</div>
+				<div class="mui-input-row">
+					<label>品牌</label>
+					<h4 id="goodBrand" data-id="100055">请选择品牌</h4>
+				</div>
+				<div class="mui-input-row">
+					<label>吊牌价</label>
+					<input type="number" id="tagPrice" placeholder="0.00">
+				</div>
+				<div class="mui-input-row">
+					<label>市场价</label>
+					<input type="number" id="markPrice" placeholder="0.00">
+				</div>
+				<div class="mui-input-row">
+					<label>款号</label>
+					<input type="text" class="mui-input-clear" id="goodsSPU" placeholder="请输入商品的款号" data-input-clear="5">
+				</div>
+				<div class="mui-input-row">
+					<label>上市年份</label>
+					<h4 id="marketYear" data-id="100055">请选择年份</h4>
+				</div>
+				<div class="mui-input-row">
+					<label>上市季节</label>
+					<h4 id="marketSeason" data-id="100055">请选择季节</h4>
+				</div>
+				<div class="mui-input-row">
+					<label>性别</label>
+					<h4 id="goodSex" data-id="100055">请选择性别</h4>
+				</div>
+			</form>
+			<div class="mui-card">
+				<div class="mui-card-header mui-card-media">
+					<img src="../images/logo.png">
+					<div class="mui-media-body">
+						货号：ADK56-1
+						<p>颜色：蓝色12</p>
+					</div>
+				</div>
+				<div class="mui-card-content">
+					<form class="mui-input-group ">
+						<div class="mui-content-padded">
+							<div class="mui-input-row pond-content-padded">
+								<label>尺码</label>
+								<input type="text" name="goodSize" class="mui-input-clear" placeholder="请输入尺码" data-input-clear="5">
+							</div>
+							<div class="mui-input-row mui-password">
+								<label>条码</label>
+								<input type="text" name="goodsBarcode" class="mui-input-clear" placeholder="请输入条码" data-input-clear="5"><span class="iconfont icon-tiaoxingma icon-barcode"></span>
+							</div>
+							<div class="mui-input-row pond-content-padded">
+								<label>库存</label>
+								<input type="text" class="mui-input-clear" name="goodAmount" placeholder="请输入商品的库存" data-input-clear="5">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/binaryajax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/exif.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/canvasResize.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/main.js"></script>
+		<script type="text/javascript">
+			var view = null;
+			mui.init({});
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('');
+				view = new App();
+				initGoodInfo();
+			});
+			document.getElementById("nextStep").addEventListener('tap', function(e) {
+				var self = plus.webview.currentWebview();
+				var goodinfo = self.goodinfo;
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+				goodinfo.guideId = uarr.guideId;
+				goodinfo.userToken = uarr.userToken;
+				goodinfo.userBelong = uarr.userBelong;
+				console.log(JSON.stringify(goodinfo.specifications));
+				mui.each(goodinfo.specifications, function(index, _data) {
+					var img = new Image();
+					img.src = _data['skuImg']; // 传过来的图片路径在这里用。
+					//document.getElementById("head-img").src = path;
+					img.onload = function() {
+						var that = this;
+						//生成比例 
+						var w = that.width,
+							h = that.height,
+							scale = w / h;
+						w = 480 || w; //480  你想压缩到多大，改这里
+						h = w / scale;
+						//生成canvas
+						var canvas = document.createElement('canvas');
+						var ctx = canvas.getContext('2d');
+						$(canvas).attr({
+							width: w,
+							height: h
+						});
+						ctx.drawImage(that, 0, 0, w, h);
+						goodinfo.specifications[index].skuImg = canvas.toDataURL('image/jpeg', 1 || 0.8);
+					}
+				})
+				var img = new Image();
+				img.src = goodinfo.goodsImg; // 传过来的图片路径在这里用。
+				//document.getElementById("head-img").src = path;
+				img.onload = function() {
+					var that = this;
+					//生成比例 
+					var w = that.width,
+						h = that.height,
+						scale = w / h;
+					w = 480 || w; //480  你想压缩到多大，改这里
+					h = w / scale;
+					//生成canvas
+					var canvas = document.createElement('canvas');
+					var ctx = canvas.getContext('2d');
+					$(canvas).attr({
+						width: w,
+						height: h
+					});
+					ctx.drawImage(that, 0, 0, w, h);
+					goodinfo.goodsImg = canvas.toDataURL('image/jpeg', 1 || 0.8);
+				}
+				console.log("商品主图:"+goodinfo.goodsImg);
+				view.AppHttpService({
+					action: 'Goods/addition_by_guide',
+					data: goodinfo
+				}, function(response) {
+					if(response.code == '200') {
+						mui.toast("上传成功！");
+						view.AppCreateWindow("goodsList.html");
+					} else if(response.code == '400') {
+						mui.toast("此款号平台已经有了，谢谢提交！");
+						view.AppCreateWindow("goodsList.html");
+					} else if(response.code == '500') {
+						mui.toast("提交失败，请重试！")
+					} else if(response.code == '501') {
+						mui.toast("图片上传失败!")
+					}
+				});
+			});
+
+			function initGoodInfo() {
+				var self = plus.webview.currentWebview();
+				var goodinfo = self.goodinfo;
+				var html = '<form class="mui-input-group">' +
+					'<div class="mui-input-row">' +
+					'<label>名称</label>' +
+					'<h5>' + goodinfo.goodsName + '</h5>' +
+					'</div>' +
+					'<div class="mui-input-row">' +
+					'<label>品类</label>' +
+					'<h5>' + goodinfo.className + '</h5>' +
+					'</div>' +
+					'<div class="mui-input-row">' +
+					'<label>品牌</label>' +
+					'<h5>' + goodinfo.brandName + '</h5>' +
+					'</div>' +
+					'<div class="mui-input-row">' +
+					'<label>吊牌价</label>' +
+					'<h5>' + goodinfo.goodsPrice + '</h5>' +
+					'</div>' +
+					'<div class="mui-input-row">' +
+					'<label>市场价</label>' +
+					'<h5>' + goodinfo.goodsTruePrice + '</h5>' +
+					'</div>' +
+					'<div class="mui-input-row">' +
+					'<label>款号</label>' +
+					'<h5>' + goodinfo.goods_spu + '</h5>' +
+					'</div>' +
+					'<div class="mui-input-row">' +
+					'<label>上市年份</label>' +
+					'<h5>' + goodinfo.yearMarket + '</h5>' +
+					'</div>' +
+					'<div class="mui-input-row">' +
+					'<label>上市季节</label>' +
+					'<h5>' + goodinfo.seasonMarketName + '</h5>' +
+					'</div>' +
+					'<div class="mui-input-row">' +
+					'<label>性别</label>' +
+					'<h5>' + goodinfo.sexName + '</h5>' +
+					'</div>' +
+					'</form>';
+				mui.each(goodinfo.specifications, function(index, _data) {
+					html += '<div class="mui-card">' +
+						'<div class="mui-card-header mui-card-media">' +
+						'<img src="' + _data['skuImg'] + '">' +
+						'<div class="mui-media-body">' +
+						'货号：' + _data['stocksSku'] + '' +
+						'<p>颜色：' + _data['color'] + '</p>' +
+						'</div>' +
+						'</div>' +
+						'<div class="mui-card-content">' +
+						'<form class="mui-input-group ">';
+					mui.each(_data.skuSize, function(i, v) {
+						var bar_code = v.bar_code ? v.bar_code : "";
+						var amount = v.amount ? v.amount : "";
+						html += '<div class="mui-input-row pond-content-padded">' +
+							'<label>尺码</label>' +
+							'<h5>' + v.size + '</h5>' +
+							'</div>' +
+							'<div class="mui-input-row mui-password">' +
+							'<label>条码</label>' +
+							'<h5>' + bar_code + '</h5>' +
+							'</div>' +
+							'<div class="mui-input-row pond-content-padded">' +
+							'<label>库存</label>' +
+							'<h5>' + amount + '</h5>' +
+							'</div>';
+					});
+					html += '</div></form></div>';
+				})
+				document.getElementById('goodInfo').innerHTML = html;
+			}
+		</script>
+	</body>
+
+</html>

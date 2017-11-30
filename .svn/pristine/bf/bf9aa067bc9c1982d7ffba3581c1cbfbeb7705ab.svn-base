@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style type="text/css">
+			#bcid {
+				width: 100%;
+				height: 480px;
+				background: #000000;
+				/*z-index: 50;*/
+				padding: 0px;
+				margin: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title" style="color: #333333;">入库</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="stocksAmount">入库历史</button>
+		</header>
+		<div class="mui-content">
+			<div id="bcid">
+
+			</div>
+
+		</div>
+		<div class="mui-bar mui-bar-footer">
+			<button type="button" class="mui-btn mui-btn-success mui-btn-block" id="trunFlash">开启闪关灯</button>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/main.js"></script>
+		<script type="text/javascript">
+			//barcode模块
+			//nativeobj模块
+			window.addEventListener('refresh', function(e) {
+				location.reload();
+				//document.getElementById('indexHeader').innerHTML = 'Hello World';  
+			})
+			mui.init({
+				beforeback: function() {
+					clearView();
+				}
+			});
+			var view = null;
+			var tipsTxtView = null;
+			var inputTxtView = null,isFlash=true;
+			var uarr;
+			mui.plusReady(function() {
+				//				var height = plus.screen.resolutionHeight*plus.screen.scale;
+				//			    console.log("当前屏幕高度:"+height);
+				//			    console.log(plus.screen.resolutionHeight+"px");
+				//			   // document.getElementById("bcid").style.height=plus.screen.resolutionHeight+"px";
+				//			    document.getElementById("bcid").style.height=document.body.offsetHeight+"px";
+				startRecognize();
+				view = new App();
+				var uinfo = plus.storage.getItem("uinfo");
+				uarr = JSON.parse(uinfo);
+				document.getElementById("stocksAmount").addEventListener('tap', function(e) {
+					clearView();
+					view.AppCreateWindow("inStorage.html");
+				});
+			});
+			var scan = null;
+			document.getElementById("trunFlash").addEventListener('tap', function(e) {
+				scan.setFlash(isFlash);
+				if(isFlash)
+				{
+					isFlash=false;
+				}
+				else{
+					isFlash=true;
+				}
+			});
+
+			function onmarked(type, result) {
+				var text = '未知: ';
+				switch(type) {
+					case plus.barcode.QR:
+						text = 'QR: ';
+						break;
+					case plus.barcode.EAN13:
+						text = 'EAN13: ';
+						break;
+					case plus.barcode.EAN8:
+						text = 'EAN8: ';
+						break;
+				}
+				scan.cancel();
+				console.log(result);
+				checkStock(result);
+
+			}
+
+			function checkStock(barcode) {
+				view.AppHttpService({
+					action: 'Goods/instock_goods',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						storeId: uarr.userBelong,
+						code: barcode
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						var btnArray = ['否', '是'];
+						mui.confirm('匹配成功，是否更新库存？', btnArray, function(e) {
+							if(e.index == 1) {
+								updateStockAmount(barcode);
+							}
+							scan.start();
+						})
+
+					} else if(response.code == '201') {
+						var btnArray = ['否', '是'];
+						mui.confirm('系统暂无此商品，是否确认录入？', '温馨提示', btnArray, function(e) {
+							if(e.index == 1) {
+								var extras = {
+									barcode: barcode,
+									openfrom: "inStorage"
+								};
+								clearView();
+								view.AppCreateWindow("../shop/goodAdd.html", null, null, extras);
+							} else {
+								scan.start();
+							}
+						})
+					} else {
+						mui.toast(response.message);
+						scan.start();
+					}
+
+				});
+			}
+
+			function updateStockAmount(stocksSku, goodsNum, goodsColor, goodsSpec, barCode) {
+				view.AppHttpService({
+					action: 'Goods/instock_goods_update',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						storeId: uarr.userBelong,
+						code: barCode
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						var sql = "insert into stockAmount(stocksSku,goodsNum,goodsColor, goodsSpec, barCode,uptime) values('" + stocksSku + "'," + goodsNum + ",'" + goodsColor + "','" + goodsSpec + "','" + barcode + "','" + getNowFormatDate("yyyy-MM-dd HH:MM:SS") + "')";
+						view.DBDML(sql, function() {
+							mui.toast("入库成功!");
+						}, function(error) {
+							console.log(error.message);
+						});
+					} else {
+						mui.toast(response.message);
+					}
+				});
+			}
+
+			function startRecognize() {
+				scan = new plus.barcode.Barcode('bcid');
+				scan.onmarked = onmarked;
+				scan.start();
+				createView();
+			}
+
+			function createView() {
+
+				tipsTxtView = new plus.nativeObj.View('tips', {
+					top: '56px',
+					left: '0px',
+					height: '20px',
+					width: '100%'
+				}); // 创建原生View控件
+				tipsTxtView.drawText('请将优惠券条码放入框内，即可自动扫描', {}, {
+					size: '14px',
+					color: '#ffffff'
+				}); // 绘制文本
+				tipsTxtView.show();
+
+				inputTxtView = new plus.nativeObj.View('tips', {
+					top: '400px',
+					left: '5px',
+					height: '20px',
+					width: '100%'
+				}); // 创建原生View控件
+				inputTxtView.drawText('无法识别？手动输入', {}, {
+					size: '14px',
+					color: '#ffffff'
+				}); // 绘制文本
+				inputTxtView.addEventListener("click", InputClick, false); // 监听原生无法输入View控件click事件
+				inputTxtView.show();
+
+			}
+			// 监听无法输入事件函数
+			function InputClick(e) {
+				scan.cancel();
+				var btnArray = ['取消', '确定'];
+				mui.prompt('请先输入条码数字', '', "温馨提示", btnArray, function(e) {
+					if(e.index == 1) {
+						checkStock(e.value);
+					}
+				});
+			}
+			// 销毁原生View控件
+			function clearView(e) {
+				tipsTxtView.clear();
+				inputTxtView.clear();
+				scan.close();
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			.mui-content{padding-bottom: 70px;}
+			.mui-backdrop{display: none;}
+			.textareabox{padding: 5px 0;background: white;border-top: 1px solid #EEEEEE;border-bottom-left-radius: 3px;border-bottom-right-radius: 3px;display: none;}
+			.mui-bar-footer{color:white;background: #ff5607;text-align: center;line-height: 60px;text-decoration: underline;box-shadow: none;height: 60px;}
+			.right li{height: 20px;line-height: 20px;}
+			.paytypebox{width: 80%;margin: 40% 10% 0 10%;}
+			.paytypebox img{height: 40px;width: 40px;}
+			.setbuttom{bottom: 0;margin-top: 0px;}
+			.mui-table-view-cell:after{left: 65px;}
+			.mui-table-view-cell:last-of-type:after{height: 0;}
+			.tit{border-bottom:1px solid #EEEEEE;padding:10px 5px;}
+			.ulinfo{border: none;}
+			.icon-dagou{color: white;}
+			.removepadd{
+				padding-left:0;
+			}			
+			.explan-p{
+				display:block;
+				-webkit-margin-before:0px !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		  	<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+			</button>
+			<h1 class="mui-title">确定订单</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<div class="mui-content-padded">
+				<!--选择按钮-->
+			    <div class="cashier" tourl="cashierselect.html">
+			    	<span class="mui-pull-left">选择导购</span><label class="mui-pull-right">点击选择导购 ></label>
+			    </div>
+			    <div class="cashier">
+			    	<span class="mui-pull-left">选择会员</span><label class="mui-pull-right">点击选择会员 ></label>
+			    </div>
+			    <div class="cashier pytp" id="paystyle">
+			    	<span class="mui-pull-left">支付方式</span><label class="mui-pull-right">支付宝支付 ></label>
+			    </div>
+			    <!--支付方式弹出框-->
+			    <div class="mui-popup mui-popup-in" style="display:none">
+			    	<div class="mui-popup-inner">
+			    	<div class="mui-popup-title">请选择支付方式</div>
+			    	<div class="mui-popup-text">
+						<ul class="mui-table-view mui-table-view-radio">
+							<li class="mui-table-view-cell mui-media removepadd">
+								<a class="mui-navigate-right">
+									<img class="mui-media-object mui-pull-left" src="../images/unionpay.png">
+									<div class="mui-media-body  mui-row">
+										<div class="mui-pull-left mui-col-xs-4">现金支付</div><br>
+										<p class="mui-ellipsis mui-col-xs- mui-pull-left">使用门店pos机收银</p>
+									</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media removepadd">
+								<a class="mui-navigate-right">
+									<img class="mui-media-object mui-pull-left" src="../images/weipay.png">
+									<div class="mui-media-body">
+										<div class="mui-pull-left">微信支付</div>
+										<p class="mui-ellipsis mui-col-xs-10 mui-pull-left">使用微信扫描二维码支付</p>
+									</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media removepadd">
+								<a class="mui-navigate-right">
+									<img class="mui-media-object mui-pull-left" src="../images/alypay.png">
+									<div class="mui-media-body">
+										<div class="mui-pull-left">支付宝支付</div>
+										<p class="mui-ellipsis mui-col-xs-11 mui-pull-left">使用支付宝扫描二维码支付</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+					</div>
+					<div class="mui-popup-buttons">
+						<span class="mui-popup-button" id="paycancel">取消</span>
+						<span class="mui-popup-button mui-popup-button-bold">確定</span>
+					</div>
+			    </div>
+			    
+			    <div class="mui-popup-backdrop mui-active" id="paybackground" style="display:none"></div>
+			    
+			    <div class="cashier" tourl="couponselect.html">
+			    	<span class="mui-pull-left">选择优惠方式</span><label class="mui-pull-right">点击选择优惠方式 ></label>
+			    </div>
+			    <!--备注框-->
+			    <div class="cashier" style="border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;">
+			    	<label class="mui-pull-left">添加订单备注</label>
+			    	<span class="mui-pull-right open">
+			    		<span class="opentxt">展开</span>
+			    		<span class="iconfont icon-comiiscaidan"></span>
+			    	</span>
+			    	<span class="mui-pull-right close">
+			    		<span class="opentxt">收起</span>
+			    		<span class="iconfont icon-jian"></span>
+			    	</span>
+			    </div>
+			    <div class="textareabox">
+			    	<textarea name="remark" rows="" cols="" id="orderremark"></textarea>
+			    </div>
+			    <!--订单产品展示-->
+			    <div style="padding: 10px 0;">本单产品</div>
+			    <div class="cashier">
+					<!--商品图片-->
+					<div class="shopimgbox mui-pull-left">
+						<img src="../images/arclist/face.png"/>
+					</div>
+					<!--商品标题盒子-->
+					<div class="titlebox mui-pull-left">
+						<div class="buy-shoptitle">2017春季新款童装17111753男童弧形分皇嘉富豪家纺</div>
+						<div class="shopsize">
+							尺寸:<span class="">100cm</span>
+						</div>
+						<div class="shopsize">
+							颜色:<span class="">牛仔蓝</span>
+						</div>
+					</div>
+					<div class="mui-pull-right">
+						<div class="shopprice">￥121.00</div>
+						<div class="mui-pull-right">x<span class="shopnum">1</span></div>
+					</div>
+			    </div>
+		  </div>
+		    <!--费用框-->
+		    <div class="orderpricebox">
+		    	<div><span class="coupontxt">使用优惠</span><span class="couponnum">-5.00</span>元</div>
+		    	<div><span class="freight">运费</span><span class="freightnum">+0</span>元</div>
+		    </div>
+		    <!--底部提交按钮-->
+		    <div class="mui-bar mui-bar-footer">
+		    	<div class="subbtn">
+		    		共￥<span class="subprice">116.00</span>元,提交订单
+		    	</div>
+		    </div>
+		    
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+//			支付弹出框
+			var paystyle = document.getElementById("paystyle");
+			var paycontent = document.getElementsByClassName("mui-popup-in")[0];
+			var paybackground = document.getElementById("paybackground");
+			var paycancel = document.getElementById("paycancel");
+			paystyle.onclick = function(){
+				paycontent.style.display = "block";
+				paybackground.style.display = "block";
+			}
+			paycancel.onclick = function(){
+				paycontent.style.display = "none";
+				paybackground.style.display = "none";
+			}
+			
+
+//		订单备注展开隐藏
+		var open = document.getElementsByClassName("open")[0];
+		var close = document.getElementsByClassName("close")[0];
+		var textare = document.getElementsByClassName("textareabox")[0];
+		open.onclick = function(){
+			this.style.display = "none";
+			close.style.display = "block";
+			textare.style.display = "block";
+		}
+		close.onclick = function(){
+			this.style.display = "none";
+			open.style.display = "block";
+			textare.style.display = "none";
+		}
+		</script>
+	</body>
+
+</html>

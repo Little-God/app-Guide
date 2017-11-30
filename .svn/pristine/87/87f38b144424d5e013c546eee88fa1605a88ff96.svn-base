@@ -1,0 +1,270 @@
+body{width: 100%;height: 100%;margin: 0px;padding: 0px;font-size: 15px;background: rgb(239, 239, 245);}
+ul,li{list-style: none;padding: 0;margin: 0;}
+dl{padding: 0;margin: 0;}
+dd{margin: 0;padding: 11px 15px;overflow: hidden;}
+header{background: white !important;}
+img{vertical-align: middle;}
+a{color: #C74B3B;}
+.mui-popover.mui-popover-action .mui-table-view a{
+    color: #C74B3B;
+}
+.mui-bar .mui-btn-link {
+    color: rgba(255, 86, 7, 1) !important;
+}
+.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {
+    color: #FF5607;
+}
+.ft40{font-size: 40px;}
+.cl82c458{color:#82c458;}
+.clDFDFDF{color: #DFDFDF;}
+.clFFFFFF{color: #FFFFFF;}
+.mui-bar .mui-title{width: 50%;margin: auto;}
+.bold{font-weight: bold;}
+.mui-flex{display: -webkit-box;}
+.mui-flex1{-webkit-box-flex: 1;width: 0;}
+.cl-orang{color: #C74B3B;}
+.cl-gray{color: #8f8f94;}
+
+/* 定义按钮 */
+.df-btn {padding: 8px 0;font-size: 16px;width: 90%;margin: 0 auto;margin-top: 20px;}
+.mui-badge {border-radius: 3px;}
+.mui-badge-danger, .mui-badge-red {background-color: #FF5053;}
+.vipitem{line-height: 44px;}
+.mui-obj{width: 50px;height: 50px;background: #007AFF;border-radius: 5px;color: #fff;line-height: 50px;}
+.sharetitle{margin-top: 10px;font-size: 16px;color: #333;}
+
+/*订单详情页中公用列表样式*/
+.flex-content{display: flex; justify-content: space-between;}
+.flex-content .mui-media-body{width: 65%;}
+.evalua{align-self: center;color: #999;}
+
+/*我的权限*/
+.powerbtn{color: #10bd0e;}
+
+/*所属门店*/
+.storelogo{width: 100px;height:100px;border-radius: 50px;background:gainsboro;margin:20px auto;}
+
+/*邀请导购*/
+.prompt{width:80%;margin:20px auto;text-align: center;}
+.refresh,.invitetxt{color: #8f8f94;text-align: center;margin-bottom: 20px;}
+.invitecode{color: red;text-align: center;font-size: 20px;}
+.code{width: 150px;height: 150px;background: white;margin: auto;margin-top: 20px;}
+#share{width: 80%;margin: 30px 10%;background: rgba(255, 86, 7, 1);text-decoration: underline;font-size: 18px;border-radius: 5px;border: none;padding: 12px 0;}
+
+/*会员-标签*/
+.roundbg{margin-right: 12px;background: #82c458;width: 40px;height: 40px;border-radius:20px ;display: inline-block;text-align: center;line-height: 40px;}
+.roundbg div{color: white;font-size: 22px;}
+.labelcontent{padding-top:1px;}
+.labelcontent>.mui-table-view:first-child{padding-top:0px;margin: 0px;}
+
+
+/*群发消息*/
+.checkedbox{background: red;height: 20px;width: 20px;border-radius: 10px;text-align: center;color: white;font-size: 12px;margin: 15px 10px 0px 0px;}
+#checkbtn{background: whtie;height: 20px;width: 20px;border: 1px solid #ccccd0;border-radius: 10px;text-align: center;color: white;font-size: 12px;margin: 15px 10px 0px 0px;}
+.allcheckedtxt{line-height: 42px;}
+
+
+/*群发文字*/
+.textareabox{position: relative;}
+.confirmbtn{line-height: 44px;text-decoration: underline;font-size: 14px;}
+.emojibtn{height: 24px;width: 100%;line-height: 30px;position: absolute;bottom:10px;}
+.emojibtn span{margin-right: 12px;}
+#form_article{height: 180px;background-color: white;padding: 10px 10px 40px 10px;}
+
+/*.textcontent{border: none ;border-radius: 0;margin: 0;border-top: 1px solid rgba(0,0,0,.1);height: 180px;line-height: 24px;padding-bottom: 30px;}*/
+
+/*群发消息内容选择*/
+.iconactive{width: 60px;height: 60px;border-radius: 30px;margin: auto;text-align: center;line-height: 60px;color: white;font-size: 30px;}
+.masscontent{text-align: center;color: #555555;}
+
+/*快捷回复*/
+.replyinput{background: #ebebeb;}
+.emoji{font-size: 24px;text-align: center;line-height: 40px;padding: 0 10px;}
+#reply{padding: 10px;margin: 5px 0 5px 5px;display: block;height: 30px;font-size: 14px;}
+
+/*会员卡信息*/
+.card{background: #c6a771;width: 90%;margin: 20px 5%;border-radius: 6px;height: 150px;padding: 20px;color: #eddcb2;box-shadow: 0px 8px 18px #ddc6a0;}
+.username{font-size: 18px;margin-top: 20px;margin-bottom: 5px;}
+.cardnum{font-size: 20px;margin-bottom: 15px;}
+.membertype{font-size: 16px;}
+#yanzheng{color: #41c64a;}
+
+/*姓名备注*/
+#remark{width: 100%;padding: 5px 10px;background: white;height:40px;border: none;margin-top: 20px;}
+
+/*优惠券*/
+.couponbox{margin: 15px 15px;border: 1px solid #DDDDDD;border-radius: 6px;}
+.couponboxup{background: #e91e63;color: white;border-top-left-radius: 5px;border-top-right-radius: 5px;padding:28px 10px;}
+.titbig{font-size: 22px;padding-bottom: 10px;}
+.titthin{font-size: 14px;}
+.couponboxdown{font-size: 12px;background: white;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding:10px 5px;color: #a3a3a3;}
+.couponinfo{font-size: 12px;text-decoration: underline;}
+
+/*会员信息*/
+.memberremark{line-height: 50px;}
+.remark{text-decoration:underline;color: #AAAAAA;}
+.icon-bi{color: #0a7cff;font-size: 14px;} 
+.addlabel{border: 1px solid red;display: inline-block;border-radius: 8px;line-height: 30px;padding:0px 5px;margin: 5px 10px 5px 0px;}
+.addtxt{color: red;text-decoration: underline;}
+
+/*查看库存*/
+.shopimg{width: 100%;padding: 10px;overflow: hidden;}
+.shopimg img{float: left;width:80px;margin-right: 10px;}
+.addimg{width: 80px;height: 80px;background: #EBEBEB;border: 1px dashed #CCCCCC;text-align: center;line-height: 80px;color: #AAAAAA;margin-right: 10px;}
+.shopinfo{width: 50px;display: inline-block;}
+.addtypetxt{color: #2c91ff;line-height: 22px;}
+.addtypebox{margin-top: 30px;}
+
+/*商品详情*/
+.shoptitlebox{background: white;padding: 10px;}
+.shoptitle{text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+.shopcart{width: 120px;background: #f19526;padding: 8px;margin: auto;display: inline-block;text-decoration: underline;border-radius:4px ;}
+.buy{background: red;padding: 8px;width: 120px;display: inline-block;text-decoration: underline;border-radius: 4px;}
+
+/*商品管理*/
+.surplus{font-size: 13px;color: #5B5B5B;}
+.bgbox{padding: 0;}
+.bgbox ul{margin: 0;}
+.bgbox .sort li{text-align: center;border-top: 1px solid #EEEEEE;}
+.bgbox .sort li:last-of-type{border-bottom: 1px solid #EEEEEE;}
+.type{padding: 0px 15px;}
+.colorlabel{margin: 8px 0;}
+.queding{display: block;text-align: center;color: white;background: red;border-radius: 8px;text-decoration: underline;padding: 10px 0;margin-top: 10px;}
+
+	/*商品列表*/
+.shoplist li{height: 72px;}
+.allshopimgsrc{background: #CCCCCC;width: 50px;height: 50px;margin-right: 10px;}
+.allshopimgsrc img{width: 100%;}
+.allshopinfobox{height: 50px;}
+.allshoptitle{font-size: 13px;line-height: 17px;display: -webkit-box;text-overflow: ellipsis;word-break: break-all;white-space: normal;overflow: hidden;-webkit-box-orient: vertical;-webkit-line-clamp: 2}
+.shoplabel{width: 30px;height: 15px;color: white;border-radius: 3px;text-align: center;margin-right: 5px;display: inline-block;font-size: 12px;}
+.new{background: red;}
+.own{background: #6a9f2f}
+.pricebox{height: 14px;}
+.txm{color: red;text-align: center;line-height: 40px;font-size: 14px;}
+.txm span{position: relative;margin: 0px 5px;display: inline-block;}
+
+/*快捷收银*/
+	/*收银底部*/
+.footernav{color: red;text-align: center;padding-top: 5px;}
+.cashiernavtxt{color: #AAAAAA;text-decoration: underline;font-size: 12px;}
+.cashierline{height: 26px;width: 1px;border-left: 1px solid #AAAAAA;margin-top: 8px;}
+	/*无商品*/
+.addshopbox{margin: auto;position: relative;top: 30%;}
+.addshop{width: 60px;height: 60px;border-radius: 30px;background: white;border:1px dashed #AAAAAA;text-align: center;line-height: 60px;margin: auto;}
+.addshopbox p{margin-top: 30px;width: 100%;text-align: center;color: #AAAAAA;}
+	/*有商品*/
+.shopimgbox{width: 40px;height: 80px;}
+.shopimgbox img{width: 100%;}
+.titlebox{width: 54%;height: 80px;padding: 0 10px;}
+.buy-shoptitle{font-size: 14px;line-height: 16px;margin-bottom: 5px;display: -webkit-box;text-overflow: ellipsis;word-break: break-all;white-space: normal;overflow: hidden;-webkit-box-orient: vertical;-webkit-line-clamp: 2}
+.shopsize{color: #AAAAAA;font-size: 12px;height: 14px;}
+.shopprice{color: red;}
+
+/*编辑商品*/
+.clear{clear: both;}
+.editshop{padding: 10px;background: #fff;width: 100%;text-align: right;}
+
+/*快捷收银-开单*/
+.cashier{width: 100%;background: white;line-height: 30px;padding: 10px;overflow: hidden;margin-top: 15px;font-size: 13px;border-radius: 3px;}
+.cashier label{color: #AAAAAA;}
+.icon-jian,.icon-comiiscaidan{font-size: 14px;margin-left: 6px;position: relative;top: 1px;}
+.close,.open{color: red;}
+.close{display: none;}
+.opentxt{text-decoration: underline;}
+	/*费用框*/
+.orderpricebox{text-align: right;background: white;margin-top:30px ;padding: 10px 15px;}
+.orderpricebox>div{line-height: 30px;} 
+.freightnum,.couponnum{width: 24%;display: inline-block;}
+.couponnum{color: red;}
+.freightnum{color: #4cd964;} 
+
+/*订单搜索*/
+.searchall{border-radius: 5px;background: white;margin: 0px 0px 0 4%;padding: 3px 0px;}
+.namesearch{border: none !important;border-radius: 0px;margin: 0px !important;height: 24px !important;padding:0px 10px !important;font-size: 14px;}
+.icon-sousuo1{display: inline-block;line-height: 24px;}
+.searchiconbox{padding-left: 10px;}
+.cancelbtn{width: 30px;text-align: center;line-height: 30px;font-size: 15px;margin: 0 10px;text-decoration: underline;color: #258cfc;}
+.moretxt{text-align: center;font-size: 16px;width: 60%;margin: 50px auto 0px auto;border-bottom: 1px solid #EEEEEE;padding-bottom:15px ;} 
+.iconbox{width:60%;margin: 0 auto;text-align: center;font-size: 13px;}
+.iconbox .iconfont{color: #AAAAAA;padding: 40px 0 15px 0;position: relative;}
+
+/*订单详情*/
+	/*详情*/
+.active{color: red !important;}
+.orderinfobox{background: white;width: 94%;margin: 80px 3% 10px 3% ;position: relative;}
+.orderimgbox{width: 60px;height: 60px;position: absolute;top: -30px;left: 50%;margin-left: -30px;border-radius: 30px;border:#fff 2px solid;}
+.address{width: 72%;}
+.orderinfoname{text-align: center;padding:40px 0;}
+	/*备注*/
+.orderremarbox{display: none;}
+.orderremarbox .textareabox{width: 94%;margin: 10px 3%;height: 180px;font-size: 13px;color: grey;}
+.textareabox textarea{height: 180px;font-size: 13px;}
+	/*改价*/
+.setpricebox{position: fixed;background: rgba(0, 0, 0, 0.5);width: 100%;height: 100%;top: 0px;display: none;}
+.setprice{width: 280px;height: 220px;background: #f5f5f5;border-radius: 5px;position: absolute;top: 50%;left: 50%;margin:-180px 0 0 -140px ;}
+.setprice h4,.setprice p{text-align: center;padding-top: 15px;}
+.setprice dd{padding: 0px 15px;height: 16px;color: #5b5b5b;}
+.setprice dd:first-child{font-size: 14px;font-weight: bold;margin: 10px 0 5px 0;color: black;}
+.conditionset{border: 1px solid red;border-radius: 5px;height: 38px;line-height: 38px;background: white;margin: 10px 15px;} 
+.conditionset a{display: inline-block;width: 50%;text-align: center;height: 36px;}
+.conditionset a:first-child{background: white;color: red;border-top-left-radius: 4px;border-bottom-left-radius: 4px;}
+.conditionset a:last-child{background: whtie;color: red;border-top-right-radius: 4px;border-bottom-right-radius: 4px;}
+.conditionset .mui-active{background:red!important;color: white!important;}
+.setinputbox{margin: 0 15px;background: white;border: 1px solid rgba(0,0,0,.2);border-radius: 3px;}
+.setinputbox input{margin: 0;border: none;width: 210px;padding: 10px 0px 10px 15px;}
+.setbuttom{position: relative;bottom: -21px;line-height: 36px;border-top: 1px solid #CCCCCC;}
+.setbuttom .mui-flex1{text-align: center;color: red;text-decoration: underline;}
+
+
+/*晒图*/
+.mui-card p{color: #A3A3A3;} 
+.sharetxt{position: absolute;top: 48%;text-align: center;z-index: 50;width: 100%;color: red;}
+.cardimg{width: 50px;height: 50px;border-radius: 25px;overflow: hidden;}
+.cardimg img{width: 100%;}
+.mui-card-content img{width: 100%;vertical-align: middle;}
+.cardshare{background: red;width: 50px;font-size: 13px;text-align: center;border-radius: 10px;margin-top: 6px;}
+
+/*发布成功*/
+.sharepublishbtn{color: white;text-align: center;padding: 80px 0;}
+.sharepublishbtn span{background: red;text-decoration: underline;display: inline-block;border-radius: 5px;padding: 12px 35px;}
+
+/*活动预览*/
+.activityimg{background: gray;width: 100%;min-height: 80px;}
+.activityimg img{width: 100%;margin: auto;vertical-align: middle;}
+.actinfo{width: 100%;}
+.acttitle{font-size: 16px;font-weight: bold;}
+.actinfo{padding: 5px 0;background: #F5F5F5;}
+.acttitle,.discount{color: black;}
+.actinfo dd{padding: 4px 15px;font-size: 14px;color: gray;}
+.sortbtnbox{line-height: 32px;text-align: center;color: gray;}
+.sortbtnbox .mui-flex1{padding: 5px 10px;}
+.uptrigon,.downtrigon{width: 0px;height: 0px;border: 5px solid darkgray;border-left-color: transparent;border-right-color: transparent;margin: 4px 0;}
+.uptrigon{border-top-color: transparent;}
+.downtrigon{border-bottom-color: transparent;}
+	/*活动商品列表*/ 
+.actshoplist{padding:0 0 10px 10px;overflow: hidden;background: #f5f5f5;}
+.actshoplist li{width: 50%;padding:10px 10px 0 0;float: left;}
+.actshoplist,.actshopimg,.actshopimg img{width: 100%;}
+.actshopimg{position: relative;}
+.newlabel{position: absolute;right: 0px;top: 0px;padding: 0px 5px;text-align: center;background: rgba(0,0,0,0.5);color: white;font-size: 13px;}
+.acttxtbox{padding: 5px;background: white;}
+.acttxt{text-overflow: ellipsis;white-space: nowrap;overflow: hidden;font-size: 13px;height: 16px;}
+.actprice .newprice{color: red;font-size: 13px;}
+.actprice .oldprice{color: gray;font-size: 13px;text-decoration: line-through;}
+
+/*分享-查询详情*/
+.infoimg,.infoimg img{width: 100%;}
+.sharetext{padding: 15px 10px;font-size: 14px;background: white;}
+.deldiv{text-align: right;color: red;}
+
+/*排行榜*/
+.sortbg{background: #db4437;color: white;font-size: 24px;font-weight: 700;text-align: center;padding: 40px 0;}
+.sorttime{font-size: 16px;font-weight: 100;padding-top: 20px;}
+.xiaoshou,.jiafen{text-align: center;color: #E9847A;background:  #db4437;height: 46px;}
+.xs,.jf{display: inline-block;height: 100%;padding:20px 0 5px 0 ;border-bottom: 3px solid #DB4437;}
+.bd-yl{border-bottom-color: #ffcf00;color: white !important;}
+.sortdiv{margin-bottom: 20px;}
+.sortnum{width: 20px;line-height: 50px;color: #DB4437 ;font-size: 18px;font-weight: 700;}
+.sortname{font-size: 14px;color: #B4ABBD;}
+.sortpbox{line-height: 50px;font-size: 16px;color: #db4437;}

@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+			</button>
+			<h1 class="mui-title">活动分享</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<div class="mui-card">
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<h4>满减活动<span class="mui-badge mui-badge-danger">NEW</span></h4>
+						<h3>新春活动满减开始啦</h3>
+						<p>2017.02.16 16:00 - 2017.02.16 16:00</p>
+					</div>
+				</div>
+				<div class="mui-card-footer">
+					<a class="mui-card-link">预览</a>
+					<a class="mui-card-link">分享</a>
+				</div>
+			</div>
+			<div class="mui-card">
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<h4>满减活动<span class="mui-badge mui-badge-danger">NEW</span></h4>
+						<h3>新春活动满减开始啦</h3>
+						<p>2017.02.16 16:00 - 2017.02.16 16:00</p>
+					</div>
+				</div>
+				<div class="mui-card-footer">
+					<a class="mui-card-link">预览</a>
+					<a class="mui-card-link">分享</a>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				//主列表点击事件
+				mui('body').on('tap', '.look', function() {
+					if(this.getAttribute('tourl') == "null" || this.getAttribute('tourl') == "") {
+
+					} else {
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

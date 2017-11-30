@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>钱包充值</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<style type="text/css">
+			header {
+				background: white !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">收入明细</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+		<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="mui-media-object mui-pull-right">-200</div>
+						<div class="mui-media-body">
+							提现
+							<p class='mui-ellipsis'>2017-06-19 03:10:24</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="mui-media-object mui-pull-right">-200</div>
+						<div class="mui-media-body">
+							提现
+							<p class='mui-ellipsis'>2017-06-19 03:10:24</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="mui-media-object mui-pull-right">-200</div>
+						<div class="mui-media-body">
+							提现
+							<p class='mui-ellipsis'>2017-06-19 03:10:24</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="mui-media-object mui-pull-right">-200</div>
+						<div class="mui-media-body">
+							提现
+							<p class='mui-ellipsis'>2017-06-19 03:10:24</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="mui-media-object mui-pull-right">+200</div>
+						<div class="mui-media-body">
+							收入
+							<p class='mui-ellipsis'>2017-06-19 03:10:24</p>
+						</div>
+					</a>
+				</li>
+				
+			</ul>
+			</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+//			判断如果是+字就变为绿色
+			var money = document.getElementsByClassName("mui-media-object");
+			for(var i=0;i<money.length;i++){
+				var firstStr = money[i].innerHTML.charAt(0);
+				if(firstStr=="+"){
+					money[i].style.color="#DD524D";
+				}
+			}
+			
+		</script>
+	</body>
+
+</html>

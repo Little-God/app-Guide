@@ -1,0 +1,306 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.icon-jia {
+				width: 20px;
+				height: 20px;
+				background: #4cd964;
+				color: white;
+				display: inline-block;
+				text-align: center;
+				border-radius: 10px;
+				line-height: 23px;
+				margin-right: 20px;
+			}
+			
+			.pond-content-padded {
+				margin-left: 60px !important;
+			}
+			
+			.pond-content-padded label~input:before {
+				right: 15px;
+				content: '\e583';
+				font-family: Muiicons;
+				font-size: inherit;
+				line-height: 1;
+				position: absolute;
+				top: 50%;
+				display: inline-block;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				text-decoration: none;
+				color: #bbb;
+				-webkit-font-smoothing: antialiased;
+			}
+			
+			.icon-barcode {
+				position: absolute;
+				right: 0px;
+				font-size: 30px;
+				color: #2c91ff;
+				line-height: 40px;
+			}
+			
+			.mui-input-row h4 {
+				font-size: 16px;
+				margin-top: 11px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">发布商品</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="submitGood">完成</button>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<!--商品图片-->
+			<div class="shopimg" id="goodImg">
+				<div class="addimg mui-pull-left" id="addImg">
+					<span class="iconfont icon-xiangji" style="font-size: 30px;"></span>
+				</div>
+				<!--<img src="../images/arclist/face.png" />-->
+			</div>
+			<!--商品详情-->
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>名称</label>
+					<input type="text" id="goodsName" placeholder="建议15字以内(必填)">
+				</div>
+				<div class="mui-input-row">
+					<label>品类</label>
+					<h4 id="procate" data-id="100055">请选择分类</h4>
+				</div>
+				<div class="mui-input-row">
+					<label>品牌</label>
+					<h4 id="goodBrand" data-id="100055">请选择品牌</h4>
+				</div>
+				<div class="mui-input-row">
+					<label>吊牌价</label>
+					<input type="text" id="tagPrice" placeholder="0.00">
+				</div>
+				<div class="mui-input-row">
+					<label>市场价</label>
+					<input type="text" id="markPrice" placeholder="0.00">
+				</div>
+				<div class="mui-input-row">
+					<label>款号</label>
+					<input type="text" class="mui-input-clear" id="goodsSPU" placeholder="请输入商品的款号" data-input-clear="5">
+				</div>
+
+			</form>
+			<!--商品规格-->
+			<h5></h5>
+			<div id="goodAttrr">
+				<form class="mui-input-group ">
+					<div class="mui-content-padded">
+						<div class="mui-input-row pond-content-padded">
+							<label>货号</label>
+							<input type="text" name="goodStock" placeholder="请输入商品货号">
+						</div>
+						<div class="mui-input-row pond-content-padded">
+							<label>尺码</label>
+							<input type="text" name="goodSize" class="mui-input-clear" placeholder="请输入尺码" data-input-clear="5">
+						</div>
+						<div class="mui-input-row pond-content-padded">
+							<label>颜色</label>
+							<input type="text" name="goodColor" class="mui-input-clear" placeholder="请输入颜色" data-input-clear="5">
+						</div>
+						<div class="mui-input-row mui-password">
+							<label>条码</label>
+							<input type="text" name="goodsBarcode" class="mui-input-clear" placeholder="请输入条码" data-input-clear="5"><span class="iconfont icon-tiaoxingma icon-barcode"></span>
+						</div>
+
+						<div class="mui-input-row pond-content-padded">
+							<label>库存</label>
+							<input type="text" class="mui-input-clear" name="goodAmount" placeholder="请输入商品的库存" data-input-clear="5">
+						</div>
+					</div>
+				</form>
+
+			</div>
+			<!--添加规格-->
+			<ul class="mui-table-view addtypebox">
+				<li class="mui-table-view-cell" id="addAttrr"><span class="iconfont icon-jia"></span><span class="addtypetxt">添加规格</span></li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/binaryajax.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/exif.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/canvasResize.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/main.js"></script>
+		<script type="text/javascript">
+			var view = null;
+			mui.init({
+				beforeback: function() {
+					//获得列表界面的webview  
+					var list = plus.webview.currentWebview().opener();
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新  
+					mui.fire(list, 'refresh');
+					//返回true，继续页面关闭逻辑  
+					return true;
+				}
+			});
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('');
+				view = new App();
+			});
+			document.getElementById("addAttrr").addEventListener('tap', function(e) {
+				document.getElementById("goodAttrr").innerHTML += '<form class="mui-input-group "><div class="mui-content-padded"><div class="mui-input-row pond-content-padded">' +
+					'<label>货号</label>' +
+					'<input type="text"  name="goodStock" placeholder="请输入款号">' +
+					'</div>' +
+					'<div class="mui-input-row pond-content-padded">' +
+					'<label>尺码</label>' +
+					'<input type="text" class="mui-input-clear"   name="goodSize" placeholder="请输入尺码" data-input-clear="5">' +
+					'</div>' +
+					'<div class="mui-input-row pond-content-padded">' +
+					'<label>颜色</label>' +
+					'<input type="text" class="mui-input-clear"  name="goodColor"  placeholder="请输入颜色" data-input-clear="5">' +
+					'</div>' +
+					'<div class="mui-input-row mui-password">' +
+					'<label>条码</label>' +
+					'<input type="text" class="mui-input-clear"  name="goodsBarcode" placeholder="请输入货号条形码" data-input-clear="5"><span class="iconfont icon-tiaoxingma icon-barcode"></span>' +
+					'</div>' +
+					'<div class="mui-input-row pond-content-padded">' +
+					'<label>库存</label>' +
+					'<input type="text" class="mui-input-clear" name="goodAmount" placeholder="请输入库存" data-input-clear="5">' +
+					'</div></div></form>';
+			});
+			/*
+			 *  @desc 添加商品图片
+			 */
+			document.getElementById("submitGood").addEventListener('tap', function(e) {
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+				var goodsName = document.getElementById("goodsName").value;
+				var goodsCateId = document.getElementById("procate").getAttribute("data-id");
+				var brandID = document.getElementById("goodBrand").getAttribute("data-id");
+				var goodsSPU = document.getElementById("goodsSPU").value;
+				var goodsPrice = document.getElementById("tagPrice").value;
+				var goodsTruePrice = document.getElementById("markPrice").value;
+				var goods = new Array();
+				var stocks = document.getElementsByName("goodStock");
+				console.log("当前货号个数：" + document.getElementsByName("goodStock")[0].value);
+				for(i = 0; i < stocks.length; i++) {
+					goods[i] = {
+						"color": document.getElementsByName("goodColor")[0].value,
+						"stocksSku": stocks[i],
+						"goodsPrice": goodsPrice,
+						"goodsTruePrice": goodsTruePrice,
+						"size": document.getElementsByName("goodSize")[0].value,
+						"colorValue": document.getElementsByName("goodColor")[0].value,
+						"bar_code": document.getElementsByName("goodsBarcode")[0].value,
+						"amount": document.getElementsByName("goodAmount")[0].value,
+					}
+				}
+				view.AppHttpService({
+					action: 'Goods/addition_by_guide',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						userBelong: uarr.userBelong,
+						goodsName: goodsName,
+						goodsPrice: goodsPrice,
+						goodsTruePrice: goodsTruePrice,
+						classId: goodsCateId,
+						brandId: brandID,
+						goods_spu: goodsSPU,
+						amount: "12",
+						specifications:goods,
+						goods_image:""
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						uarr.userName = nUserName;
+						plus.storage.setItem("uinfo", JSON.stringify(uarr));
+						plus.nativeUI.toast("数据已更新！");
+						document.getElementById('trueName').innerHTML = nUserName;
+					} else {
+						plus.nativeUI.toast("更新失败," + response.message);
+					}
+				});
+			});
+			/*
+			 *  @desc 选择商品分类
+			 */
+			document.getElementById("procate").addEventListener('tap', function(e) {
+				view.AppCreateWindow("productCates.html");
+			});
+			/*
+			 *  @desc 选择商品品牌
+			 */
+			document.getElementById("goodBrand").addEventListener('tap', function(e) {
+				view.AppCreateWindow("authBrand.html");
+			});
+			/*
+			 *  @desc 添加商品图片
+			 */
+			document.getElementById("addImg").addEventListener('tap', function(e) {
+
+				var obj = document.createElement("img");;
+				if(mui.os.plus) {
+					var a = [{
+						title: "拍照"
+					}, {
+						title: "从手机相册选择"
+					}];
+					plus.nativeUI.actionSheet({
+						title: "添加商品图片",
+						cancel: "取消",
+						buttons: a
+					}, function(b) {
+						switch(b.index) {
+							case 0:
+								break;
+							case 1:
+								cameraimages(obj);
+								//upload_img();
+								break;
+							case 2:
+								galleryImg(obj);
+								//upload_img();
+								break;
+							default:
+								break
+						}
+					})
+				}
+				document.getElementById("goodImg").appendChild(obj);
+			});
+			/*
+			 *  @desc 扫描货品条码
+			 */
+			mui('.mui-content').on('tap', '.icon-barcode', function() {
+				this.previousSibling.value = "223";
+			});
+			function getSelect(id, name, type) {
+				console.log(id, name, type);
+				if(type == "brand") {
+					document.getElementById('goodBrand').innerHTML = name;
+					document.getElementById('goodBrand').setAttribute("data-id", id);
+				} else if(type == "cate") {
+					document.getElementById('procate').innerHTML = name;
+					document.getElementById('procate').setAttribute("data-id", id);
+					console.log("设置的导购ID号：" + document.getElementById('guideValue').getAttribute("guideId"))
+				}
+			}
+		</script>
+	</body>
+
+</html>

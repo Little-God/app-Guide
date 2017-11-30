@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			.confirmbtn{color: #AAAAAA;}
+			ul,li{background: white;}
+			li{width: 25%;display: inline-block;float: left;padding: 3px;position: relative;}
+			.icon-xiangji{display: inline-block;font-size: 28px;background: red;width: 100%;height: 100%;color: white;text-align: center;}
+			#checkbtn{position: absolute;top: 10px;right: 10px;margin: 0;line-height: 20px;}
+			.green,.mui-badge-success{background: #3aae43;}
+			.send{color: #3aae43;text-decoration: underline;}
+			.mui-bar-footer{line-height: 44px;font-size: 13px;}
+			.preview{display: inline-block;border-radius: 6px;background: #DDDDDD;height: 24px;width: 44px;text-align: center;line-height: 24px;margin-top: 10px;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+			<h1 class="mui-title bold">晒图</h1>
+			<span class="mui-pull-right confirmbtn mui-action-back">取消</div>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+		    <ul class="imgul">
+		    	<li>
+		    		<span class="iconfont icon-xiangji"></span>
+		    	</li>
+		    	<li>
+		    		<div id="checkbtn" class="iconfont icon-dagou mui-pull-left goubtn"></div>
+		    	</li>
+		    </ul>
+		    <div class="mui-bar mui-bar-footer">
+		    	<div class="mui-pull-left preview">
+		    		预览
+		    	</div>
+		    	<div class="mui-pull-right send" tourl="publishgroup.html">
+		    		<span class="mui-badge mui-badge-success">1</span>发送
+		    	</div>
+		    </div>
+		</div>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+		        view=new App();
+		        //主列表点击事件
+				mui('body').on('tap', '.send', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+		    });
+			$(function(){
+				$('li').height($('li').width());
+				$('.icon-xiangji').css('line-height',$('li').height()+'px');
+				$(window).resize(function(){
+					$('li').height($('li').width());
+					$('.icon-xiangji').css('line-height',$('li').height()+'px');
+				});
+				
+				$('#checkbtn').click(function(){
+					if($(this).hasClass('green')){
+						$(this).removeClass('green');
+					}else{
+						$(this).addClass('green');
+					}
+				});
+			})
+		</script>
+	</body>
+
+</html>

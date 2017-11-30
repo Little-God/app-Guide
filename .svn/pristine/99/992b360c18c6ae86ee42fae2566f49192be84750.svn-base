@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的权限</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			header{background: white !important;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">我的权限</h1>
+
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<!--收银台导购开单以下-->
+		    <ul class="mui-table-view">
+				<li class="mui-table-view-cell">收银台选择其他导购开单<span class="powerbtn mui-pull-right">已开启</span></li>
+				<li class="mui-table-view-cell">邀请其他导购<span class="powerbtn mui-pull-right ">已开启</span></li>
+				<li class="mui-table-view-cell">为其他导购邀请会员<span class="powerbtn mui-pull-right ">已开启</span></li>
+				<li class="mui-table-view-cell">代其他导购卡券核销<span class="powerbtn mui-pull-right ">已开启</span></li>
+			</ul>
+			<!--订单改价以下-->
+			<ul class="mui-table-view" style="margin-top: 15px;">
+				<li class="mui-table-view-cell">订单改价<span class="powerbtn mui-pull-right ">已开启</span></li>
+				<li class="mui-table-view-cell">支付宝/微信支付<span class="powerbtn mui-pull-right ">已开启</span></li>
+				<li class="mui-table-view-cell">现金收银<span class="powerbtn mui-pull-right ">已开启</span></li>
+			</ul>
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

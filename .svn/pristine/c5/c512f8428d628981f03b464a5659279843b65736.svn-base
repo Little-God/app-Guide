@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.iconright{line-height: 52px;color: #cbcbd0;padding: 0;}
+			.mui-bar-footer{background: white;}
+			.checkedbox{border: none !important;}
+			.mui-bar-footer{padding: 0 20px;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   	<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">群发消息</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<!--留边框-->
+			<div class="contentbox">
+				<!--全部num-->
+				<div class="vipbtn">
+					<div class="vipqb mui-pull-left">
+						全部
+					</div>
+					<div class="ddd mui-pull-left">
+						
+					</div>
+					<div class="vipmy mui-pull-left">
+						我的
+					</div>
+				</div>
+				
+				<!--搜索会员-->
+				<div class="searchbox">
+				    <input id="search" type="search" class="mui-input-clear" placeholder="使用微信昵称、备注姓名、手机号、会员卡号搜索会员">
+				</div>
+				<!--账户头像信息等-->
+			    <ul class="mui-table-view ulinfo">
+				    <li class="mui-table-view-cell" >
+				    	<div id="checkbtn" class="iconfont icon-dagou mui-pull-left goubtn"></div>
+			        	<div class="left mui-pull-left">
+				        	<div class="tou">
+				        		
+				        	</div>
+				        </div>
+				        <div class="right mui-pull-left">
+				        	<ul>
+				        		<li class="name">四风谷<span class="iconfont icon-icon61 lj"></span></li>
+				        		<li>
+				        			<span class="vipname">普通会员</span><span class="br">|</span><span class="jifennum">0</span><span class="jifentxt">积分</span>
+				        		</li>
+				        	</ul>
+				        </div>
+				        <span class="mui-icon mui-icon-forward mui-pull-right iconright"></span>
+				    </li>
+				</ul>
+				 <ul class="mui-table-view ulinfo">
+				    <li class="mui-table-view-cell" >
+				 		<div id="checkbtn" class="iconfont icon-dagou checkedbox mui-pull-left goubtn"></div>
+				    	
+			        	 <div class="left mui-pull-left">
+				        	<div class="tou">
+				        		
+				        	</div>
+				        </div>
+				        <div class="right mui-pull-left">
+				        	<ul>
+				        		<li class="name">那崽儿<span class="iconfont icon-icon61 lj"></span></li>
+				        		<li>
+				        			<span class="vipname">普通会员</span><span class="br">|</span><span class="jifennum">0</span><span class="jifentxt">积分</span>
+				        		</li>
+				        	</ul>
+				        </div>
+				        <span class="mui-icon mui-icon-forward mui-pull-right iconright"></span>
+				    </li>
+				</ul>
+				 <ul class="mui-table-view ulinfo">
+				    <li class="mui-table-view-cell" >
+				 	<div id="checkbtn" class="iconfont icon-dagou mui-pull-left goubtn"></div>
+			        	 <div class="left mui-pull-left">
+				        	<div class="tou">
+				        		
+				        	</div>
+				        </div>
+				        <div class="right mui-pull-left">
+				        	<ul>
+				        		<li class="name">任天野<span class="iconfont icon-icon61 lj"></span></li>
+				        		<li>
+				        			<span class="vipname">普通会员</span><span class="br">|</span><span class="jifennum">0</span><span class="jifentxt">积分</span>
+				        		</li>
+				        	</ul>
+				        </div>
+				        <span class="mui-icon mui-icon-forward mui-pull-right iconright"></span>
+				    </li>
+				</ul>
+			</div>
+			
+			<!--底部全选-->
+			<div class="mui-bar mui-bar-footer">
+				<div class="allcheckedbox mui-pull-left">
+					<div id="checkbtn" class="iconfont icon-dagou mui-pull-left allbtn" style="margin: 10px 5px 0 0;"></div>
+					<span class="allcheckedtxt backsize vipite">全选</span>
+				</div>
+				<div class="confirmbtn mui-pull-right orange backsize" tourl="">确定(<span class="checkednum">0</span>)</div>
+			</div>
+			
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+		        view=new App();
+		        //主列表点击事件
+				mui('body').on('tap', '.confirmbtn', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				
+		    });
+			//计数
+			$(function(){
+				$(".checkednum").text($("li .checkedbox").length);
+			})
+			
+			//单个打钩
+			mui("body").on("click","#checkbtn",function(){
+				if($(this).hasClass("checkedbox")){
+					$(this).removeClass("checkedbox");
+				}
+				else{
+					$(this).addClass("checkedbox");
+				}
+				$(".checkednum").html($("li .checkedbox").length);
+				
+				var fal=true;
+				for(var i=0;i<$(".goubtn").length;i++){
+					if($(".goubtn").eq(i).hasClass("checkedbox")==false){
+					 	fal=false;
+					}
+				}
+				
+				if(fal==true){
+					$(".allbtn").addClass("checkedbox");
+				}
+				else{
+					$(".allbtn").removeClass("checkedbox");
+				}
+			});
+			//全选按钮
+			mui("body").on("click",".allbtn",function(){
+				for(var i=0;i<$(".goubtn").length;i++){
+					if($(".goubtn").eq(i).hasClass("checkedbox")==false){
+						var fal=false;
+					}
+				}
+				if(fal!==false){
+					$(".icon-dagou").removeClass("checkedbox");
+				}else{
+					$(".icon-dagou").addClass("checkedbox");
+				}
+				$(".checkednum").html($("li .checkedbox").length);
+			})
+			 
+		</script> 
+	</body>
+
+</html>

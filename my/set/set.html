@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>设置</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<style type="text/css">
+			ul li {
+				line-height: 24px;
+			}
+			
+			ul li span {
+				color: #cbcbd0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">设置</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<!--个人资料-->
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell" tourl="personalInfo.html">个人资料设置<span class="mui-pull-right mui-icon mui-icon-forward"></span></li>
+				<li class="mui-table-view-cell" tourl="updatePwd">密码修改<span class="mui-pull-right mui-icon mui-icon-forward"></span></li>
+			</ul>
+			<!--默认收款模式-->
+			<ul class="mui-table-view" style="margin-top: 15px;">
+				<li class="mui-table-view-cell" tourl="defaultPickUp">默认收款模式<span class="mui-pull-right mui-icon mui-icon-forward"></span><label class="mui-pull-right" id="casherType">客户主扫</label></li>
+				<li class="mui-table-view-cell" tourl="invitation.html">邀请导购加入门店<span class="mui-pull-right mui-icon mui-icon-forward"></span></li>
+				<li class="mui-table-view-cell" tourl="newStoreDesc">新商家入驻说明<span class="mui-pull-right mui-icon mui-icon-forward"></span></li>
+			</ul>
+			<!--清除缓存-->
+			<ul class="mui-table-view" style="margin-top: 15px;">
+				<li class="mui-table-view-cell" tourl="clearCache">清除缓存<span class="mui-pull-right mui-icon mui-icon-forward"></span></li>
+				<li class="mui-table-view-cell" tourl="aboutUs">关于我们<span class="mui-pull-right mui-icon mui-icon-forward"></span></li>
+			</ul>
+			<!--退出登录按钮-->
+			<ul class="mui-table-view" style="margin-top: 50px;">
+				<li class="mui-table-view-cell" style="text-align: center;color: red;" tourl="quit">退出登录</li>
+			</ul>
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				//主列表点击事件
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+				document.getElementById('casherType').innerHTML = uarr.casherType=='1'? '客户主扫' : '客户被扫';
+				mui('body').on('tap', '.mui-table-view-cell', function() {
+					tourl = this.getAttribute('tourl');
+					console.log(tourl);
+					if(this.getAttribute('tourl') == "null" || this.getAttribute('tourl') == "") {
+
+					} else if(tourl == 'quit') {
+						view.LoginOut();
+						if(mui.os.ios) {
+							view.AppCreateWindow('../../login.html');
+							return;
+						}
+						var btnArray = [{
+							title: "注销当前账号"
+						}, {
+							title: "直接关闭应用"
+						}];
+						plus.nativeUI.actionSheet({
+							cancel: "取消",
+							buttons: btnArray
+						}, function(event) {
+							var index = event.index;
+							switch(index) {
+								case 1:
+									plus.storage.clear();
+									view.AppCreateWindow('../../login.html');
+									break;
+								case 2:
+									plus.storage.clear();
+									plus.runtime.quit();
+									break;
+							}
+						});
+					} else if(tourl == 'clearCache') {
+						plus.cache.clear(function() {
+							plus.cache.calculate(function(size) {
+								plus.nativeUI.toast("成功清除 " + size + " byte!缓存");
+							});
+						});
+					} else if(tourl == "updatePwd") {
+						var btnArray = ['取消', '确定'];
+						mui.prompt('请先输入你的手机号：', '', "修改密码", btnArray, function(e) {
+							if(e.index == 1) {
+								view.AppHttpService({
+									action: 'Auth/sms_code',
+									data: {
+										mobile: e.value,
+										tag:1
+									}
+								}, function(response) {
+									if(response.code == '200') {
+										var yzm=response.data.code;
+										var extras = {
+											syzm:yzm
+										};
+										view.AppCreateWindow("updatePwd.html", null, null, extras);
+									} else if(response.code == '1001') {
+										mui.toast(response.message);
+										view.AppCreateWindow("../../login.html");
+									} else {
+										mui.toast(response.message);
+									}
+								});
+							}
+						});
+					} else if(tourl == 'defaultPickUp') {
+						var  PickupArray = [{
+							title: "客户主扫"
+						}, {
+							title: "客户被扫"
+						}];
+						plus.nativeUI.actionSheet({
+							cancel: "取消",
+							buttons: PickupArray
+						}, function(event) {
+							var index = event.index;
+							var pickType = null;
+							switch(index) {
+								case 1:
+									pickType = '1';
+									break;
+								case 2:
+									pickType = '2';
+									break;
+							}
+							if(index != '0') {
+								view.AppHttpService({
+									action: 'Guide/payment',
+									data: {
+										guideId: uarr.guideId,
+										userToken: uarr.userToken,
+										casher_type: pickType
+									}
+								}, function(response) {
+									if(response.code == '200') {
+										uarr.casherType = pickType;
+										plus.storage.setItem("uinfo", JSON.stringify(uarr));
+										document.getElementById('casherType').innerHTML=response.data.type=='1'? '客户主扫' : '客户被扫';
+									} else {
+										mui.toast(response.message);
+									}
+
+								})
+							}
+						});
+					} else {
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

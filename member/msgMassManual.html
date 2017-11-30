@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.mui-bar-footer {
+				background: white;
+			}
+			
+			.mui-bar-footer {
+				padding: 0 20px;
+			}
+			#searchbox {
+				text-align: center;
+			}
+			
+			#search {
+				background: white;
+				width: 96%;
+				margin: 8px 2%;
+				height: 28px;
+				font-size: 12px;
+				text-align: left;
+				padding: 5px 13px;
+			}
+			
+			#search::-webkit-input-placeholder,
+			.storename {
+				text-align: center;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">群发选会员</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-card">
+				<div class="df-card-nav">
+					<a class="df-card-nav-item df-card-nav-action"><span>全部</span></a>
+					<a class="df-card-nav-item "><span>我的</span></a>
+				</div>
+				<div class="mui-card-content">
+					<div style="background-color: #DCDCDC;">
+						<input id="search" type="search" class="mui-input-clear" placeholder="使用微信昵称、备注姓名、手机号、会员卡号搜索会员">
+					</div>
+					<ul class="mui-table-view mui-table-view-chevron" id="memberData">
+						<li class="mui-table-view-cell mui-media">
+							<a class="mui-navigate-right">
+								<img class="mui-media-object mui-pull-left" src="../images/psb.jpg">
+								<div class="mui-media-body">
+									李刚<span class="iconfont icon-duigoutuijian"></span><span class="iconfont icon-icon61"></span>
+									<p class="mui-ellipsis">黄金会员|0积分</p>
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media">
+							<a class="mui-navigate-right" href="javascript:;">
+								<img class="mui-media-object mui-pull-left" src="../images/psb.jpg">
+								<div class="mui-media-body">
+									李刚<span class="iconfont icon-duigoutuijian"></span><span class="iconfont icon-icon61"></span>
+									<p class="mui-ellipsis">黄金会员|0积分</p>
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media">
+							<a class="mui-navigate-right">
+								<img class="mui-media-object mui-pull-left" src="../images/psb.jpg">
+								<div class="mui-media-body">
+									李刚<span class="iconfont icon-duigoutuijian"></span><span class="iconfont icon-icon61"></span>
+									<p class="mui-ellipsis">黄金会员|0积分</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="mui-bar mui-bar-footer">
+				<div class="allcheckedbox mui-pull-left">
+					<div id="checkbtn" class="iconfont icon-dagou mui-pull-left allbtn" style="margin: 10px 5px 0 0;"></div>
+					<span class="allcheckedtxt backsize vipite">全选</span>
+				</div>
+				<div class="confirmbtn mui-pull-right orange backsize" tourl="">确定(<span class="checkednum">0</span>)</div>
+			</div>
+
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				//主列表点击事件
+				mui('body').on('tap', '.confirmbtn', function() {
+					if(this.getAttribute('tourl') == "null" || this.getAttribute('tourl') == "") {
+
+					} else {
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

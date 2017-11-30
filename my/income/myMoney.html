@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的权限</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+		<style type="text/css">
+			header {
+				background: white !important;
+			}   
+			.money{
+				color: #f05b48;
+				text-align: center;
+				margin-top: 20%;
+				font-size: 70px; 
+			}
+			.money span{
+				font-size: 20px;
+			}
+			.money-small{
+				text-align: center;
+				font-size: 13px;
+				margin-top: 20px;
+			}
+			.money-bg{
+				width: 93%; 
+				margin-top: 0px;
+			}
+			.mui-content{
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			.mui-btn-block {
+			    padding: 10px 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">我的收入</h1>
+		<div class="mui-pull-right set mui-btn-link" style="line-height: 44px;">收入明细</div>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<div class="money">4.72<span>元</span></div>
+			<p class="money-small">账户超过10元可提现，今天还可提现1次</p>
+			<div class="btn-bottom">
+			<div class="money-bg">
+				<img src="../../images/money.png" alt="" class="img-resposive"/>
+			</div>
+			<button type="button" class="mui-btn mui-btn-block">提现</button>
+			<button type="button" class="mui-btn mui-btn-danger mui-btn-block recharge">充值</button>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+		        view=new App();
+			
+			mui('body').on('tap', '.set', function() {
+					view.AppCreateWindow("moneyDetail.html");
+				});
+				
+			mui('body').on('tap', '.recharge', function() {
+					view.AppCreateWindow("recharge.html");
+				});	
+			
+			})
+		</script>
+	</body>
+
+</html>

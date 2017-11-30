@@ -1,0 +1,1453 @@
+{
+	"@platforms": ["android", "iPhone", "iPad"],
+	"id": "H5A2010DA",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"name": "云聚客",/*应用名称，程序桌面图标名称*/
+	"version": {
+		"name": "0.122",/*应用版本名称*/
+		"code": "83"
+	},
+	"description": "云聚客app是一款新零售门店线下线下服务工具，帮助导购更好地服务消费者，通过手机就能入库、盘点、开单、核销、发货等操作，方便与高效，并支持个性晒商品、晒活动、晒评价等宣传功能，有助于吸引更多顾客到店消费。",/*应用描述信息*/
+	"icons": {
+		"72": "icon.png"
+	},
+	"launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"developer": {
+		"name": "",/*开发者名称*/
+		"email": "",/*开发者邮箱地址*/
+		"url": "http://www.dcloud.io"
+	},
+	"permissions": {
+		
+        "Audio": {},
+        "Cache": {
+            "description": "管理应用缓存"
+        },
+        "Camera": {},
+        "Console": {
+            "description": "跟踪调试输出日志"
+        },
+        "Contacts": {},
+        "Device": {},
+        "Downloader": {},
+        "Events": {
+            "description": "应用扩展事件"
+        },
+        "File": {},
+        "Gallery": {},
+        "Geolocation": {},
+         "Invocation": {},
+        "Messaging": {},
+        
+        
+        "Storage": {},
+        
+        "Uploader": {},
+        "Runtime": {},
+        "XMLHttpRequest": {},
+        "Zip": {},
+        "Barcode": {},
+        
+        "Speech": {},
+        "Webview":{},
+        "NativeUI":{},
+        "Navigator":{},
+        "NativeObj":{},"Push":{},"Share":{}
+	},
+	"plus": {
+		"splashscreen": {
+			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+			"waiting": false,"delay":"0"
+		},
+		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+		"distribute": {"plugins":{"payment":{},"share":{"weixin":{"appid":"wx6c8882b4f1f75494","appsecret":"wx6c8882b4f1f75494","description":"可选，微信分享"},"qq":{"appid":"1106158102","description":"QQ分享"}},"push":{"igexin":{"appid":"3ETgsV7E447yY7do9rMn41","appkey":"Q80974cA7G69IHMvZz8kE7","appsecret":"jS8qtozIQ9AmS8E8UfSPu"}}},
+			"apple": {
+				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+				"mobileprovision": "",/*iOS应用打包配置文件*/
+				"password": "",/*iOS应用打包个人证书导入密码*/
+				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+				"frameworks": []
+			},
+			"google": {
+				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+				"keystore": "",/*Android应用打包使用的密钥库文件*/
+				"password": "",/*Android应用打包使用密钥库中证书的密码*/
+				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.GET_TASKS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.SEND_SMS\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.REBOOT\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>","<uses-permission android:name=\"android.permission.RECEIVE_WAP_PUSH\"/>","<uses-permission android:name=\"android.permission.WRITE_SMS\"/>","<uses-permission android:name=\"android.permission.READ_SMS\"/>"]
+			},
+			"orientation": ["portrait-primary", "portrait-secondary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+			"icons": {
+				"ios": {
+					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+					"iphone": {
+						"normal": "unpackage/res/icons/57x57.png",/*iPhone普通屏幕程序图标，分辨率：57x57*/
+						"retina": "unpackage/res/icons/114x114.png",/*iPhone高分屏程序图标，分辨率：114x114*/
+						"retina7": "unpackage/res/icons/120x120.png",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
+						"spotlight-normal": "unpackage/res/icons/29x29.png", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "unpackage/res/icons/58x58.png", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png", /*iPhone设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png","retina8":"unpackage/res/icons/180x180.png","settings-retina8":"unpackage/res/icons/87x87.png"
+					},
+					"ipad": {
+						"normal": "unpackage/res/icons/72x72.png", /*iPad普通屏幕程序图标，分辨率：72x72*/
+						"retina": "unpackage/res/icons/144x144.png", /*iPad高分屏程序图标，分辨率：144x144*/
+						"normal7": "unpackage/res/icons/76x76.png", /*iPad iOS7程序图标，分辨率：76x76*/
+						"retina7": "unpackage/res/icons/152x152.png", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						"spotlight-normal": "unpackage/res/icons/50x50.png", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+						"spotlight-retina": "unpackage/res/icons/100x100.png", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+						"spotlight-normal7": "unpackage/res/icons/40x40.png",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						"spotlight-retina7": "unpackage/res/icons/80x80.png",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "unpackage/res/icons/29x29.png",/*iPad设置页面程序图标，分辨率：29x29*/
+						"settings-retina": "unpackage/res/icons/58x58.png"
+					}
+				},
+				"android": {
+					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"
+				}
+			},
+			"splashscreen": {
+				"ios": {
+					"iphone": {
+						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
+						"retina35": "F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/iPhone4.png","retina55":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/iPhone6plus竖屏.png","retina47":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/iPhone6.png","retina40":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/iPhone5.png","retina55l":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/iPhone6plus横屏.png"
+					},
+					"ipad": {"portrait":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/iPad竖屏768x1004.png","portrait7":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/iPadIOS7竖屏.png","landscape":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/iPad横屏1024x748.png","landscape7":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/iPadIOS7横屏.png","portrait-retina":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/iPad高分屏竖屏.png","portrait-retina7":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/iPad-iOS7高分屏竖屏.png","landscape-retina":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/iPad高分屏横屏.png","landscape-retina7":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/iPad-iOS7高分屏横屏.png"
+						 /*iPad竖屏启动图片，分辨率：768x1004*/
+						/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						 /*iPad横屏启动图片，分辨率：1024x748*/
+						 /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						 /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						 /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						
+					}
+				},
+				"android": {
+					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "","hdpi":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/Android高分屏480x762.png","xhdpi":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/Android-720P高分屏.png","xxhdpi":"F:/建设项目/2017/聚客o2o2s/资料/APP/启动页/快速导出/Android-1080P高分屏.png"
+				}
+			},"debug":true
+		}
+	},
+	"dependencies": {
+		"pages": {
+			"Scan/scan.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"index.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"fonts/mui.ttf",
+					"workbench/workbench.html",
+					"js/jquery-3.1.0.min.js",
+					"js/app.js"
+				],
+				"refer": [
+					"my/my.html",
+					"member/member.html",
+					"member/memberheader.html",
+					"guide.html",
+					"login.html",
+					"member/memberList.html"
+				],
+				"priority": 0
+			},
+			"my/mypower.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"member/mass.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/app.js"
+				],
+				"refer": [
+					"member/manualnews.html",
+					"member/labelmass.html",
+					"member/massselect.html"
+				],
+				"priority": 0
+			},
+			"member/member.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/app.js",
+					"js/jquery-3.1.0.min.js"
+				],
+				"refer": [
+					"member/label.html",
+					"member/mass.html",
+					"member/memberinfo.html"
+				],
+				"priority": 0
+			},
+			"member/memberinfo.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/app.js"
+				],
+				"refer": [
+					"member/membercardinfo.html",
+					"member/remarks.html",
+					"member/coupon.html",
+					"member/chat-im.html"
+				],
+				"priority": 0
+			},
+			"member/masstext.html": {
+				"resources": [
+					"css/webiaoqing.css",
+					"js/webiaoqin.js",
+					"js/mui.min.js",
+					"css/img/default.gif",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/jquery-3.1.0.min.js",
+					"images/arclist/1.gif",
+					"images/arclist/57.gif",
+					"images/arclist/71.gif",
+					"images/arclist/78.gif",
+					"images/arclist/73.gif",
+					"images/arclist/80.gif",
+					"images/arclist/72.gif",
+					"images/arclist/82.gif",
+					"images/arclist/67.gif",
+					"images/arclist/96.gif",
+					"images/arclist/91.gif",
+					"images/arclist/93.gif",
+					"images/arclist/95.gif",
+					"images/arclist/76.gif",
+					"images/arclist/75.gif",
+					"images/arclist/85.gif",
+					"images/arclist/92.gif",
+					"images/arclist/86.gif",
+					"images/arclist/89.gif",
+					"images/arclist/94.gif",
+					"images/arclist/88.gif",
+					"images/arclist/24.gif",
+					"images/arclist/11.gif"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"cashiermanage/editgoods.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"images/arclist/face.png",
+					"js/jquery-3.1.0.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"cashiermanage/cashierselect.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/jquery-3.1.0.min.js",
+					"images/arclist/face.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"cashiermanage/billing.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/jquery-3.1.0.min.js",
+					"images/arclist/face.png",
+					"js/app.js"
+				],
+				"refer": [
+					"cashiermanage/couponselect.html"
+				],
+				"priority": 0
+			},
+			"cashiermanage/couponselect/couponselect.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"ordermanage/ordersearch.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"ordermanage/ordermanage.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/jquery-3.1.0.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"ordermanage/ordermanage-webview/ordermanage.html": {
+				"resources": [
+					"ordermanage/ordermanage-webview/tab-top-subpage-1.html",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"js/webviewGroup.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/jquery-3.1.0.min.js",
+					"ordermanage/ordermanage-webview/tab-top-subpage-2.html",
+					"ordermanage/ordermanage-webview/all.html",
+					"ordermanage/ordermanage-webview/dpaid.html",
+					"ordermanage/ordermanage-webview/header.html",
+					"fonts/iconfont.ttf",
+					"js/app.js"
+				],
+				"refer": [
+					"ordermanage/ordermanage-webview/tab-top-subpage-3.html",
+					"ordermanage/ordermanage-webview/tab-top-subpage-5.html",
+					"ordermanage/ordermanage-webview/tab-top-subpage-4.html",
+					"ordermanage/ordermanage-webview/ysend.html",
+					"ordermanage/ordermanage-webview/dsend.html",
+					"ordermanage/ordermanage-webview/dtake.html",
+					"ordermanage/ordermanage-webview/yfinish.html",
+					"ordermanage/ordermanage-webview/yclose.html",
+					"ordermanage/ordersearch.html"
+				],
+				"priority": 0
+			},
+			"ordermanage/ordermanage-webview/tab-top-webview-main.html": {
+				"resources": [
+					"ordermanage/ordermanage-webview/tab-top-subpage-1.html",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"js/webviewGroup.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"ordermanage/ordermanage-webview/tab-top-subpage-3.html",
+					"ordermanage/ordermanage-webview/tab-top-subpage-2.html",
+					"ordermanage/ordermanage-webview/tab-top-subpage-5.html",
+					"ordermanage/ordermanage-webview/tab-top-subpage-4.html"
+				],
+				"priority": 0
+			},
+			"ordermanage/ordermanage-webview/tab-top-subpage-1.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"workbench/workbench.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"ordermanage/ordermanage-webview/tab-top-webview-main.html",
+					"fonts/mui.ttf",
+					"js/app.js"
+				],
+				"refer": [
+					"scan/scan.html",
+					"scans.html",
+					"shopmanage/shopmanage.html",
+					"ordermanage/ordermanage-webview/ordermanage.html",
+					"cashiermanage/cashier.html",
+					"share/share.html",
+					"ordermanage/return.html",
+					"messagecenter.html",
+					"workbench/invitemember.html",
+					"workbench/statistic.html",
+					"cashier/cashier.html",
+					"order/order-webview/list.html",
+					"shop/manage.html",
+					"order/return.html",
+					"shop/goodsList.html",
+					"order/quickDelivery.html",
+					"order/list/orderList.html",
+					"order/goodsRejected.html",
+					"scan/scanStorage.html",
+					"login.html",
+					"scan/inventoryArea.html"
+				],
+				"priority": 0
+			},
+			"ordermanage/ordermanage-webview/all.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"css/mui.min.css",
+					"css/iconfont.css",
+					"css/style.css",
+					"js/app.js"
+				],
+				"refer": [
+					"ordermanage/orderinfo.html"
+				],
+				"priority": 0
+			},
+			"ordermanage/ordermanage-webview/header.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"ordermanage/ordermanage-webview/dpaid.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/iconfont.css",
+					"css/style.css",
+					"js/app.js"
+				],
+				"refer": [
+					"ordermanage/orderinfo.html"
+				],
+				"priority": 0
+			},
+			"ordermanage/ordermanage-webview/ysend.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/iconfont.css",
+					"css/style.css",
+					"js/app.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"ordermanage/ordermanage-webview/dsend.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/iconfont.css",
+					"css/style.css",
+					"js/app.js"
+				],
+				"refer": [
+					"ordermanage/orderinfo.html"
+				],
+				"priority": 0
+			},
+			"ordermanage/ordermanage-webview/dtake.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/app.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"ordermanage/ordermanage-webview/yfinish.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/app.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"ordermanage/ordermanage-webview/yclose.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/app.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"ordermanage/orderinfo.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"images/arclist/face.png",
+					"fonts/iconfont.ttf",
+					"js/jquery-3.1.0.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my/my.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"fonts/iconfont.ttf",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/app.js"
+				],
+				"refer": [
+					"my/mypower.html",
+					"my/set/set.html",
+					"my/set/personalInfo.html"
+				],
+				"priority": 0
+			},
+			"scan/scan.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"images/saoma.png",
+					"js/database.js",
+					"js/app.js",
+					"css/style.css"
+				],
+				"refer": [
+					"scan/stocksAmout.html"
+				],
+				"priority": 0
+			},
+			"member/memberheader.html": {
+				"resources": [
+					"member/member.html",
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/jquery-3.1.0.min.js",
+					"member/label.html",
+					"member/message.html"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"share/activityshare.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/jquery-3.1.0.min.js",
+					"js/app.js"
+				],
+				"refer": [
+					"share/activityshow.html"
+				],
+				"priority": 0
+			},
+			"scans.html": {
+				"resources": [
+					"css/iconfont.css",
+					"css/style.css",
+					"images/arclist/face.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"share/showimg.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"images/arclist/face.png",
+					"js/jquery-3.1.0.min.js"
+				],
+				"refer": [
+					"share/shareinfo.html",
+					"share/selectimg.html"
+				],
+				"priority": 0
+			},
+			"share/activityshow.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/jquery-3.1.0.min.js",
+					"images/arclist/face.png"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"share/publishgroup.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"images/arclist/1.gif",
+					"images/arclist/face.png",
+					"js/jquery-3.1.0.min.js",
+					"js/app.js"
+				],
+				"refer": [
+					"share/sharepublish.html"
+				],
+				"priority": 0
+			},
+			"share/shareinfo.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"images/arclist/face.png",
+					"js/jquery-3.1.0.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"shopmanage/shopmanage.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"images/arclist/face.png",
+					"js/jquery-3.1.0.min.js",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/app.js"
+				],
+				"refer": [
+					"shopmanage/select.html",
+					"shopmanage/shoppublish.html",
+					"shopmanage/shopinfo.html"
+				],
+				"priority": 0
+			},
+			"cashiermanage/cashier.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"images/arclist/face.png",
+					"js/jquery-3.1.0.min.js"
+				],
+				"refer": [
+					"cashiermanage/billing.html"
+				],
+				"priority": 0
+			},
+			"share/share.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"js/app.js",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [
+					"share/showimg.html",
+					"share/activityshare.html"
+				],
+				"priority": 0
+			},
+			"member/manualnews.html": {
+				"resources": [
+					"js/jquery-3.1.0.min.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/app.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"member/massselect.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [
+					"member/message.html",
+					"member/masstext.html",
+					"member/remarks.html",
+					"member/addmessage.html",
+					"member/reply.html"
+				],
+				"priority": 0
+			},
+			"member/addmessage.html": {
+				"resources": [
+					"css/webiaoqing.css",
+					"js/webiaoqin.js",
+					"css/img/default.gif",
+					"js/jquery-3.1.0.min.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"images/arclist/12.gif",
+					"images/arclist/15.gif",
+					"images/arclist/8.gif",
+					"images/arclist/2.gif",
+					"images/arclist/71.gif",
+					"images/arclist/96.gif",
+					"images/arclist/74.gif",
+					"images/arclist/89.gif",
+					"images/arclist/59.gif",
+					"images/arclist/80.gif",
+					"images/arclist/51.gif",
+					"images/arclist/75.gif",
+					"images/arclist/60.gif",
+					"images/arclist/55.gif",
+					"images/arclist/64.gif",
+					"images/arclist/72.gif",
+					"images/arclist/54.gif",
+					"images/arclist/79.gif",
+					"images/arclist/90.gif"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"member/reply.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [
+					"member/addmessage.html"
+				],
+				"priority": 0
+			},
+			"member/labelmass.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"member/membercardinfo.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"member/coupon.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my/set/set.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/app.js"
+				],
+				"refer": [
+					"my/set/personaldata.html",
+					"my/set/invitation.html",
+					"login.html",
+					"my/set/personalInfo.html",
+					"my/set/updatePwd.html"
+				],
+				"priority": 0
+			},
+			"my/set/personaldata.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [
+					"my/set/setstore.html"
+				],
+				"priority": 0
+			},
+			"shopmanage/select.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/jquery-3.1.0.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"share/selectimg.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/jquery-3.1.0.min.js"
+				],
+				"refer": [
+					"share/publishgroup.html"
+				],
+				"priority": 0
+			},
+			"ordermanage/return.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/jquery_min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"share/sharepublish.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"messagecenter.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my/set/invitation.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/app.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"workbench/invitemember.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"images/arclist/face.png",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/jquery-3.1.0.min.js",
+					"workbench/invitemember-sub.html",
+					"js/app.js",
+					"js/main.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"shopmanage/shopinfo.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"images/arclist/face.png",
+					"js/jquery-3.1.0.min.js"
+				],
+				"refer": [
+					"shopmanage/inventory.html",
+					"shopmanage/imginfo.html"
+				],
+				"priority": 0
+			},
+			"shopmanage/inventory.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"shopmanage/imginfo.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"workbench/statistic.html": {
+				"resources": [
+					"js/echarts-all.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/jquery-3.1.0.min.js",
+					"js/main.js",
+					"css/font-awesome.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"cashier/cashier.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"images/arclist/face.png",
+					"js/jquery-3.1.0.min.js",
+					"js/app.js",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [
+					"cashier/billing.html",
+					"cashier/editgoods.html"
+				],
+				"priority": 0
+			},
+			"order/order-webview/list.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"order/order-webview/dpaid.html",
+					"fonts/mui.ttf",
+					"js/webviewGroup.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/jquery-3.1.0.min.js"
+				],
+				"refer": [
+					"order/order-webview/all.html",
+					"order/order-webview/dsend.html",
+					"order/order-webview/ysend.html"
+				],
+				"priority": 0
+			},
+			"shop/manage.html": {
+				"resources": [
+					"images/arclist/face.png",
+					"js/app.js",
+					"css/iconfont.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/jquery-3.1.0.min.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"shop/shopinfo.html",
+					"shop/select.html",
+					"shop/goodAdd.html",
+					"scan/simpleScan.html",
+					"shop/goodInfo.html",
+					"shop/search.html"
+				],
+				"priority": 0
+			},
+			"login.html": {
+				"resources": [
+					"js/app.js",
+					"js/jQuery.md5.add.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/jQuery.md5.js",
+					"js/jquery-3.1.0.min.js",
+					"js/md5.js"
+				],
+				"refer": [
+					"index.html"
+				],
+				"priority": 0
+			},
+			"my/set/personalInfo.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css",
+					"css/mui.picker.min.css",
+					"js/mui.picker.min.js",
+					"js/exif.js",
+					"js/canvasResize.js",
+					"js/binaryajax.js",
+					"js/jquery-3.1.0.min.js",
+					"js/main.js"
+				],
+				"refer": [
+					"my/set/setstore.html"
+				],
+				"priority": 0
+			},
+			"workbench/invitemember-sub.html": {
+				"resources": [
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"order/return.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"member/chat-im.html": {
+				"resources": [
+					"js/mui.imageViewer.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/arttmpl.js",
+					"js/app.js",
+					"js/exif.js",
+					"js/canvasResize.js",
+					"js/binaryajax.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"member/remarks.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my/set/updatePwd.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/app.js",
+					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"my/set/setstore.html": {
+				"resources": [
+					"css/img/default.gif"
+				],
+				"refer": [
+					"scan/simpleScan.html"
+				],
+				"priority": 0
+			},
+			"scan/stocksAmout.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"js/database.js",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"scan/simpleScan.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css",
+					"js/app.js"
+				],
+				"refer": [
+					"shop/goodInfo.html"
+				],
+				"priority": 0
+			},
+			"shop/search.html": {
+				"resources": [
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"js/jquery-3.1.0.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"shop/goodsList.html": {
+				"resources": [
+					"images/arclist/face.png",
+					"js/app.js",
+					"images/dfgoods.png",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf",
+					"shop/goodsList-sub.html"
+				],
+				"refer": [
+					"shop/goodInfo.html",
+					"shop/goodAdd.html",
+					"shop/search.html"
+				],
+				"priority": 0
+			},
+			"shop/goodInfo.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"images/arclist/face.png",
+					"js/jquery-3.1.0.min.js",
+					"fonts/iconfont.ttf",
+					"images/dfgoods.png",
+					"js/main.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"shop/goodAdd.html": {
+				"resources": [
+					"images/arclist/face.png",
+					"fonts/mui.ttf",
+					"fonts/iconfont.ttf",
+					"js/mui.min.js",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"shop/goodsList-sub.html": {
+				"resources": [
+					"images/dfgoods.png",
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css",
+					"fonts/iconfont.ttf"
+				],
+				"refer": [
+					"shop/goodInfo.html",
+					"shop/goodAdd.html",
+					"scan/simpleScan.html"
+				],
+				"priority": 0
+			},
+			"member/memberList.html": {
+				"resources": [
+					"fonts/mui.ttf",
+					"images/psb.jpg",
+					"images/my.png"
+				],
+				"refer": [
+					"login.html"
+				],
+				"priority": 0
+			},
+			"order/quickDelivery.html": {
+				"resources": [
+					"css/mui.min.css",
+					"js/app.js",
+					"js/mui.min.js"
+				],
+				"refer": [
+					"order/delivery.html",
+					"member/chat-im.html"
+				],
+				"priority": 0
+			},
+			"order/list/orderList.html": {
+				"resources": [
+					"js/webviewGroup.js",
+					"order/list/allOrder.html",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"order/list/waitSend.html",
+					"order/list/waitPaid.html",
+					"order/list/close.html",
+					"order/list/alreadySend.html"
+				],
+				"priority": 0
+			},
+			"order/list/waitPaid.html": {
+				"resources": [
+					"css/mui.min.css",
+					"js/app.js",
+					"js/mui.min.js"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"order/goodsRejected.html": {
+				"resources": [
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"order/delivery.html": {
+				"resources": [
+					"js/mui.picker.js",
+					"js/app.js",
+					"js/mui.min.js",
+					"js/mui.poppicker.js",
+					"css/mui.min.css",
+					"css/mui.picker.min.css"
+				],
+				"refer": [
+					"scan/simpleScan.html"
+				],
+				"priority": 0
+			},
+			"order/list/waitSend.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"order/list/alreadySend.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"css/mui.min.css"
+				],
+				"refer": [],
+				"priority": 0
+			},
+			"scan/scanStorage.html": {
+				"resources": [
+					"js/main.js",
+					"css/mui.min.css"
+				],
+				"refer": [
+					"scan/inStorage.html"
+				],
+				"priority": 0
+			},
+			"scan/inventoryArea.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [
+					"scan/scanInventory.html"
+				],
+				"priority": 0
+			},
+			"scan/scanInventory.html": {
+				"resources": [
+					"js/main.js"
+				],
+				"refer": [
+					"scan/inventoryData.html"
+				],
+				"priority": 0
+			},
+			"scan/inventoryData.html": {
+				"resources": [
+					"js/app.js",
+					"js/mui.min.js",
+					"fonts/mui.ttf",
+					"css/iconfont.css",
+					"css/mui.min.css",
+					"css/style.css"
+				],
+				"refer": [],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"Workbench/workbench.html",
+				"My/my.html",
+				"js/iconfont.js",
+				"js/mui.js",
+				"css/mui.css",
+				"Member/member.html"
+			]
+		}
+	},
+	"unpackage":[
+	  "css/mui.css",
+	  "js/iconfont.js",
+	  "js/mui.js"
+	]
+}

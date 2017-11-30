@@ -1,0 +1,462 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.mui-bar-footer {
+				background: white;
+				color: white;
+				box-shadow: none;
+			}
+			
+			.mui-bar-footer a {
+				color: white;
+			}
+			
+			.mui-flex1 {
+				text-align: center;
+				margin-top: 4px;
+			}
+			
+			.mui-navigate-right:after {
+				right: 0px;
+			}
+			
+			.mui-table-view .mui-media-object {
+				line-height: 80px;
+				max-width: 80px;
+				height: 80px;
+			}
+			
+			.mui-popover .mui-table-view {
+				max-height: 400px;
+			}
+			
+			input[type=radio] {
+				display: none;
+			}
+			
+			input[type=radio]+label {
+				border: 1px solid #ccc;
+				border-radius: 5px;
+				padding: 4px 8px;
+				margin: 4px 3px;
+				display: inline-block;
+				text-align: center;
+			}
+			
+			input[type=radio]+label:active {
+				background-color: #DC433B;
+				color: #fff;
+			}
+			
+			input[type=radio]:checked+label {
+				background-color: #DC433B;
+				color: #fff;
+			}
+			
+			.radio-div {
+				display: inline-block;
+			}
+			
+			#goodSliderImg img {
+				max-height: 40%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+			</button>
+			<h1 class="mui-title">商品详情</h1>
+			<a class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" href="#goodInfoMore" id="getGoodInfoMore">更多</a>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<!--图片轮播-->
+			<div id="slider" class="mui-slider">
+				<!--轮播图片-->
+				<div class="mui-slider-group" id="goodSliderImg">
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#"><img src="http://dcloudio.github.io/mui/assets/img/yuantiao.jpg"></a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="http://dcloudio.github.io/mui/assets/img/shuijiao.jpg"></a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="http://dcloudio.github.io/mui/assets/img/muwu.jpg"></a>
+					</div>
+				</div>
+				<!--轮播按钮-->
+				<div class="mui-slider-indicator" id="goodSliderAction">
+					<div class="mui-indicator mui-active"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+				</div>
+			</div>
+			<!--商品标题-->
+			<div class="shoptitlebox">
+				<div class="mui-ellipsis" id="goodName">
+					2017春季新款童装 17110068男童绣仙鹤夹克
+				</div>
+				<span class="cl-orang" id="goodPrice">￥196.00</span>
+			</div>
+			<!--详情-->
+			<div class="mui-content">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">配送方式<span class="mui-pull-right"><p id="goodDistribution">到店自提|快递</p></span>
+					</li>
+					<li class="mui-table-view-cell">限购数量<span class="mui-pull-right"><p id="limitNum">无限制</p></span></li>
+					<li class="mui-table-view-cell">能否使用优惠券<span class="mui-pull-right"><p id="limitCoupon">能</p></span></li>
+				</ul>
+			</div>
+			<div class="mui-content">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell" id="getGoodDesc">
+						<a class="mui-navigate-right">
+							图文详情
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!--购买按钮-->
+			<div class="mui-bar mui-bar-footer">
+				<div class="mui-flex">
+					<div class="mui-flex1">
+						<a data-action="shopcart" href="#goodAttr" class="shopcart">
+							加入收银台
+						</a>
+					</div>
+					<div class="mui-flex1">
+						<a data-action="buy" href="#goodAttr" class="buy">
+							立即开单
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--查看更多弹出面板-->
+		<div id="goodInfoMore" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right">
+						<img class="mui-media-object mui-pull-left" id="goodImgMore" src="../images/dfgoods.png">
+						<div class="mui-media-body mui-text-left mui-col-xs-8 mui-ellipsis">
+							<h5 id="goodNameMore">烤炉模式的城，到黄昏，如同打翻的调色盘一般</h5>
+							<p class="cl-orang" id="goodPriceMore">￥：123.00</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="goodShare">分享</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a id="goodStock">查看库存</a>
+				</li>
+				<li class="mui-table-view-cell" id="editGoodsImg">
+					<a id="goodEditImg">编辑图片</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#goodInfoMore"><b>取消</b></a>
+				</li>
+			</ul>
+		</div>
+		<!--开单弹出面板-->
+		<div id="goodAttr" class="mui-popover mui-popover-action mui-popover-bottom">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right">
+						<img class="mui-media-object mui-pull-left" id="goodImgPop" src="../images/dfgoods.png" height="100px" width="100px">
+						<div class="mui-media-body mui-text-left mui-col-xs-8 mui-ellipsis">
+							<h5 id="goodNamePop">烤炉模式的城，到黄昏，如同打翻的调色盘一般</h5>
+							<p class="cl-orang" id="goodPricePop">￥：123.00</p>
+							<h5 id="goodAmount">剩余库存<span id="colorSizeAmount">0</span>件</h5>
+						</div>
+					</a>
+				</li>
+				<div class="mui-content-padded mui-text-left">
+					<h5 class="mui-content-padded" id="goodColorPop">颜色</h5>
+					<div id="goodColorArea">
+						<!--<div class="radio-div"><input type="radio" name="color" value="CW" id="CW"><label for="CW">白色</label></div>
+					<div class="radio-div"><input type="radio" name="color" value="CB" id="CB"><label for="CB">黑色</label></div>
+					<div class="radio-div"><input type="radio" name="color" value="CR" id="CR"><label for="CR">红色</label></div>-->
+					</div>
+
+					<h5 class="mui-content-padded" id="goodSizePop">尺码</h5>
+					<div id="goodSizeArea">
+						<!--<div class="radio-div"><input type="radio" name="size" value="S" id="SS"><label for="SS">SS</label></div>
+					<div class="radio-div"><input type="radio" name="size" value="SL" id="SL"><label for="SL">SL</label></div>
+					<div class="radio-div"><input type="radio" name="size" value="SXL" id="SXL"><label for="SXL">SXL</label></div>-->
+					</div>
+					<h5 class="mui-content-padded">数量</h5>
+					<div class="mui-numbox" data-numbox-min='1'>
+						<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+						<input id="buyNum" class="mui-input-numbox" type="number" value="0" />
+						<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+					</div>
+				</div>
+				<li class="mui-table-view-cell">
+					<a href="javascript:volid(0);" id="submit">确定</a>
+				</li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/main.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var goodId = null;
+			//				selectColorValue = null,
+			//				selectSize = null,
+			//				selectBarCode = null,
+			//				selectGoodAId = null,
+			//				selectStocksSku = null,
+			//				sstockPrice = null,
+			//				selectGoodEAid = null;
+			var goodinfo = new Array();
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('');
+				view = new App();
+				var self = plus.webview.currentWebview();
+				goodId = self.goodId;
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+				view.AppHttpService({
+					action: 'Goods/details_get',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						userBelong: uarr.userBelong,
+						goodsId: goodId,
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						goodinfo = response.data;
+						document.getElementById('goodName').innerHTML = response.data.goodsName;
+						document.getElementById('goodPrice').innerHTML = "￥:" + response.data.goodsTruePrice;
+						document.getElementById('limitNum').innerHTML = response.data.limitNum != '0' ? response.data.limitNum + "件" : "无限制";
+						document.getElementById('limitCoupon').innerHTML = response.data.availableCoupons == '1' ? "支持" : "不支持";
+						if(response.data.logisticsType == '0') {
+							document.getElementById('goodDistribution').innerHTML = "到店自提|快递";
+						} else if(response.data.logisticsType == '1') {
+							document.getElementById('goodDistribution').innerHTML = "到店自提";
+						} else if(response.data.logisticsType == '2') {
+							document.getElementById('goodDistribution').innerHTML = "快递";
+						} else {
+							document.getElementById('goodDistribution').innerHTML = "未知";
+						}
+						document.getElementById('goodPriceMore').innerHTML = "￥:" + response.data.goodsTruePrice;
+						document.getElementById('goodPricePop').innerHTML = "￥:" + response.data.goodsTruePrice;
+						document.getElementById('goodNameMore').innerHTML = response.data.goodsName;
+						document.getElementById('goodNamePop').innerHTML = response.data.goodsName;
+						document.getElementById('goodImgMore').src = response.data.goodsImage;
+						document.getElementById('goodImgPop').src = response.data.goodsImage;
+						var arrColor = new Array();
+						var arrSize = new Array();
+						var arrImg = new Array();
+						var CSAmount = 0;
+						arrImg.push(response.data.goodsImage);
+						mui.each(response.data.skus, function(index, _data) {
+							arrColor[index] = {
+								"color": _data.color,
+								"good_a_id": _data.goodsColorId,
+								"stock_sku": _data.stocksSku,
+								"sizea": JSON.stringify(_data.size_amount)
+							};
+							mui.each(_data.size_amount, function(i, v) {
+								arrSize.push(v['size']);
+								CSAmount = v['amount'] * 1 + CSAmount * 1; //*1隐式转成数字，否则是字符串拼接
+							});
+							arrImg.push(_data.sku_images);
+						});
+						document.getElementById('colorSizeAmount').innerHTML = CSAmount;
+						//赋值滚动图片
+						var len = arrImg.length;
+						for(i = 0; i < len; i++) {
+							if(i == 0) {
+								document.getElementById('goodSliderImg').innerHTML = '<div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="' + arrImg[i] + '"></a></div>';
+								document.getElementById('goodSliderAction').innerHTML = '<div class="mui-indicator mui-active"></div>';
+							} else {
+								document.getElementById('goodSliderImg').innerHTML += '<div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="' + arrImg[i] + '"></a></div>';
+								document.getElementById('goodSliderAction').innerHTML += '<div class="mui-indicator "></div>';
+							}
+
+						}
+						//复制商品颜色属性
+						var colorHtml = "";
+						mui.each(arrColor, function(index, _data) {
+							colorHtml += '<div class="radio-div"><input type="radio" name="color" data-goodAid="' + _data.good_a_id + '"  data-stockSku="' + _data.stock_sku + '"  data-size="' + _data.sizea.replace(/"/g, "'") + '" value="' + _data.color + '" id="cl' + index + '"><label for="cl' + index + '">' + _data.color + '</label></div>';
+						});
+						document.getElementById('goodColorArea').innerHTML = colorHtml;
+						showGoodSize(arrSize.unique());
+					} else {
+						plus.nativeUI.toast("获取商品详情失败" + response.message);
+					}
+				});
+			});
+			mui('#goodColorArea').on('tap', 'div', function() {
+				//				selectColorValue = this.firstChild.getAttribute("value");
+				//				selectGoodAId = this.firstChild.getAttribute("data-goodAid");
+				//				selectStocksSku = this.firstChild.getAttribute("data-stockSku");
+				var selectColorSize = this.firstChild.getAttribute("data-size");
+				var tem = JSON.parse(selectColorSize.replace(/'/g, '"'));
+				showGoodSize(tem);
+			});
+			mui('#goodSizeArea').on('tap', 'div', function() {
+				//				selectSize = this.firstChild.getAttribute("value");
+				//				selectBarCode = this.firstChild.getAttribute("data-barcode");
+				//				sstockPrice = this.firstChild.getAttribute("data-stocksPrice");
+				//				selectGoodEAid = this.firstChild.getAttribute("data-goodeaid");
+				document.getElementById('colorSizeAmount').innerHTML = this.firstChild.getAttribute("data-amount");
+				document.getElementById('goodPricePop').innerHTML = "￥:" + this.firstChild.getAttribute("data-stocksPrice");
+
+			});
+			document.getElementById("goodStock").addEventListener('tap', function(e) {
+				var extras = {
+					goodId: goodId
+				};
+				view.AppCreateWindow("goodStocks.html", null, null, extras);
+			});
+			document.getElementById("goodEditImg").addEventListener('tap', function(e) {
+				var extras = {
+					goodId: goodId
+				};
+				view.AppCreateWindow("goodEditImg.html", null, null, extras);
+			});
+			document.getElementById("getGoodDesc").addEventListener('tap', function(e) {
+				var extras = {
+					goodDesc: goodinfo.mobile_desc
+				};
+				view.AppCreateWindow("goodImginfo.html", null, null, extras);
+			});
+			mui('.mui-popover').on('tap', '.mui-navigate-right', function() {
+				var extras = {
+					goodDesc: goodinfo.mobile_desc
+				};
+				view.AppCreateWindow("goodImginfo.html", null, null, extras);
+			});
+			mui('.mui-flex').on('tap', 'a', function() {
+				var action = this.getAttribute('class');
+				document.getElementById('goodAttr').setAttribute("aciton", action);
+			});
+			document.getElementById("submit").addEventListener('tap', function(e) {
+				var action = document.getElementById('goodAttr').getAttribute("aciton");
+				var num = document.getElementById('buyNum').value;
+				var goodEaAmount=document.getElementById('colorSizeAmount').innerText;
+				if(num>goodEaAmount)
+				{
+					mui.toast("购买数量超出库存数量");return;
+				}
+				var selectColorValue = null,
+					selectStocksSku = null,
+					selectSize = null,
+					selectBarCode = null,
+					selectGoodAId = null,
+					selectGoodEAId = null;
+				//获得 尺码单选选按钮name集合  
+				var radiosSize = document.getElementsByName("size");
+				//根据 name集合长度 遍历name集合  
+				for(var i = 0; i < radiosSize.length; i++) {
+					//判断那个单选按钮为选中状态  
+					if(radiosSize[i].checked) {
+						//弹出选中单选按钮的值  
+						selectSize = radiosSize[i].value;
+						selectBarCode = radiosSize[i].getAttribute("data-barcode");
+						sstockPrice = radiosSize[i].getAttribute("data-stocksPrice");
+						selectGoodEAid = radiosSize[i].getAttribute("data-goodeaid");
+					}
+				}
+				var radiosColor = document.getElementsByName("color");
+				//根据 name集合长度 遍历name集合  
+				for(var i = 0; i < radiosColor.length; i++) {
+					//判断那个单选按钮为选中状态  
+					if(radiosColor[i].checked) {
+						//弹出选中单选按钮的值  
+						selectColorValue = radiosColor[i].value;
+						selectGoodAId = radiosColor[i].getAttribute("data-goodAid");
+						selectStocksSku = radiosColor[i].getAttribute("data-stockSku");
+					}
+				}
+				if(!selectColorValue)
+				{
+					mui.toast("请选择开单商品颜色");return;
+				}
+				if(!selectSize)
+				{
+					mui.toast("请选择开单尺码");return;
+				}
+				mui('#goodAttr').popover('hide');
+				console.log("当前操作:" + action + "选择颜色:" + selectColorValue + "选择尺码:" + selectSize + "选择数量:" + num);
+				if(action == 'buy') {
+					var extras = {
+						goodinfo: {
+							goods_a_id: selectGoodAId,
+							goods_ea_id: selectGoodEAid,
+							goodsId: goodinfo.goodsId,
+							stocksSku: selectStocksSku,
+							goodName: goodinfo.goodsName,
+							goodsNum: num,
+							goodsImage: goodinfo.goodsImage,
+							goodsColor: selectColorValue,
+							goodsSpec: selectSize,
+							barCode: selectBarCode,
+							goodPrice: goodinfo.goodsTruePrice,
+						},
+						openfrom: "goodinfo"
+					};
+					view.AppCreateWindow("../cashier/confirmOrder.html", null, null, extras, "confrimOrder");
+				} else if(action == 'shopcart') {
+					console.log(selectGoodAId);
+					var sql = "select * from  shopCart  where  goods_ea_id = " + selectGoodEAid + ";";
+					view.DBquery(sql, function(len, shopCartData) {
+						if(len > 0) {
+							console.log("拿到数据了:" + JSON.stringify(shopCartData[0].scid));
+							var sql = "update shopCart set goodsNum = goodsNum + " + num + " where  scid= " + shopCartData[0].scid + "";
+							view.DBDML(sql, function() {
+								console.log("更新成功，增加了数量!");
+							}, function(error) {
+								console.log(error.message);
+							});
+
+						} else {
+							var sql = "insert into shopCart(goods_a_id, goodsId,goods_ea_id, stocksSku,goodName, goodsNum, goodsImage, goodsColor, goodsSpec, barCode,goodPrice) values(" + selectGoodAId + "," + goodinfo.goodsId + ",'" + selectGoodEAid + "','" + selectStocksSku + "','" + goodinfo.goodsName + "'," + num + ",'" + goodinfo.goodsImage + "','" + selectColorValue + "','" + selectSize + "','" + selectBarCode + "'," + sstockPrice + ")";
+							view.DBDML(sql, function() {
+								console.log("添加成功!");
+							}, function(error) {
+								console.log(error.message);
+							});
+						}
+					}, function(error) {
+						console.log(error.message);
+					});
+				}
+			});
+
+			function showGoodSize(arr) {
+				var sizeHtml = "";
+				mui.each(arr, function(index, _data) {
+					if(_data.hasOwnProperty("size")) {
+						sizeHtml += '<div class="radio-div"><input type="radio" name="size" data-barcode="' + _data.barCode + '" data-goodeaid="' + _data.goods_ea_id + '" data-stocksPrice="' + _data.stocksPrice + '" data-amount="' + _data.amount + '" value="' + _data.size + '" id="sz' + index + '"><label for="sz' + index + '">' + _data.size + '</label></div>';
+					} else {
+						sizeHtml += '<div class="radio-div"><input type="radio" name="size" data-barcode="' + _data.barCode + '" data-goodeaid="' + _data.goods_ea_id + '" data-stocksPrice="' + _data.stocksPrice + '" value="' + _data + '" id="sz' + index + '"><label for="sz' + index + '">' + _data + '</label></div>';
+					}
+				});
+				document.getElementById('goodSizeArea').innerHTML = sizeHtml;
+			}
+		</script>
+	</body>
+
+</html>

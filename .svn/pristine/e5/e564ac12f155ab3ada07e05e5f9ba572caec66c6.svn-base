@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>所属门店</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">所属门店</h1>
+		</header>
+		<div class="mui-content">
+			<!--门店logo-->
+			<div class="storelogo">
+				<img src="../../css/img/default.gif" id="storeLogo" />
+			</div>
+			<!--门店名字-->
+			<div class="storename bold" id="storename">
+				喵果先生1号店
+			</div>
+			<!--设置门店按钮-->
+			<ul class="mui-table-view" style="margin-top: 50px;">
+				<li class="mui-table-view-cell" id="switchStore">扫一扫切换门店</li>
+			</ul>
+		</div>
+
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				//主列表点击事件
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+				document.getElementById('storename').innerHTML = uarr.userStoreName ? uarr.userStoreName : '无门店';
+				document.getElementById('storeLogo').src = view.commodUri + uarr.userStoreLogo;
+				document.getElementById("switchStore").addEventListener('tap', function(e) {
+					var extras = {
+						type:'switchStore'
+					};
+					view.AppCreateWindow("../../scan/simpleScan.html", null, null, extras);
+				});
+			})
+		</script>
+	</body>
+
+</html>

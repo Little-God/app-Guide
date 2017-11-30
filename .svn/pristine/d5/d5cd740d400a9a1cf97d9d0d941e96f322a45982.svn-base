@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			.confirmbtn{text-decoration: none;font-size: 20px;}
+			.mui-bar-footer{text-align: center;line-height: 50px;height: 50px;text-decoration: underline;color: #8a8a8a;padding: 0;-webkit-box-shadow: none;}
+			.mui-table-view-cell:after {left: 5%;width: 90%;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   	<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">快捷回复</h1>
+		    <span class="mui-pull-right orange confirmbtn iconfont icon-bianji" tourl="addmessage.html"></div>
+		</header>
+		<div class="mui-content">
+		    <div class="replyinput mui-flex">
+		    	<input type="text" name="reply" id="reply" class="mui-flex1" value="" />
+		    	<div class="iconfont icon-xiaolian emoji"></div>
+		    </div>
+		    
+		    <ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					您平时穿什么尺码的比较多呢？
+				</li>
+				<li class="mui-table-view-cell">
+					亲请放心哈，我们家是和实体店铺一体的！商家的宝贝也是实体店的实物，亲下单的款可以凭订单号自行到店铺提取的  放心哟~
+				</li>
+				<li class="mui-table-view-cell">
+					商品图片都是100%实物拍摄，我们的美工上架之前也都会对着实物反复调色的呢！但由于每台手机显示器所设置的光亮程度不同以及个人对颜色的感觉不同，所以少许色差是在所难免的！请您见谅~~
+				</li>
+				
+			</ul>
+		    
+		    <div class="mui-bar mui-bar-footer mui-flex">
+		    	<div class="mui-flex1" style="background: #f3f3f3;">
+		    		自建
+		    	</div>
+		    	<div class="mui-flex1" style="background: white;">
+		    		预设
+		    	</div>
+		    	<div class="mui-flex1" style="background: #ff0000;text-decoration: underline;color: white;">
+		    		发送
+		    	</div>
+		    </div>
+		    
+		</div>
+		
+		
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+		        view=new App();
+		        //主列表点击事件
+				mui('body').on('tap', '.confirmbtn', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				
+		    });
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">发布商品-第一步</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="nextStep">下一步</button>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>名称</label>
+					<input type="text" id="goodsName" placeholder="建议15字以内(必填)">
+				</div>
+				<div class="mui-input-row">
+					<label>品类</label>
+					<h4 id="procate" data-id="100055">请选择分类</h4>
+				</div>
+				<div class="mui-input-row">
+					<label>品牌</label>
+					<h4 id="goodBrand" data-id="100055">请选择品牌</h4>
+				</div>
+				<div class="mui-input-row">
+					<label>吊牌价</label>
+					<input type="number" id="tagPrice" placeholder="0.00">
+				</div>
+				<div class="mui-input-row">
+					<label>市场价</label>
+					<input type="number" id="markPrice" placeholder="0.00">
+				</div>
+				<div class="mui-input-row">
+					<label>款号</label>
+					<input type="text" class="mui-input-clear" id="goodsSPU" placeholder="请输入商品的款号" data-input-clear="5">
+				</div>
+			</form>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/main.js"></script>
+		<script type="text/javascript">
+			var view = null;
+			mui.init({
+				beforeback: function() {
+					//获得列表界面的webview  
+					var list = plus.webview.currentWebview().opener();
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新  
+					mui.fire(list, 'refresh');
+					//返回true，继续页面关闭逻辑  
+					return true;
+				}
+			});
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('');
+				view = new App();
+			});
+			document.getElementById("nextStep").addEventListener('tap', function(e) {
+				view.AppCreateWindow("addGoodS2.html");
+			});
+			/*
+			 *  @desc 选择商品分类
+			 */
+			document.getElementById("procate").addEventListener('tap', function(e) {
+				view.AppCreateWindow("goodCate.html");
+			});
+			/*
+			 *  @desc 选择商品品牌
+			 */
+			document.getElementById("goodBrand").addEventListener('tap', function(e) {
+				view.AppCreateWindow("authBrand.html");
+			});
+
+			function getSelect(id, name, type) {
+				console.log(id, name, type);
+				if(type == "brand") {
+					document.getElementById('goodBrand').innerHTML = name;
+					document.getElementById('goodBrand').setAttribute("data-id", id);
+				} else if(type == "cate") {
+					document.getElementById('procate').innerHTML = name;
+					document.getElementById('procate').setAttribute("data-id", id);
+				}
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/webiaoqing.css"/>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/webiaoqin.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			body,.mui-content{background: #f9f9f9;}
+			.textareabox{width: 90%;margin: 20px 5% 0 5%;}
+			#form_article{border-radius: 8px;border: 1px solid gainsboro;}
+			dd{overflow: visible;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   	<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">添加快捷短语</h1>
+		    <span class="mui-pull-right orange confirmbtn">保存</span>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<div class="textareabox">
+				<!--输入框-->
+				<!--<textarea class="textcontent" name="textarea" maxlength="140"></textarea>-->
+				<article id="form_article" contenteditable="true" onkeydown="myInput.listen(this, event);"></article>
+				<!--字数监测、表情添加-->
+				<div class="emojibtn">
+					<span class="iconfont icon-xiaolian mui-pull-right" style="font-size: 24px;"></span>
+					<span class="writedbox mui-pull-right"><label class="writed">0</label>/140</span>
+				</div>
+			</div> 
+			<!--emoji表情框-->
+			<div class="page_emotion box_swipe" id="page_emotion" style="background: #f6f6f6;visibility:hidden ;">
+				<dl id="list_emotion" class="list_emotion pt_10"></dl><!-- 表情框 -->
+				<dt><ol id="nav_emotion" class="nav_emotion"></ol></dt><!-- 分页提示点 -->
+			</div>
+		</div>
+		
+		
+		
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			$(function(){
+				//添加表情初始化
+				$(".page_emotion").hide()
+				//限制字数
+				var keynum=0;
+				$(".writed").text(keynum); 
+				//
+				$("#form_article").on("keydown",function(e){
+					if (e.keyCode!== 8) {
+		                if(keynum>=140){
+		                	return false;
+		                }else{
+		                	keynum+=1;
+		                	$(".writed").text(keynum);
+		                }
+		           	}
+					else{
+						if(keynum>0){
+							keynum-=1;
+						}else{
+							keynum=0;
+						}
+						$(".writed").text(keynum);
+					}
+				})
+				
+				$("dd span").click(function(){
+					if(keynum<140){
+						keynum+=1;
+		           		$(".writed").text(keynum);
+					}else{
+						$("img:last-child").remove();
+					}
+					
+				})
+				
+				$(".confirmbtn").click(function(){
+					console.log($("#form_article").text().length); 
+				});
+				$(".icon-xiaolian").click(function(){
+					if($(".page_emotion").is(":hidden")){
+						$(".page_emotion").show();
+					}else( 
+						$(".page_emotion").hide()
+					)
+				});
+			})
+		</script>
+	</body>
+
+</html>

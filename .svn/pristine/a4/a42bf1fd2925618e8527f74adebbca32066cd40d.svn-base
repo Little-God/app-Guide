@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			body,.mui-content,.mui-slider-group{background-color: #f9f9f9;}
+			dd{padding: 0px;}
+			.vipitem{margin:0 20px;}
+		</style>
+	</head>
+
+	<body>
+		
+			<div class="mui-content">
+			<!--留边框-->
+				<div class="contentbox">
+					<!--会员群发-->
+					<div class="vip_sa">
+						<span class="iconfont icon-huiyuanqunfa mui-pull-left iconleft"></span>
+						<div class="vipmofa mui-pull-left">
+							<dl>
+								<dd style="font-size: 18px;">会员群发</dd>
+								<dd style="color: #bcbcbc;">批量给我的会员发消息</dd>
+							</dl>
+						</div>
+						<span class="iconfont icon-arrowright mui-pull-right" style="padding: 0 10px 0 0;line-height: 34px;color: #bcbcbc;"></span>
+					</div>
+				</div>
+			</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

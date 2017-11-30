@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style>
+			.mui-media img {
+				border-radius: 22px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cl-orang"></span><span class="vipitem orange mui-action-back backsize cl-orang">返回</span>
+			<h1 class="mui-title bold">选择会员</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="invitationUser">邀请会员</button>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<div class="mui-input-row mui-search  mui-content-padded">
+				<input type="search" class="mui-input-clear" placeholder="搜索">
+			</div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="../images/psb.jpg">
+						<div class="mui-media-body">
+							赵赵
+							<p class='mui-ellipsis'>黄金会员|0积分</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="../images/psb.jpg">
+						<div class="mui-media-body">
+							赵赵
+							<p class='mui-ellipsis'>黄金会员|0积分</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="../images/psb.jpg">
+						<div class="mui-media-body">
+							赵赵
+							<p class='mui-ellipsis'>黄金会员|0积分</p>
+						</div>
+					</a>
+				</li>
+
+			</ul>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				view = new App();
+				document.getElementById("invitationUser").addEventListener('tap', function(e) {
+					view.AppCreateWindow("../workbench/invitemember.html");
+				});
+			});
+		</script>
+	</body>
+
+</html>

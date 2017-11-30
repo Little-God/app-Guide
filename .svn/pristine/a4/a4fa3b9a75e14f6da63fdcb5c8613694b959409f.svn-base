@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>扫描货品详情</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+		<style>
+			.mui-bar-tab {
+				background-color: #FFFFFF;
+				height: 62px;
+			}			
+			.mui-btn-warning a,
+			.mui-btn-submit a,
+			.mui-btn-danger a,
+			.mui-btn-royal a {
+				color: #fff;
+				line-height: 56px;
+				padding: 3px 6px;
+				display: inline-block;
+			}			
+			.mui-bar .mui-table-cell {
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-center mui-title">库存扫描详情</h1>
+		</header>
+		<div class="mui-content">
+			<!--数据列表-->
+			<ul id="stocks" class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<div class="mui-slider-left mui-disabled">
+						<a action="del" class="mui-btn mui-btn-red">删除</a>
+					</div>
+					<div class="mui-slider-right mui-disabled">
+						<a action="del" class="mui-btn mui-btn-red">删除</a>
+					</div>
+					<div class="mui-slider-handle">
+						<div class="mui-media-body">
+							<div class="mui-table">
+								<div class=" mui-table-cell mui-col-xs-6">
+									<h4>ABAC46-1</h4>
+									<h5>尺码:X</h5>
+								</div>
+								<div class="mui-table-cell mui-col-xs-6 mui-text-right">
+									<div class="mui-numbox" data-numbox-min='0'>
+										<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+										<input class="mui-input-numbox" type="number" value="0" />
+										<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+				
+			</ul>
+		</div>
+		<nav class="mui-bar mui-bar-tab">
+			<div class="mui-table" id="menu">
+				<div class="mui-table-cell mui-col-xs-6 mui-btn-danger">
+					<a>
+						库存盘点
+					</a>
+				</div>
+				<div class="mui-table-cell mui-col-xs-6 mui-btn-warning">
+					<a>新货入库</a>
+				</div>
+			</div>
+		</nav>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script>
+			mui.plusReady(function() {
+				var data = new Pdatabase();
+				//加载扫描数据
+				    data.query('stocksAmount', function(stocksData) {
+				    var datahtml="";
+					mui.each(stocksData, function(index, _data) {
+						console.log("拿到数据了:" + JSON.stringify(_data));
+							 datahtml+= '<li class="mui-table-view-cell">' +
+								'<div class="mui-slider-left mui-disabled">' +
+								'<a action="del" data-stocks="'+_data['stockCode']+'" class="mui-btn mui-btn-red">删除</a>' +
+								'</div>' +
+								'<div class="mui-slider-right mui-disabled">' +
+								'<a action="del" class="mui-btn mui-btn-red">删除</a>' +
+								'</div>' +
+								'<div class="mui-slider-handle">' +
+								'<div class="mui-media-body">' +
+								'<div class="mui-table">' +
+								'<div class=" mui-table-cell mui-col-xs-6">' +
+								'<h4>'+_data['stockCode']+'</h4>' +
+								'<h5>尺码:'+_data['size']+'</h5>' +
+								'</div>' +
+								'<div class="mui-table-cell mui-col-xs-6 mui-text-right">' +
+								'<div class="mui-numbox" data-numbox-min="0">' +
+								'<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>' +
+								'<input class="mui-input-numbox" type="number" value="'+_data['amount']+'" />' +
+								'<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</li>';
+								console.log(datahtml);
+					});
+					document.getElementById("stocks").innerHTML=datahtml;
+				},function(error){
+						console.log(error);
+					});
+                //删除扫描数据
+                mui('#stocks').on('tap', 'a', function(event) {
+					console.log(this.getAttribute("action"));
+					elem = this.parentNode.parentNode;
+                    if(this.getAttribute("action") == "del") {
+						stockKey = this.getAttribute("data-stocks");
+						var btnArray = ['确认', '取消'];
+						mui.confirm('确认删除该条记录？', 'Hello', btnArray, function(e) {
+							if(e.index == 0) {
+								data.del("stocksAmount","stockCode",stockKey,function(success){
+									elem.parentNode.removeChild(elem);
+								},function(error){
+									console.log(error);
+								});
+							} else {
+								setTimeout(function() {
+									mui.swipeoutClose(elem);
+								}, 0);
+							}
+						});
+					} else {
+						setTimeout(function() {
+							mui.swipeoutClose(elem);
+						}, 0);
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

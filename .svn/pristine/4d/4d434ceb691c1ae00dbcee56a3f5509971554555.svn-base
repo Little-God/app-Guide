@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<style>
+			.mui-content {
+				margin-bottom: 30px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title" style="color: #333333;" id="pagetitle">盘点还原点</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view" id="undoData">
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">还原
+		            <span class="mui-icon mui-icon-undo"></span>
+		        </button>
+						<div class="mui-media-body">
+							李洋
+							<p class="mui-ellipsis">2017-06-13 15:30</p>
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">还原
+		            <span class="mui-icon mui-icon-undo"></span>
+		        </button>
+
+						<div class="mui-media-body">
+							李洋
+							<p class="mui-ellipsis">2017-06-13 15:30</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var view = null,
+				uarr;
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				var uinfo = plus.storage.getItem("uinfo");
+				uarr = JSON.parse(uinfo);
+			});
+			mui('.mui-table-view').on('tap', 'li', function() {
+				view.AppHttpService({
+					action: 'Goods/store_inventory_sure',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						storeId: uarr.userBelong,
+						areaId: areaId,
+						lists: stocksData
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						mui.toast("还原成功");
+					}
+				});
+			});
+
+			function loadData() {
+				view.AppHttpService({
+					action: 'Goods/store_inventory_sure',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						storeId: uarr.userBelong,
+						areaId: areaId,
+						lists: stocksData
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						mui.each(response.data, function(index, _data) {
+							document.getElementById("undoData").innerHTML += '<li class="mui-table-view-cell mui-media">' +
+								'<a href="javascript:;">' +
+								'<button type="button" class="mui-btn mui-btn-danger mui-btn-outlined">还原'+
+								'<span class="mui-icon mui-icon-undo"></span>' +
+								' </button>' +
+								'<div class="mui-media-body">' +_data.name+
+								'<p class="mui-ellipsis">'+_data.name+'</p>' +
+								'</div>' +
+								'</a>' +
+								'</li>';
+						});
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

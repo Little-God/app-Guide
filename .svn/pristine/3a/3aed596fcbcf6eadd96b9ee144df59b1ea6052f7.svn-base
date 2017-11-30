@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			body,
+			.mui-content {
+				background: white;
+			}
+			.searchbox {
+				background: #EEEEEE !important;
+				padding: 10px 0;
+			}
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.mui-card-media {
+				color: initial;
+			}
+			
+			.mui-card-link {
+				color: #FF5607;
+				text-decoration: underline !important;
+			}
+			
+			.mui-card-content img {
+				width: 60px !important;
+				height: 60px;
+			}
+			
+			.mui-card-header img {
+				border-radius: 55px;
+				margin-top: 5px;
+			}
+			
+			.mui-card-header {
+				min-height: 64px;
+			}
+			
+			.mui-bar-nav~.mui-content {
+				padding-top: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--搜索会员-->
+		<div class="searchbox mui-flex">
+			<div class="searchall mui-flex mui-flex1">
+				<div class="searchiconbox">
+					<span class="iconfont icon-sousuo1"></span>
+				</div>
+				<div class="mui-flex1">
+					<input class="mui-flex1 namesearch" type="text" id="searchOrder" class="mui-input-clear" placeholder="请输入搜索名称">
+				</div>
+			</div>
+			<div class="cancelbtn mui-action-back">
+				取消
+			</div>
+		</div>
+		<div class="content" id="orderData">
+			<div class="moretxt">搜索更多内容</div>
+			<div class="iconbox">
+				<div class="mui-flex">
+					<div class="mui-flex1">
+						<div class="iconfont icon-dingdan" style="font-size: 30px;"></div>
+						<div class="ordertxt">订单号</div>
+					</div>
+					<div class="mui-flex1">
+						<div class="iconfont icon-wode" style="font-size: 36px;top: -2px;"></div>
+						<div class="ordertxt">收货人</div>
+					</div>
+					<div class="mui-flex1">
+						<div class="iconfont icon-dianhua" style="font-size: 26px;"></div>
+						<div class="ordertxt">手机号</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var currpage = 1,uarr=null;
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				var uinfo = plus.storage.getItem("uinfo");
+				uarr = JSON.parse(uinfo);
+				//主列表点击事件
+			});
+			mui('#orderData').on('tap', '.mui-card-content', function() {
+				var orderId = this.getAttribute('data-sn');
+				var extras = {
+					orderSn: orderId
+				};
+				view.AppCreateWindow("orderInfo.html", null, null, extras);
+			});
+			mui('#orderData').on('tap', 'a', function() {
+				var action = this.getAttribute('data-action');
+				console.log("当前操作:"+action);
+				if(action == 'delivery') {
+					var orderSn = this.getAttribute('data-sn');
+					var extras = {
+						orderSn: orderSn
+					};
+					view.AppCreateWindow("delivery.html", null, null, extras);
+				} else if(action == 'orderNote') {
+					var orderSn = this.getAttribute('data-sn');
+					var extras = {
+						orderSn: orderSn,
+						item:"item2"
+					};
+					view.AppCreateWindow("orderInfo.html", null, null, extras);
+				} else if(action == 'contactBuyer') {
+					var buyerID = this.getAttribute('data-buyerId');
+					var buyerName = this.getAttribute('data-buyerName');
+					var extras = {
+						buyer_id: buyerID,
+						buyer_name: buyerName,
+					};
+					view.AppCreateWindow("../member/chat-im.html", null, null, extras);
+				}else if(action == 'notifyPay'){
+					var orderSn = this.getAttribute('data-sn');
+					view.AppHttpService({
+							action: 'Order/remind_pay',
+							data: {
+								guideId: uarr.guideId,
+								userToken: uarr.userToken,
+							    orderId:orderSn,
+							}
+						}, function(response) {
+							if(response.code == '200') {
+								mui.toast("提醒成功");
+							} else {
+								mui.toast(response.message);
+							}
+
+						})
+				}
+			});
+			document.getElementById("searchOrder").addEventListener('keydown', function(e) {
+				console.log(e.which+"键盘值:"+e.keyCode)
+				if(13 == e.keyCode) { //点击了“搜索”  
+					var keywords = document.getElementById("searchOrder").value;
+					console.log(keywords);
+					if(keywords.length > 0) {
+						view.AppHttpService({
+							action: 'Order/order_list',
+							data: {
+								guideId: uarr.guideId,
+								userToken: uarr.userToken,
+								roleType: uarr.userType,
+								keyword: keywords,
+								currpage: currpage,
+								rp: 15,
+							}
+						}, function(response) {
+							if(response.code == '200') {
+								if(currpage==1)
+								{
+									document.getElementById('orderData').innerHTML="";
+								}
+								mui.each(response.data, function(index, _data) {
+									var orderStatu = "",
+										orderAction = "";
+									if(_data.order_status == 0) {
+										orderStatu = "已关闭";
+										orderAction = '<a data-action="contactBuyer" data-buyerId="' + _data.buyer_id + '" data-buyerName="' + _data.user_name + '" class="mui-card-link">联系买家</a>' +
+											'<a data-action="orderNote"  class="mui-card-link">备注</a>';
+									} else if(_data.order_status == 10) {
+										orderStatu = "未付款";
+										orderAction = '<a data-action="notifyPay" data-sn="' + _data.order_sn + '" class="mui-card-link">提醒付款</a>' +
+											'<a data-action="orderNote" data-sn="' + _data.order_sn + '"  class="mui-card-link">备注</a>' +
+											'<a class="mui-card-link">关闭订单</a>';
+									} else if(_data.order_status == 20) {
+										orderStatu = "待发货";
+										orderAction = '<a data-action="contactBuyer" data-buyerId="' + _data.buyer_id + '" data-buyerName="' + _data.user_name + '" class="mui-card-link">联系买家</a>' +
+											'<a data-action="delivery"  data-sn="' + _data.order_sn + '" class="mui-card-link">发货</a>' +
+											'<a data-action="orderNote" data-sn="' + _data.order_sn + '"  class="mui-card-link">备注</a>';
+									} else if(_data.order_status == 30) {
+										orderStatu = "已发货";
+										orderAction = '<a data-action="contactBuyer" data-buyerId="' + _data.buyer_id + '" data-buyerName="' + _data.user_name + '" class="mui-card-link">联系买家</a>' +
+											'<a data-action="orderNote"  data-sn="' + _data.order_sn + '" class="mui-card-link">备注</a>';
+									} else if(_data.order_status == 40) {
+										orderStatu = "已完成";
+										orderAction = '<a data-action="contactBuyer" data-buyerId="' + _data.buyer_id + '" data-buyerName="' + _data.user_name + '" class="mui-card-link">联系买家</a>' +
+											'<a data-action="orderNote" data-sn="' + _data.order_sn + '"  class="mui-card-link">备注</a>';
+									} else if(_data.order_status == 50) {
+										orderStatu = "待自提";
+										orderAction = '<a data-action="contactBuyer" data-buyerId="' + _data.buyer_id + '" data-buyerName="' + _data.user_name + '" class="mui-card-link">联系买家</a>' +
+											'<a data-action="orderNote"  data-sn="' + _data.order_sn + '" class="mui-card-link">备注</a>';
+									}
+									document.getElementById('orderData').innerHTML += '<div class="mui-card" data-sn="' + _data.order_sn + '">' +
+										'<div class="mui-card-header  mui-card-media">' +
+										'<img class="mui-pull-left" src="' + _data.head_portrait + '">' +
+										'<div class="mui-media-body">' +
+										'<div class="mui-col-xs-8 mui-pull-left ">' +
+										'<h4>' + _data.user_name + '</h4>' +
+										'<p>' + _data.created_time + '</p>' +
+										'</div>' +
+										'<h4 class="mui-pull-left" style="margin-top: 10px;">' + orderStatu + '</h4>' +
+										'</div>' +
+										'</div>' +
+										'<div class="mui-card-content"  data-sn="' + _data.order_sn + '">' +
+										'<div class="mui-card-content-inner mui-card-media">' +
+										'<img class="mui-pull-right" src="' + _data.image + '">' +
+										'<div class="mui-media-body">' +
+										'<h6>订单号：' + _data.order_sn + '</h6>' +
+										'<h6>总金额：' + _data.order_price + '元</h6>' +
+										'<h6>共' + _data.goods_num + '件商品</h6>' +
+										'</div>' +
+										'</div>' +
+										'</div>' +
+										'<div class="mui-card-footer">' + orderAction +
+										'</div>' +
+										'</div>';
+								});
+								currpage++;
+							} else if(response.code == '201') {
+								mui.toast("没查到相关订单");
+								currpage=1;
+							} else {
+								plus.nativeUI.toast("更新失败," + response.message);
+								currpage=1;
+							}
+						});
+					}
+					document.activeElement.blur(); //隐藏软键盘 
+				}
+			}, false);
+		</script>
+	</body>
+
+</html>

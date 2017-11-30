@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.ulinfo {
+				border-left: none;
+				border-right: none;
+				margin-top: 1px !important;
+			}
+			
+			.right li {
+				line-height: 50px;
+			}
+			
+			.mui-icon-forward {
+				color: #cbcbd0;
+				font-size: 21px;
+			}
+			
+			.icon-plus {
+				font-size: 14px;
+				position: relative;
+				top: -1px;
+				color: red;
+			}
+			
+			#userHead {
+				height: 50px;
+				width: 50px;
+				border-radius: 50px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">会员信息</h1>
+		</header>
+		<div class="mui-content">
+			<!--账户头像信息等-->
+			<dl class="mui-table-view ulinfo">
+				<dd class="dd">
+					<div class="left mui-pull-left">
+						<img id="userHead" src="../css/img/default.gif" />
+					</div>
+					<div class="right mui-pull-left">
+						<ul>
+							<li id="name">
+
+							</li>
+						</ul>
+					</div>
+					<div class="mui-pull-right memberremark" id="remarks">
+						<span class="remark mui-pull-left">姓名备注</span>
+						<span class="mui-pull-left iconfont icon-bi"></span>
+					</div>
+				</dd>
+			</dl>
+			<!--会员卡信息-->
+			<ul class="mui-table-view addtypebox" id="membercardinfo">
+				<li class="mui-table-view-cell">
+					<span class="mui-pull-left">会员卡信息</span>
+					<span class="mui-pull-right mui-icon mui-icon-forward"></span>
+					<span class="mui-pull-right">
+						<span class="vipname" id="vipinfo">普通会员|积分</span>
+					</span>
+				</li>
+			</ul>
+			<!--标签添加-->
+			<dl class="mui-table-view addtypebox">
+				<dd class="dd">
+					<div class="labeltxt">标签</div>
+					<div class="addlabelbox">
+						<div class="addlabel">
+							<span class="iconfont icon-plus bold"></span>
+							<span class="addtxt" id="addLabel">添加</span>
+						</div>
+					</div>
+				</dd>
+			</dl>
+
+			<!--记录优惠券-->
+			<ul class="mui-table-view addtypebox">
+				<li class="mui-table-view-cell" id="order">
+					<span class="mui-pull-left">消费记录</span>
+					<span class="mui-pull-right mui-icon mui-icon-forward"></span>
+					<span class="mui-pull-right" style="color: #AAAAAA;" id="orderInfo">
+						无购物记录
+					</span>
+				</li>
+				<li class="mui-table-view-cell" id="coupon">
+					<span class="mui-pull-left">剩余优惠券</span>
+					<span class="mui-pull-right mui-icon mui-icon-forward"></span>
+					<span class="mui-pull-right" id="couponInfo">
+						1张
+					</span>
+				</li>
+			</ul>
+			<!--
+			<ul class="mui-table-view addtypebox">
+				<li class="mui-table-view-cell">
+					<span class="mui-pull-left">补充会员信息</span>
+					<span class="mui-pull-right mui-icon mui-icon-forward"></span>
+					<span class="mui-pull-right" style="color: #AAAAAA;">
+						点击可编辑
+					</span>
+				</li>
+			</ul>-->
+			<button type="button" id="sendMsg" class="mui-btn mui-btn-warning mui-btn-block df-btn">发送消息</button>
+			<button type="button" id="callUser" class="mui-btn mui-btn-block mui-btn-outlined df-btn">拨打电话</button>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var view = null,
+				uarr = null,
+				userinfo = null;
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				var uinfo = plus.storage.getItem("uinfo");
+				console.log(uinfo);
+				uarr = JSON.parse(uinfo)
+				var self = plus.webview.currentWebview();
+				loadUserInfo(self.userId);
+				document.getElementById("callUser").addEventListener('tap', function(e) {
+				userinfo.call = '18108129768';
+					if(userinfo.call != "" && userinfo.call != null) {
+						var btnArray = ['取消', '呼叫'];
+						mui.confirm(userinfo.call, 'Hello,你是否拨打电话：', btnArray, function(e) {
+							if(e.index == 1) {
+								if(mui.os.plus) {
+									plus.device.dial(userinfo.call);
+								} else {
+									location.href = 'tel:' + userinfo.call;
+								}
+
+							}
+						})
+					}
+				});
+			});
+
+			function loadUserInfo(userID) {
+				view.AppHttpService({
+					action: 'Member/member_details',
+					data: {
+						guideId: uarr.guideId,
+						memberId: userID,
+						userToken: uarr.userToken
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						userinfo = response.data;
+						document.getElementById("userHead").src = userinfo.head_portrait;
+						document.getElementById("vipinfo").innerText = userinfo.exp + '|' + userinfo.integral_total;
+						document.getElementById("name").innerHTML = userinfo.user_name + ' <span class="iconfont icon-iconfontiocnnan lj"></span>' +
+							'<span class="iconfont icon-duigoutuijian gou"></span>' +
+							'<span class="iconfont icon-icon61 lj"></span>';
+						if(userinfo.order_num == '0' || userinfo.order_num || userinfo.order_num == '' || userinfo.order_num == null) {
+							document.getElementById("orderInfo").innerText = "暂无购物记录";
+						} else {
+							document.getElementById("orderInfo").innerHTML = "共" + userinfo.order_num + "笔订单，" + userinfo.order_money_num + "元</br>最近消费时间：" + userinfo.order_time;
+						}
+						if(userinfo.coupon_num == '0' || userinfo.coupon_num || userinfo.coupon_num == '' | userinfo.coupon_num == null) {
+							document.getElementById("couponInfo").innerText = "暂无可用优惠券";
+						} else {
+							document.getElementById("couponInfo").innerHTML = "共" + userinfo.coupon_num + "张";
+						}
+						if(userinfo.tel == "" || userinfo.tel == null) {
+							document.getElementById("callUser").innerText = "用户未绑定手机号";
+						} else {
+							document.getElementById("callUser").innerText = "拨打电话" + userinfo.tel;
+						}
+
+					} else {
+						plus.nativeUI.toast("更新失败," + response.message);
+					}
+				});
+			}
+			document.getElementById("sendMsg").addEventListener('tap', function(e) {
+				var extras = {
+					buyer_id: userinfo.user_id,
+					buyer_name: userinfo.user_name,
+				};
+				view.AppCreateWindow("chat-im.html", null, null, extras);
+			});
+			document.getElementById("remarks").addEventListener('tap', function(e) {
+				var extras = {
+					userId: userinfo.user_id,
+				};
+				view.AppCreateWindow("remarks.html", null, null, extras);
+			});
+			document.getElementById("addLabel").addEventListener('tap', function(e) {
+				var extras = {
+					userId: userinfo.user_id,
+				};
+				view.AppCreateWindow("chat-im.html", null, null, extras);
+			});
+			document.getElementById("order").addEventListener('tap', function(e) {
+				var extras = {
+					userId: userinfo.user_id,
+				};
+				view.AppCreateWindow("chat-im.html", null, null, extras);
+			});
+			document.getElementById("coupon").addEventListener('tap', function(e) {
+				var extras = {
+					userId: userinfo.user_id,
+				};
+				view.AppCreateWindow("chat-im.html", null, null, extras);
+			});
+			document.getElementById("membercardinfo").addEventListener('tap', function(e) {
+				var extras = {
+					userId: userinfo.user_id,
+				};
+				view.AppCreateWindow("chat-im.html", null, null, extras);
+			});
+		</script>
+	</body>
+
+</html>

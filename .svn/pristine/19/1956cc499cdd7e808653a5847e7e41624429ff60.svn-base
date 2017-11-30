@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			body,.mui-content{background: white;}
+			.prompt{font-size: 20px;padding:20px 0 10px 0;margin:0;width: 100%;border-top: 1px solid ghostwhite;}
+			.invitetxt{font-size: 12px;}
+			ul{margin-bottom:30px ;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   	<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">群发消息</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+		    <p class="prompt">群发什么给会员？</p>
+		    <p class="invitetxt">请选择下面其中一个内容给会员</p>
+		    <ul class="mui-flex">
+		    	<li class="mui-flex1">
+		    		<div class="iconactive iconfont icon-wenben1" style="background: #7589d9;"></div>
+		    		<div class="masscontent">
+		    			商家活动
+		    		</div>
+		    		
+		    	</li>
+		    	<li class="mui-flex1">
+		    		<div class="iconactive iconfont icon-shangjia" style="background:#e3ab58;font-size: 40px;"></div>
+		    		<div class="masscontent">
+		    			商品
+		    		</div>
+		    	</li>
+		    </ul>
+		    <ul class="mui-flex">
+		    	<li class="mui-flex1" tourl="reply.html">
+		    		<div class="iconactive iconfont icon-kuaijiegongneng" style="background: #82c558;font-size: 40px;"></div>
+		    		<div class="masscontent">
+		    			快捷用语
+		    		</div>
+		    		
+		    	</li>
+		    	<li class="mui-flex1">
+		    		<div class="iconactive iconfont icon-pengyouquan" style="background:#60cd5f;font-size: 44px;line-height: 55px;"></div>
+		    		<div class="masscontent">
+		    			晒图
+		    		</div>
+		    	</li>
+		    </ul>
+		    <ul class="mui-flex">
+		    	<li class="mui-flex1">
+		    		<div class="iconactive iconfont icon-iconfont19" style="background: #ea6e6d;font-size: 40px;line-height: 64px;"></div>
+		    		<div class="masscontent">
+		    			相册
+		    		</div>
+		    		
+		    	</li>
+		    	<li class="mui-flex1" tourl="masstext.html">
+		    		<div class="iconactive iconfont icon-wenben" style="background:#7589d9;font-size: 32px;line-height: 64px;"></div>
+		    		<div class="masscontent">
+		    			文字
+		    		</div>
+		    	</li>
+		    </ul>
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+		        view=new App();
+		        //主列表点击事件
+				mui('body').on('tap', '.mui-flex1', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				
+		    });
+		</script>
+	</body>
+
+</html>

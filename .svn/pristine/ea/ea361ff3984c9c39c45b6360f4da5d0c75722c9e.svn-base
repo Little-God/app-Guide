@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style>
+			.mui-content img{width:100%}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+			</button>
+			<h1 class="mui-title">图文详情</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content" id="goodinfo">
+		    
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				goodDesc = self.goodDesc;
+				mui.each(JSON.parse(goodDesc), function(i, v) {
+					console.log(v['type']);
+					console.log(v['value']);
+					if(v['type']=='image')
+					{  
+						document.getElementById('goodinfo').innerHTML+='<img src="'+ v['value']+ '" />';
+					}		
+				});
+			});
+		</script>
+	</body>
+
+</html>

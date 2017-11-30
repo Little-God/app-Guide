@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的权限</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			header {
+				background: white !important;
+			}
+			
+			.btn-sm {
+				padding: 3px 6px;
+				font-size: 14px;
+				margin-top: 5px;
+			}
+			
+			.mui-table-view-cell>a:not(.mui-btn) {
+				white-space: normal;
+			}
+			
+			.time {
+				font-size: 12px;
+				margin-top: 5px;
+			}
+			
+			.diamond {
+				width: 170px;
+				float: left;
+			}
+			
+			.diamond li {
+				float: left;
+				margin-left: 3px;
+			}
+			
+			.diamond img {
+				width: 20px;
+			}
+			.df-lable button{
+				margin-right: 5px;
+				position: relative;
+				float: left;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">评价明细</h1>
+
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<ul class="mui-table-view" style="margin-top: 0;" id="evaluateData">
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<img class="mui-media-object mui-pull-left" src="../images/shuijiao.jpg" />
+						<div class="mui-media-body">
+							<div class="mui-media-body">
+								<p style="float: left;">唯一 </p>
+								<ul class="diamond">
+									<li><img src="../images/diamond1.png" alt=""></li>
+									<li><img src="../images/diamond.png" alt=""></li>
+									<li><img src="../images/diamond.png" alt=""></li>
+									<li><img src="../images/diamond.png" alt=""></li>
+									<li><img src="../images/diamond.png" alt=""></li>
+								</ul>
+							</div>
+							<div class="df-lable mui-media-body">
+								<button type="button" class="mui-btn cl-gray btn-sm">众里</button><button type="button" class="mui-btn cl-gray btn-sm">众里</button><button type="button" class="mui-btn cl-gray btn-sm">众里</button>
+								
+							</div>
+							<p class="time">2017-05-04 17:32:14</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var view = null;
+			mui.init();
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('');
+				view = new App();
+				loadData();
+			});
+
+			function loadData() {
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+				view.AppHttpService({
+					action: 'Guide/evalute_details',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+					}
+				}, function(response) {
+					if(response.code == '200') { 
+						var datahtml = "";
+						mui.each(response.data, function(index, _data) {
+							datahtml += '<li class="mui-table-view-cell mui-media" data-sn="'+_data.order_sn+'">' +
+								'<a href="javascript:;">' +
+								'<img class="mui-media-object mui-pull-left" src="'+_data.head_portrait+'" />' +
+								'<div class="mui-media-body">' +
+								'<div class="mui-media-body">' +
+								'<p style="float: left;">'+_data.user_name+' </p>' +
+								'<ul class="diamond">';
+								for(i=0;i<5;i++)
+								{
+									if(i<_data.evaluation_grade)
+									{
+										datahtml +='<li><img src="../images/diamond1.png" alt=""></li>';
+									}else{
+										datahtml +='<li><img src="../images/diamond.png" alt=""></li>';
+									}
+								}
+								datahtml +='</ul>' + 
+								'</div>' +
+								'<div class="df-lable mui-media-body">';
+								mui.each(_data.evaluation_label,function(i,v){
+									datahtml += '<button type="button" class="mui-btn cl-gray btn-sm">'+v+'</button>';
+								});
+								datahtml += '</div>' +
+								'<p class="time">'+_data.evaluation_time+'</p>' +
+								'</div>' +
+								'</a>' +
+								'</li>';
+								
+						});
+						document.getElementById("evaluateData").innerHTML = datahtml;
+					} else {
+						plus.nativeUI.toast(response.message);
+					}
+				});
+			}
+
+		</script>
+	</body>
+
+</html>

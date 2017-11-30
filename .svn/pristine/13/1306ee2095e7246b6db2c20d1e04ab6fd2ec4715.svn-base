@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			#bcid {
+				width: 100%;
+				height: 480px;
+				background: #000000;
+				/*z-index: 50;*/
+				padding: 0px;
+				margin: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title" style="color: #333333;">扫描添加收银商品</h1>
+		</header>
+		<div class="mui-content">
+			<div id="bcid">
+
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript">
+			//barcode模块
+			var parentView = null;
+			var view = null;
+			mui.init({
+				beforeback: function() {
+					clearView();
+				}
+			});
+			mui.init({
+				beforeback: function() {
+					clearView();
+					//获得列表界面的webview  
+					var list = plus.webview.currentWebview().opener();
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新  
+					mui.fire(list, 'refresh');
+					//返回true，继续页面关闭逻辑  
+					return true;
+				}
+			});
+			var tipsTxtView = null;
+			var inputTxtView = null;
+			var sanType = 1;
+			mui.plusReady(function() {
+				//				var height = plus.screen.resolutionHeight*plus.screen.scale;
+				//			    console.log("当前屏幕高度:"+height);
+				//			    console.log(plus.screen.resolutionHeight+"px");
+				//			    document.getElementById("bcid").style.height=plus.screen.resolutionHeight+"px";
+				//			    document.getElementById("bcid").style.height=document.body.offsetHeight+"px";
+				parentView = plus.webview.currentWebview().opener();
+				view = new App();
+				startRecognize();
+				console.log(parentView.id);
+				//页面扫描成功之后跳转
+			});
+			var scan = null;
+
+			function onmarked(type, result) {
+				var text = '未知: ';
+				switch(type) {
+					case plus.barcode.QR:
+						text = 'QR: ';
+						break;
+					case plus.barcode.CODE39:
+						text = 'CODE39: ';
+						break;
+					case plus.barcode.CODE128:
+						text = 'CODE128: ';
+						break;
+				}
+				scan.cancel();
+				var btnArray = ['否', '是'];
+				mui.confirm('扫描识别' + result + '，确认？', '', btnArray, function(e) {
+					if(e.index == 1) {
+						checkStock(result);
+					} else {
+						scan.start();
+					}
+				})
+			}
+
+			function startRecognize() {
+				scan = new plus.barcode.Barcode('bcid');
+				scan.onmarked = onmarked;
+				startScan();
+				createView();
+			}
+
+			function startScan() {
+				scan.start();
+			}
+
+			function createView() {
+				tipsTxtView = new plus.nativeObj.View('actiontips', {
+					top: '56px',
+					left: '0px',
+					height: '20px',
+					width: '100%'
+				}); // 创建原生View控件
+				tipsTxtView.drawText('将条码放入框内，即可自动扫描', {}, {
+					size: '14px',
+					color: '#ffffff'
+				}); // 绘制文本
+				tipsTxtView.show();
+
+				inputTxtView = new plus.nativeObj.View('inputips', {
+					top: '420px',
+					left: '0px',
+					height: '20px',
+					width: '100%'
+				}); // 创建原生View控件
+				inputTxtView.drawText('无法识别？手动输入', {}, {
+					size: '14px',
+					color: '#ffffff'
+				}); // 绘制文本
+				inputTxtView.addEventListener("click", InputClick, false); // 监听原生无法输入View控件click事件
+				inputTxtView.show();
+			}
+			// 监听无法输入事件函数
+			// 监听无法输入事件函数
+			function InputClick(e) {
+				console.log("点击无法输入原生控件：" + JSON.stringify(e));
+				inputBarCode();
+			}
+
+			function inputBarCode() {
+				var btnArray = ['取消', '确定'];
+				mui.prompt('请先输入商品条码', '', "温馨提示", btnArray, function(e) {
+					if(e.index == 1) {
+						checkStock(e.value);
+					}
+				});
+			}
+
+			function inputStockSku() {
+				var btnArray = ['取消', '确定'];
+				mui.prompt('请先输入商品条码尺码', '条码和尺码之间用空格隔开', "温馨提示", btnArray, function(e) {
+					if(e.index == 1) {
+						console.log(e.value);
+						var stock = e.value.split(" ");
+						mui.confirm('你刚刚是输入的是货号:' + stock[0] + '与尺码:' + stock[1] + '？', '请确认', btnArray, function(e) {
+							if(e.index == 1) {
+								checkStock("", stock[0], stock[1]);
+							}
+						})
+					}
+				});
+			}
+			// 销毁原生View控件
+			function clearView(e) {
+				tipsTxtView.clear();
+				inputTxtView.clear();
+				scan.close();
+			}
+
+			function checkStock(barcode, size, skucode) {
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+				view.AppHttpService({
+					action: 'Goods/searching',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						storeId: uarr.userBelong,
+						code: barcode,
+						size: size,
+						goodsSku: skucode
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						var btnArray = ['收银', '详情', '取消'];
+						mui.confirm('找到商品:'+response.data.goods_name+" 尺码:"+response.data.size,'确认开单？', btnArray, function(e) {
+							console.log(e.index);
+							if(e.index == 0) {
+								console.log("收银台");
+								insertData(response.data.goods_a_id, response.data.goods_id, response.data.stocks_sn, response.data.goods_name, 1, response.data.goods_image, response.data.color, response.data.size, response.data.stocks_bar_code, response.data.stocks_price);
+							} else if(e.index == 1) {
+								clearView();
+								var goodId =response.data.goods_id;
+								var extras = {
+									goodId: goodId
+								};
+								view.AppCreateWindow("../shop/goodInfo.html", null, null, extras);
+							}
+							else{
+								scan.start();
+							}
+							
+						})
+					} else if(response.code == '201') {
+						var btnArray = ['确认', '取消'];
+						mui.confirm('刚刚扫到的商品条码没找到,是否手动输入条码和尺码试试？', '请选择', btnArray, function(e) {
+							if(e.index == 1) {
+								inputStockSku();
+							} else {
+								scan.start();
+							}
+						})
+					} else {
+						mui.toast(response.message);
+						scan.start();
+					}
+
+				});
+			}
+
+			function insertData(goods_a_id, goodsId, stocksSku, goodName, goodsNum, goodsImage, goodsColor, goodsSpec, barCode, goodPrice) {
+				console.log(barCode);
+				var sql = "select * from  shopCart  where  goods_a_id = " + goods_a_id + " and  goodsSpec ='" + goodsSpec + "';";
+				view.DBquery(sql, function(len, shopCartData) {
+					if(len > 0) {
+						console.log("拿到数据了:" + JSON.stringify(shopCartData[0].scid));
+						var sql = "update shopCart set goodsNum = goodsNum + " + goodsNum + " where  scid= " + shopCartData[0].scid + "";
+						view.DBDML(sql, function() {
+							console.log("更新成功，增加了数量!");
+							scan.start();
+						}, function(error) {
+							console.log(error.message);
+						});
+
+					} else {
+						var sql = "insert into shopCart(goods_a_id, goodsId, stocksSku,goodName, goodsNum, goodsImage, goodsColor, goodsSpec, barCode,goodPrice) values(" + goods_a_id + "," + goodsId + ",'" + stocksSku + "','" + goodName + "'," + goodsNum + ",'" + goodsImage + "','" + goodsColor + "','" + goodsSpec + "','" + barCode + "'," + goodPrice + ")";
+						view.DBDML(sql, function() {
+							console.log("添加成功!");
+							scan.start();
+						}, function(error) {
+							console.log(error.message);
+						});
+					}
+				}, function(error) {
+					console.log(error.message);
+				});
+			}
+		</script>
+	</body>
+
+</html>

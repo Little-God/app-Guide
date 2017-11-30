@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style type="text/css">
+			#bcid {
+				width: 100%;
+				height: 480px;
+				background: #000000;
+				/*z-index: 50;*/
+				padding: 0px;
+				margin: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title" style="color: #333333;">扫一扫</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="stocksAmount">库存详细</button>
+		</header>
+		<div class="mui-content">
+			<div id="bcid">
+
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript">
+			//barcode模块
+			//nativeobj模块
+			mui.init({
+				beforeback: function() {
+					clearView();
+				}
+			});
+			var tipsTxtView = null;
+			var inputTxtView = null;
+			var stockImgView = null;
+			var stockTxtView = null;
+			var pickImgView = null;
+			var pickTxtView = null;
+			var sanType = 1;
+			var sanNum = 0;
+			mui.plusReady(function() {
+				//				var height = plus.screen.resolutionHeight*plus.screen.scale;
+				//			    console.log("当前屏幕高度:"+height);
+				//			    console.log(plus.screen.resolutionHeight+"px");
+				//			   // document.getElementById("bcid").style.height=plus.screen.resolutionHeight+"px";
+				//			    document.getElementById("bcid").style.height=document.body.offsetHeight+"px";
+				startRecognize();
+				view = new App();
+				document.getElementById("stocksAmount").addEventListener('tap', function(e) {
+					clearView();
+					view.AppCreateWindow("stocksAmout.html");
+				});
+			});
+			var scan = null;
+
+			function onmarked(type, result) {
+				var text = '未知: ';
+				switch(type) {
+					case plus.barcode.QR:
+						text = 'QR: ';
+						break;
+					case plus.barcode.EAN13:
+						text = 'EAN13: ';
+						break;
+					case plus.barcode.EAN8:
+						text = 'EAN8: ';
+						break;
+				}
+				//alert(text + result);
+				if(sanType == 1) {
+					scan.cancel();
+					console.log(result);
+					var data = new Pdatabase();
+					if(sanNum == 0) {
+						data.dropTable('stocksAmount');
+					}
+					sanNum++;
+					console.log("开始创建数据表");
+					var flagCreateTable = data.createTable('stocksAmount', 'stockCode varchar(20) NOT NULL PRIMARY KEY,size varchar(5),amount INTEGER');
+					if(flagCreateTable) {
+						console.log("开始插入数据");
+						var stockCode = "ABAC45-1" + sanNum;
+						var stock = new Array(stockCode, "s", "6");
+						data.stockInsert("ABAC45-1" + sanNum, "s", "6", function(flag) {
+							console.log("添加成功!");
+							scan.start();
+						}, function(error) {
+							console.log(error);
+						});
+
+					} else {
+						console.log("初始化设备失败");
+					}
+				}
+			}
+
+			function startRecognize() {
+				scan = new plus.barcode.Barcode('bcid');
+				scan.onmarked = onmarked;
+				scan.start();
+				createView();
+			}
+
+			function createView() {
+
+				tipsTxtView = new plus.nativeObj.View('tips', {
+					top: '56px',
+					left: '0px',
+					height: '20px',
+					width: '100%'
+				}); // 创建原生View控件
+				tipsTxtView.drawText('请将优惠券条码放入框内，即可自动扫描', {}, {
+					size: '14px',
+					color: '#ffffff'
+				}); // 绘制文本
+				tipsTxtView.show();
+
+				inputTxtView = new plus.nativeObj.View('tips', {
+					top: '400px',
+					left: '5px',
+					height: '20px',
+					width: '100%'
+				}); // 创建原生View控件
+				inputTxtView.drawText('无法识别？手动输入', {}, {
+					size: '14px',
+					color: '#ffffff'
+				}); // 绘制文本
+				inputTxtView.addEventListener("click", InputClick, false); // 监听原生无法输入View控件click事件
+				inputTxtView.show();
+
+				stockImgView = new plus.nativeObj.View('barcodeimg', {
+					top: '440px',
+					left: '20%',
+					height: '100px',
+					width: '50%'
+				});
+				stockImgView.draw([{
+						tag: 'img',
+						id: 'stockimg',
+						src: '../images/barcodeico.png',
+						position: {
+							top: '0px',
+							left: '25px',
+							width: '50px',
+							height: '35px'
+						},
+						color: '#fff',
+					},
+					{
+						tag: 'rect',
+						id: 'stockrect',
+						color: '#fff',
+						position: {
+							top: '52px',
+							left: '0px',
+							width: '95px',
+							height: '1px'
+						}
+					},
+					{
+						tag: 'font',
+						id: 'stockfont',
+						position: {
+							top: '25px',
+							left: '0px',
+							width: '100px',
+							height: '40px'
+						},
+						text: '货品入库|盘点',
+						textStyles: {
+							size: '15px',
+							color: '#fff',
+							align: 'left'
+						}
+					}
+				]); // 绘制图片
+				stockImgView.addEventListener("click", StockClick, false); // 监听原生库存盘点View控件click事件
+				stockImgView.show();
+
+				pickImgView = new plus.nativeObj.View('pickimg', {
+					top: '440px',
+					left: '70%',
+					height: '100px',
+					width: '50%'
+				});
+				pickImgView.draw([{
+						tag: 'img',
+						id: 'pickimg',
+						src: '../images/stockicoG.png',
+						position: {
+							top: '0px',
+							left: '10px',
+							width: '50px',
+							height: '35px'
+						}
+					},
+					{
+						tag: 'rect',
+						id: 'pickrect',
+						color: '#fff',
+						position: {
+							top: '52px',
+							left: '0px',
+							width: '75px',
+							height: '1px'
+						}
+					},
+					{
+						tag: 'font',
+						id: 'pickfont',
+						position: {
+							top: '25px',
+							left: '0px',
+							width: '90px',
+							height: '40px'
+						},
+						text: '提货码验证',
+						textStyles: {
+							size: '15px',
+							color: '#fff',
+							align: 'left'
+						}
+					}
+				]);
+				//pickImgView.drawBitmap('../images/stockicoG.png', { top:'0px',left:'0px', width:'100%',height:'100%'}, { top:'0', left:'0', width:'50px',height:'50px' });// 绘制图片
+
+				pickImgView.addEventListener("click", PickClick, false); // 监听原生提货码View控件click事件
+				//pickImgView.interceptTouchEvent(true);//是否拦截View控件的触屏事件
+				pickImgView.show();
+
+			}
+			// 监听无法输入事件函数
+			function InputClick(e) {
+				console.log("点击无法输入原生控件：" + JSON.stringify(e));
+				var btnArray = ['取消', '确定'];
+				mui.prompt('请先输入条码数字', '', "温馨提示", btnArray, function(e) {
+					if(e.index == 1) {
+						console.log(e.value);
+					}
+				});
+			}
+			// 监听库存盘点事件函数
+			function StockClick(e) {
+				console.log("点击库存盘点原生控件：" + JSON.stringify(e));
+			}
+			// 监听提货码事件函数
+			function PickClick(e) {
+				console.log("点击提货码原生控件：" + JSON.stringify(e));
+			}
+			// 销毁原生View控件
+			function clearView(e) {
+				tipsTxtView.clear();
+				inputTxtView.clear();
+				stockImgView.clear();
+				pickImgView.clear();
+				scan.close();
+			}
+		</script>
+	</body>
+
+</html>

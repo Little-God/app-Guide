@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.icon-jia {
+				width: 20px;
+				height: 20px;
+				background: #4cd964;
+				color: white;
+				display: inline-block;
+				text-align: center;
+				border-radius: 10px;
+				line-height: 23px;
+				margin-right: 20px;
+			}
+			
+			.mui-input-row h4 {
+				font-size: 16px;
+				margin-top: 11px;
+			}
+			
+			.mui-input-group img {
+				max-height: 80px;
+				max-width: 80px;
+			}
+			
+			.mui-media {
+				height: 80px;
+			}
+			
+			h5 {
+				height: 20px;
+				background-color: #efeff4;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">发布商品-商品规格</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="nextStep">下一步</button>
+		</header>
+		<div class="mui-content">
+			<!--商品规格-->
+			<form class="mui-input-group" id="goodAttrr">
+				<!--<div class="mui-content-padded">
+					<div class="mui-input-row">
+						<label>货号</label>
+						<input type="text" name="goodStock" placeholder="请输入商品货号">
+					</div>
+					<div class="mui-input-row ">
+						<label>颜色</label>
+						<input type="text" name="goodColor" class="mui-input-clear" placeholder="请输入颜色" data-input-clear="5">
+					</div>
+					<div class="mui-input-row ">
+						<label>市场价格</label>
+						<input type="number" name="goodsTruePrice" class="mui-input-clear"  data-input-clear="5">
+					</div>
+					<div class="mui-input-row mui-radio">
+						<label>是否主图</label>
+						<input name="ismaster" type="radio">
+					</div>
+					<div class="mui-media">
+						<div class="addimg mui-pull-left">
+							<span class="iconfont icon-xiangji" style="font-size: 30px;"></span>
+						</div>
+					</div>
+				</div>-->
+			</form>
+			<!--添加规格-->
+			<ul class="mui-table-view addtypebox">
+				<li class="mui-table-view-cell" id="addAttrr"><span class="iconfont icon-jia"></span><span class="addtypetxt">添加规格</span></li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/main.js"></script>
+		<script type="text/javascript">
+			var view = null,
+				goodinfo = new Array(),
+				obj;
+			mui.init({});
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('');
+				view = new App();
+				var self = plus.webview.currentWebview();
+				goodinfo = self.goodinfo;
+				addSpec();
+			});
+			document.getElementById("nextStep").addEventListener('tap', function(e) {
+				var goodStock = new Array();
+				var imgs = new Array();
+				var stocks = document.getElementsByName("goodStock");
+				var ismaster=document.getElementsByName('ismaster');
+				for(i = 0; i < stocks.length; i++) {
+					imgs=stocks[i].parentNode.parentNode.lastChild.getElementsByTagName('img');
+					console.log("是否主图"+ismaster[i].checked);
+					for(j=0;j<imgs.length;j++)
+					{
+						console.log(imgs[j].src);
+					}
+					goodStock[i] = {
+						"color": document.getElementsByName("goodColor")[i].value,
+						"stocksSku": stocks[i].value,
+						"goodsTruePrice": document.getElementsByName("goodsTruePrice")[i].value,
+						"colorValue": document.getElementsByName("goodColor")[i].getAttribute('data-value'),
+						"skuImg":"",
+					}
+					console.log(imgs.length);
+					if(imgs.length>0)
+					{
+						goodStock[i].skuImg=imgs[0].src;
+					}
+					if(ismaster[i].checked){
+						goodinfo.goodsImg=imgs[0].src;
+					}
+				}
+				var extras = {
+					goodinfo: goodinfo,
+					stock:goodStock
+				};
+				view.AppCreateWindow("addGoodS3.html", null, null, extras);
+			});
+			document.getElementById("addAttrr").addEventListener('tap', function(e) {
+				addSpec();
+			});
+			mui('.mui-content').on('tap', '.addimg', function() {
+				var obj = document.createElement("img");;
+				if(mui.os.plus) {
+					var a = [{
+						title: "拍照"
+					}, {
+						title: "从手机相册选择"
+					}];
+					plus.nativeUI.actionSheet({
+						title: "添加商品图片",
+						cancel: "取消",
+						buttons: a
+					}, function(b) {
+						switch(b.index) {
+							case 0:
+								break;
+							case 1:
+								cameraimages(obj);
+								//upload_img();
+								break;
+							case 2:
+								galleryImg(obj);
+								//upload_img();
+								break;
+							default:
+								break
+						}
+					})
+				}
+				this.parentNode.appendChild(obj);
+			});
+			mui(".mui-content").on("tap", "input[name='goodColor']", function() {
+				obj = this;
+				view.AppCreateWindow("stockColor.html", null, null);
+			});
+
+			function addSpec() {
+				document.getElementById("goodAttrr").innerHTML += '<h5></h5>' +
+					'<div class="mui-content-padded">' +
+					'<div class="mui-input-row">' +
+					'<label>货号</label>' +
+					'<input type="text" name="goodStock" placeholder="请输入商品货号">' +
+					'</div>' +
+					'<div class="mui-input-row ">' +
+					'<label>颜色</label>' +
+					'<input type="text" name="goodColor" class="mui-input-clear" placeholder="请输入颜色" data-input-clear="5">' +
+					'</div>' +
+					'<div class="mui-input-row ">' +
+						'<label>市场价格</label>' +
+						'<input type="number" name="goodsTruePrice" class="mui-input-clear" value="'+goodinfo.goodsTruePrice+'"  data-input-clear="5">' +
+					'</div>' +
+					'<div class="mui-input-row mui-radio">' +
+					'<label>是否主图</label>' +
+					'<input name="ismaster" type="radio">' +
+					'</div>' +
+					'<div class="mui-media">' +
+					'<div class="addimg mui-pull-left" id="addImg">' +
+					'<span class="iconfont icon-xiangji" style="font-size: 30px;"></span>' +
+					'</div>' +
+					'</div>' +
+					'</div>';
+			}
+
+			function getSelect(value, name, type) {
+				if(type == "color") {
+					obj.value = name;
+					obj.setAttribute("data-value", value)
+				}
+			}
+		</script>
+	</body>
+
+</html>

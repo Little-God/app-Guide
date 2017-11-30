@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>修改密码</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav" id="selectlist">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">修改密码</h1>
+		</header>
+		<div class="mui-content ">
+			<div class="mui-card" style="margin-bottom: 35px;">
+				<form class="mui-input-group ">
+					<div class="mui-input-row">
+						<label>短信验证码:</label>
+						<input id='yzm' type="text" class="mui-input-clear mui-input" placeholder="请输入验证码">
+					</div>
+					<div class="mui-input-row">
+						<label>密码:</label>
+						<input type="password" id="password" class="mui-input-password" data-input-password="3" placeholder="请输入密码">
+					</div>
+					<div class="mui-input-row">
+						<label>确认密码:</label>
+						<input id="cfpwd" type="password" class="mui-input-password" data-input-password="3" placeholder="重复输入密码">
+					</div>
+				</form>
+			</div>
+			<div class="mui-content-padded">
+				<button type="button" id="submit" class="mui-btn mui-btn-danger mui-btn-block">确认</button>
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.plusReady(function() {
+				view = new App();
+				var self = plus.webview.currentWebview();
+				var syzm = self.syzm;
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+				var yzm = document.getElementById('yzm');
+				var pwd = document.getElementById('password');
+				var cfpwd = document.getElementById('cfpwd');
+				
+				document.getElementById('submit').addEventListener('tap', function() {
+					if(yzm.value == "") {
+						plus.nativeUI.toast('验证码不能为空');
+						return;
+					} else if(pwd.value == "") {
+						plus.nativeUI.toast('密码不能为空');
+						return;
+					} else if(cfpwd.value == "") {
+						plus.nativeUI.toast('请确认密码');
+						return;
+					}  else if(cfpwd.value !=pwd.value) {
+						plus.nativeUI.toast('两次输入的密码不一致');
+						return;
+					} else if(yzm.value !=syzm) {
+                         plus.nativeUI.toast('验证码输入不正确');
+						return;
+					} else {
+						view.AppHttpService({
+							action: 'Auth/edit_password',
+							data: {
+								guideId: uarr.guideId,
+								userToken: uarr.userToken,
+							    mobile:uarr.userTel,
+							    password: pwd.value
+							}
+						}, function(response) {
+							if(response.code == '200') {
+								mui.toast("修改成功,请重新登录");
+								plus.webview.close(self);
+								view.AppCreateWindow("../login.html");
+							} else {
+								mui.toast(response.message);
+							}
+
+						})
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

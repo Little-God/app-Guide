@@ -1,0 +1,296 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<style>
+			.mui-content {
+				margin-bottom: 30px;
+			}
+			
+			.df-fix-content {
+				position: fixed;
+				z-index: 10;
+				top: 42px;
+				width: 100%;
+			}
+			
+			.df-data-content {
+				margin-top: 190px;
+			}
+			/*Android平台使用父子webview，因此需要修改顶部进度条的显示位置*/
+			
+			.mui-plus.mui-android>.mui-progressbar {
+				top: 0;
+			}
+			
+			.mui-progressbar span {
+				background-color: #f0ad4e !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title" style="color: #333333;">货号尺码入库</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<div class="df-fix-content">
+				<div class="mui-card">
+					<div class="mui-card-content">
+						<form class="mui-input-group">
+							<div class="mui-input-row">
+								<label>货号</label>
+								<input type="text" id="stockcode" class="mui-input-clear" placeholder="请输入货品" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							<div class="mui-input-row">
+								<label>尺码</label>
+								<input type="text" id="stocksize" class="mui-input-clear" placeholder="请输入货品尺码" data-input-clear="5"><span class="mui-icon mui-icon-clear mui-hidden"></span>
+							</div>
+							<div class="mui-input-row">
+								<label>数量</label>
+								<div class="mui-numbox">
+									<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
+									<input class="mui-input-numbox" id="stockAmount" value="1" type="number">
+									<button class="mui-btn mui-btn-numbox-plus" type="button">+</button>
+								</div>
+							</div>
+							<div class="mui-button-row">
+								<button type="button" class="mui-btn mui-btn-primary" id="search" onclick="return false;">确认</button>&nbsp;&nbsp;
+								<button type="button" class="mui-btn mui-btn-danger" id="resetting" onclick="return false;">重置</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="mui-content-padded df-data-content">
+				<ul class="mui-table-view mui-table-view-striped mui-table-view-condensed" id="inputStorageData">
+					<!--<li class="mui-table-view-cell">
+						<div class="mui-table">
+							<div class="mui-table-cell mui-col-xs-8">
+								<h4>条码：ADFADFDAF</h4>
+								<p class="mui-h6 mui-ellipsis">货号:123adk-a 尺码：XL 颜色：蓝色</p>
+							</div>
+							<div class="mui-table-cell mui-col-xs-4 mui-text-right">
+								<h5>数量：1</h5>
+								<p class="mui-h6 mui-ellipsis">2017-05-22 15:28</p>
+							</div>
+						</div>
+					</li>-->
+				</ul>
+			</div>
+		</div>
+		<div class="mui-bar mui-bar-footer">
+			<div class="mui-flex">
+				<div class="mui-flex1 txm" id="uploadData">
+					<span class="mui-icon mui-icon-upload" style="font-size: 20px;top:1px;"></span>入库
+				</div>
+				<div class="" style="height: 30px;width: 1px;border-left: 1px solid #AAAAAA;margin-top: 6px;"></div>
+				<div class="mui-flex1 txm" id="clearHis">
+					<span class="mui-icon mui-icon-trash" style="font-size: 16px;"></span>清空
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/main.js"></script>
+		<script type="text/javascript">
+			var view = null;
+			mui.init();
+			var view = null;
+			var uarr = null;
+			mui.plusReady(function() {
+				var uinfo = plus.storage.getItem("uinfo");
+				uarr = JSON.parse(uinfo);
+				console.log(uinfo);
+				view = new App();
+				loadInputData();
+			});
+			//页面顶部进度条
+			document.getElementById("search").addEventListener("tap", function(e) {
+				var stockCode = document.getElementById("stockcode").value;
+				var stockSize = document.getElementById("stocksize").value;
+				var stockAmount = document.getElementById("stockAmount").value;
+				if(stockCode.length < 1) {
+					mui.toast("请输入货号");
+					return;
+				} else if(stockSize.length < 1) {
+					mui.toast("请输入尺码");
+					return;
+				} else {
+					checkStock(stockCode, stockSize, stockAmount);
+				}
+				console.log(stockCode + "点击搜索" + stockCode.length);
+			}, false);
+			document.getElementById("stockcode").addEventListener("keydown", function(e) {
+				if(13 == e.keyCode) { //点击了“搜索”  
+					var stockCode = document.getElementById("stockcode").value;
+					var stockSize = document.getElementById("stocksize").value;
+					var stockAmount = document.getElementById("stockAmount").value;
+					if(stockCode.length < 1) {
+						mui.toast("请输入货号");
+						return;
+					} else if(stockSize.length < 1) {
+						mui.toast("请输入尺码");
+						return;
+					}
+					document.activeElement.blur(); //隐藏软键盘 
+					checkStock(stockCode, stockSize, stockAmount);
+				}
+			}, false);
+			document.getElementById("stocksize").addEventListener("keydown", function(e) {
+				if(13 == e.keyCode) { //点击了“搜索”  
+					var stockCode = document.getElementById("stockcode").value;
+					var stockSize = document.getElementById("stocksize").value;
+					var stockAmount = document.getElementById("stockAmount").value;
+					if(stockCode.length < 1) {
+						mui.toast("请输入货号");
+						return;
+					} else if(stockSize.length < 1) {
+						mui.toast("请输入尺码");
+						return;
+					}
+					document.activeElement.blur(); //隐藏软键盘 
+					checkStock(stockCode, stockSize, stockAmount);
+				}
+			}, false);
+			//			document.getElementById("uploadData").addEventListener('tap', function(e) {
+			//				mui('body').progressbar({
+			//					progress: 0
+			//				}).show();
+			//				simulateLoading('body', 20);
+			//			});
+
+			function simulateLoading(container, progress) {
+				mui(container).progressbar().setProgress(progress);
+				if(progress > 99) {
+					//mui(container).progressbar().hide();进度条隐藏
+					mui.toast("上传完成");
+				}
+			}
+
+			function checkStock(stockCode, stockSize, good_amount) {
+				view.AppHttpService({
+					action: 'Goods/searching',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						storeId: uarr.userBelong,
+						sku: stockCode,
+						size: stockSize
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						updateStockAmount(response.data.goods_ea_id, response.data.stocks_sn, good_amount, response.data.color, response.data.size);
+					} else {
+						mui.toast(response.message);
+					}
+
+				});
+			}
+
+			function updateStockAmount(goods_ea_id, stocksSku, goodsNum, goodsColor, goodsSpec) {
+				var sql = "select * from stockAmountInput where goods_ea_id='" + goods_ea_id + "'";
+				view.DBquery(sql, function(len, stocksData) {
+					if(len > 0) {
+						var sql = "update stockAmountInput set goodsNum = goodsNum + '" + goodsNum + "' where  goods_ea_id='" + goods_ea_id + "';";
+						view.DBDML(sql, function() {
+							console.log("记录成功!");
+							loadInputData();
+						}, function(error) {
+							console.log(error.message);
+						});
+					} else {
+						var sql = "insert into stockAmountInput(goods_ea_id,stocksSku,goodsNum,goodsColor, goodsSpec,uptime) values('" + goods_ea_id + "','" + stocksSku + "'," + goodsNum + ",'" + goodsColor + "','" + goodsSpec + "','" + getNowFormatDate("yyyy-MM-dd HH:MM:SS") + "')";
+						view.DBDML(sql, function() {
+							console.log("记录成功!");
+							loadInputData();
+						}, function(error) {
+							mui.toast("系统错误!");
+							console.log(error.message);
+						});
+					}
+				}, function(error) {
+					console.log(error.message);
+				});
+			}
+			//加载记录的数据
+			function loadInputData() {
+				view.DBquery('select * from stockAmountInput', function(len, inputData) {
+					var datahtml = "";
+					mui.each(inputData, function(index, _data) {
+						console.log("拿到数据了:" + JSON.stringify(_data));
+						datahtml += '<li class="mui-table-view-cell">' +
+							'<div class="mui-table">' +
+							'<div class="mui-table-cell mui-col-xs-8">' +
+							'<h4>货号：' + _data['stocksSku'] + '</h4>' +
+							'<p class="mui-h6 mui-ellipsis">尺码：' + _data['goodsSpec'] + ' 颜色：' + _data['goodsColor'] + '</p>' +
+							'</div>' +
+							'<div class="mui-table-cell mui-col-xs-4 mui-text-right">' +
+							'<h5>数量：' + _data['goodsNum'] + '</h5>' +
+							'<p class="mui-h6 mui-ellipsis">' + _data['uptime'] + '</p>' +
+							'</div>' +
+							'</div>' +
+							'</li>';
+					});
+					document.getElementById("inputStorageData").innerHTML = datahtml;
+				}, function(error) {
+					console.log(error.message);
+				});
+			}
+			document.getElementById("clearHis").addEventListener('tap', function(e) {
+				view.DBDML('delete from stockAmountInput', function(res) {
+					mui.toast("清空历史记录成功！");
+					loadInputData();
+				}, function(error) {
+					console.log(error.message);
+				});
+			});
+			document.getElementById("uploadData").addEventListener('tap', function(e) {
+				mui('body').progressbar({
+					progress: 0
+				}).show();
+				var uinfo = plus.storage.getItem("uinfo");
+				uarr = JSON.parse(uinfo);
+				var sql = "select * from stockAmountInput;";
+				view.DBquery(sql, function(len, stocksData) {
+					mui.each(stocksData, function(i, v) {
+                        simulateLoading('body', ((i+1)/len)*100);
+						uploadStockAmountData(v['goods_ea_id'],v['goodsNum']);
+					});
+				}, function(error) {
+					console.log(error.message);
+				});
+			});
+			function uploadStockAmountData(goodsEaId, amount) {
+				view.AppHttpService({
+					action: 'goods/stock_modify',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						userBelong: uarr.userBelong,
+						goods_ea_id: goodsEaId,
+						amount: amount
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						mui.toast("上传成功!");
+					} else {
+						mui.toast(response.message);
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

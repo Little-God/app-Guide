@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>商品分类</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" href="../css/style.css">
+		<style type="text/css">
+			.mui-table-view-cell.mui-collapse .mui-collapse-content {
+				margin: -6px -15px -11px;
+				padding: 2px 15px;
+			}
+			
+			.mui-table-view-cell>a:not(.mui-btn) {
+				margin: -10px -15px;
+			}
+			
+			.mui-table-view-cell.mui-active {
+				background-color: #fff;
+			}
+			
+			.mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell {
+				padding-left: 15px;
+			}
+			
+			.mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell:after {
+				left: 15px;
+			}
+			
+			.fold-one {
+				background-color: #F3F3F3;
+			}
+			
+			.fold-two {
+				background-color: #DFDFDF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">商品分类</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="dowell">关闭</button>
+		</header>
+		<div class="mui-content">
+			<h5 class="mui-content-padded">商品标签</h5>
+			<ul class="mui-table-view mui-table-view-radio">
+				<li class="mui-table-view-cell" data-id="ALL" data-type="tag" data-name="所有商品">
+					<a class="mui-navigate-right">
+						所有商品
+					</a>
+				</li>
+				<li class="mui-table-view-cell" data-id="NEW" data-type="tag" data-name="新品上市">
+					<a class="mui-navigate-right">
+						新品上市
+					</a>
+				</li>
+				<li class="mui-table-view-cell" data-id="SALES" data-type="tag" data-name="特价促销">
+					<a class="mui-navigate-right">
+						特价促销
+					</a>
+				</li>
+			</ul>
+			<h5 class="mui-content-padded"></h5>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-collapse">
+					<a class="mui-navigate-right" href="#">商品品牌</a>
+					<div class="mui-collapse-content">
+						<ul class="mui-table-view mui-table-view-radio" id="brandData">
+							<!--<li class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						Item 1
+					</a>
+				</li>-->
+						</ul>
+					</div>
+				</li>
+			</ul>
+			<h5 class="mui-content-padded">商品分类</h5>
+			<ul class="mui-table-view" id="myCateData">
+				<!--<li class="mui-table-view-cell mui-collapse">
+					<a class="mui-navigate-right" href="#">
+						<h4>一级菜单</h4></a>
+					<div class="mui-collapse-content">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">二级菜单</a>
+								<div class="mui-collapse-content-one" style="display: none;">
+									<ul class="mui-table-view">
+										<li class="mui-table-view-cell mui-collapse">
+											<a class="mui-navigate-right fold-two" href="#">三级菜单</a>
+
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">二级菜单</a>
+								<div class="mui-collapse-content-one" style="display: none;">
+									<ul class="mui-table-view">
+										<li class="mui-table-view-cell mui-collapse">
+											<a class="mui-navigate-right fold-two" href="#">三级菜单</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</li>-->
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			var view = null;
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			mui(".mui-content").on('tap', '.fold-one', function() {
+				if(this.nextSibling) {
+					if(this.nextSibling.style.display == "none") {
+						this.nextSibling.style.display = 'block';
+					} else {
+						this.nextSibling.style.display = 'none';
+					}
+				}
+			});
+			mui.plusReady(function() {
+				view = new App();
+				loadData();
+				loadBrand();
+			});
+			document.getElementById("dowell").addEventListener('tap', function(e) {
+				mui.back();
+			});
+			mui('.mui-table-view').on('tap', 'li', function() {
+				var type = this.getAttribute('data-type');
+				var name = this.getAttribute('data-name');
+				var id = this.getAttribute('data-id');
+				var parent = plus.webview.currentWebview().opener();
+				if(type != 'tag') {
+					if(!this.firstChild.nextSibling) {
+						id = this.getAttribute('data-id');
+						name = this.getAttribute('data-name');
+						type = this.getAttribute('data-type');
+						parent.evalJS("setGoodSearch('" + id + "','" + name + "','" + type + "')");
+						parent.evalJS("pullupRefresh()");
+						mui.back();
+					}
+				} else {
+					parent.evalJS("setGoodSearch('" + id + "','" + name + "','" + type + "')");
+					parent.evalJS("pullupRefresh()");
+					mui.back();
+				}
+			});
+
+			function loadBrand() {
+				view.AppHttpService({
+					action: 'Goods/brands',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						storeId: uarr.userBelong
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						mui.each(response.data, function(index, _data) {
+							document.getElementById("brandData").innerHTML += '<li class="mui-table-view-cell" data-type="brand" data-id="' + _data['brand_id'] + '" data-name="' + _data['brand_name'] + '" >' +
+								'<a class="mui-navigate-right">' + _data['brand_name'] +
+								'</a>' +
+								'</li>';
+						});
+					} else {
+						mui.toast(response.message);
+					}
+				});
+			}
+
+			function loadData() {
+				var uinfo = plus.storage.getItem("uinfo");
+				uarr = JSON.parse(uinfo);
+				view.AppHttpService({
+					action: 'Goods/goods_class',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						storeId: uarr.userBelong
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						var Html = "";
+						mui.each(response.data.myClass, function(index, _data) {
+							Html += '<li class="mui-table-view-cell mui-collapse" data-type="cate"   data-id="' + _data.gc_id + '"   data-name="' + _data.gc_name + '">' +
+								'<a class="mui-navigate-right" href="#">' +
+								'<h4>' + _data.gc_name + '</h4></a>';
+							if(_data.next !== undefined) {
+								Html += '<div class="mui-collapse-content">' +
+									'<ul class="mui-table-view">';
+								mui.each(_data.next, function(i, v) {
+									Html += '<li class="mui-table-view-cell mui-collapse" data-type="cate"    data-id="' + v.gc_id + '"   data-name="' + v.gc_name + '">' +
+										'<a class="mui-navigate-right fold-one" href="#">' + v.gc_name + '</a>';
+									if(v.end !== undefined) {
+										Html += '<div class="mui-collapse-content-one" style="display: none;">' +
+											'<ul class="mui-table-view">';
+										mui.each(v.end, function(j, k) {
+											Html += '<li class="mui-table-view-cell mui-collapse"  data-type="cate"   data-id="' + k.gc_id + '"   data-name="' + k.gc_name + '">' +
+												'<a class="mui-navigate-right fold-two" href="#">' + k.gc_name + '</a></li>';
+										});
+										Html += '</ul></div>';
+									}
+									Html += '</li>';
+								});
+								Html += '	</ul></div>';
+							}
+							Html += '</li>';
+						});
+						document.getElementById("myCateData").innerHTML = Html;
+					} else {
+						mui.toast(response.message);
+					}
+				});
+			}
+		</script>
+	</body>
+
+</html>

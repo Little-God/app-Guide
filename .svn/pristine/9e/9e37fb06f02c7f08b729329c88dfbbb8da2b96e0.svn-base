@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			.mui-content{padding-bottom: 70px;}
+			.mui-backdrop{display: none;}
+			.textareabox{padding: 5px 0;background: white;border-top: 1px solid #EEEEEE;border-bottom-left-radius: 3px;border-bottom-right-radius: 3px;display: none;}
+			.padding{padding: 0 15px;}
+			.mui-bar-footer{color:white;background: #ff5607;text-align: center;line-height: 60px;text-decoration: underline;box-shadow: none;height: 60px;}
+			.right li{height: 20px;line-height: 20px;}
+			.paytypebox{width: 80%;margin: 40% 10% 0 10%;}
+			.paytypebox img{height: 40px;width: 40px;}
+			.setbuttom{bottom: 0;margin-top: 0px;}
+			.mui-table-view-cell:after{left: 65px;}
+			.mui-table-view-cell:last-of-type:after{height: 0;}
+			.tit{border-bottom:1px solid #EEEEEE;padding:10px 5px;}
+			.ulinfo{border: none;}
+			.icon-dagou{color: white;}
+			
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   	<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">确认订单</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<div class="padding">
+				<!--选择按钮-->
+			    <div class="cashier" tourl="cashierselect.html">
+			    	<span class="mui-pull-left">选择导购</span><label class="mui-pull-right">点击选择导购 ></label>
+			    </div>
+			    <div class="cashier">
+			    	<span class="mui-pull-left">选择会员</span><label class="mui-pull-right">点击选择会员 ></label>
+			    </div>
+			    <div class="cashier pytp">
+			    	<span class="mui-pull-left">支付方式</span><label class="mui-pull-right">支付宝支付 ></label>
+			    </div>
+			    <div class="cashier" tourl="couponselect.html">
+			    	<span class="mui-pull-left">选择优惠方式</span><label class="mui-pull-right">点击选择优惠方式 ></label>
+			    </div>
+			    <!--备注框-->
+			    <div class="cashier" style="border-bottom-left-radius: 0px;border-bottom-right-radius: 0px;">
+			    	<label class="mui-pull-left">添加订单备注</label>
+			    	<span class="mui-pull-right open">
+			    		<span class="opentxt">展开</span>
+			    		<span class="iconfont icon-comiiscaidan"></span>
+			    	</span>
+			    	<span class="mui-pull-right close">
+			    		<span class="opentxt">收起</span>
+			    		<span class="iconfont icon-jian"></span>
+			    	</span>
+			    </div>
+			    <div class="textareabox">
+			    	<textarea name="remark" rows="" cols="" id="orderremark"></textarea>
+			    </div>
+			    <!--订单产品展示-->
+			    <div style="padding: 10px 0;">本单产品</div>
+			    <div class="cashier">
+					<!--商品图片-->
+					<div class="shopimgbox mui-pull-left">
+						<img src="../images/arclist/face.png"/>
+					</div>
+					<!--商品标题盒子-->
+					<div class="titlebox mui-pull-left">
+						<div class="buy-shoptitle">2017春季新款童装17111753男童弧形分皇嘉富豪家纺</div>
+						<div class="shopsize">
+							尺寸:<span class="">100cm</span>
+						</div>
+						<div class="shopsize">
+							颜色:<span class="">牛仔蓝</span>
+						</div>
+					</div>
+					<div class="mui-pull-right">
+						<div class="shopprice">￥121.00</div>
+						<div class="mui-pull-right">x<span class="shopnum">1</span></div>
+					</div>
+			    </div>
+		   </div>
+		    <!--费用框-->
+		    <div class="orderpricebox">
+		    	<div><span class="coupontxt">使用优惠</span><span class="couponnum">-5.00</span>元</div>
+		    	<div><span class="freight">运费</span><span class="freightnum">+0</span>元</div>
+		    </div>
+		    <!--底部提交按钮-->
+		    <div class="mui-bar mui-bar-footer">
+		    	<div class="subbtn">
+		    		共￥<span class="subprice">116.00</span>元,提交订单
+		    	</div>
+		    </div>
+		    
+		</div>
+		<!--支付方式-->
+		<div class="mui-backdrop">
+			<div class="paytypebox">
+				
+				<ul class="mui-table-view ulinfo">
+					<div class="tit">
+						选择支付方式
+					</div>
+				    <li class="mui-table-view-cell" >
+			        	 <div class="left mui-pull-left">
+				        	<img src=""/>
+				        </div>
+				        <div class="right mui-pull-left">
+				        	<ul>
+				        		<li id="name">现金支付</li>
+				        		<li>
+				        			<span class="vipname">使用门店pos机收银</span>
+				        		</li>
+				        	</ul>
+				        </div>
+				        <span class="mui-pull-right iconfont icon-dagou"></span>
+				        
+				    </li>
+				     <li class="mui-table-view-cell" >
+			        	 <div class="left mui-pull-left">
+				        	<img src=""/>
+				        </div>
+				        <div class="right mui-pull-left">
+				        	<ul>
+				        		<li id="name">微信支付</li>
+				        		<li>
+				        			<span class="vipname">使用微信扫描二维码支付</span>
+				        		</li>
+				        	</ul>
+				        </div>
+				        <span class="mui-pull-right iconfont icon-dagou"></span>
+				        
+				    </li>
+				     <li class="mui-table-view-cell" >
+			        	 <div class="left mui-pull-left">
+				        	<img src=""/>
+				        </div>
+				        <div class="right mui-pull-left">
+				        	<ul>
+				        		<li id="name">支付宝支付</li>
+				        		<li>
+				        			<span class="vipname">使用支付宝扫描二维码支付</span>
+				        		</li>
+				        	</ul>
+				        </div>
+				        <span class="mui-pull-right iconfont icon-dagou"></span>
+				    </li>
+				
+				<div class="setbuttom">
+	    			<div class="mui-flex">
+			    		<div class="mui-flex1 qx" >
+			    			取消
+			    		</div>
+			    		<div class="" style="height: 35px;width: 1px;border-left: 1px solid #CCCCCC;"></div>
+			    		<div class="mui-flex1">
+			    			确定 
+			    		</div>
+			    	</div>
+	    		</div></ul>
+			</div>
+		</div>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+		        view=new App(); 
+		        //主列表点击事件
+				mui('body').on('tap', '.cashier', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+		   });
+		   mui('body').on('tap','.pytp',function(){
+		   	$('.mui-backdrop').fadeIn(300);
+		   })
+			mui('body').on('tap','.open',function(){
+				$(this).css("display","none");
+				$(".close").css("display","block"); 
+				$(".textareabox").css("display","block"); 
+			})
+			mui('body').on('tap','.close',function(){
+				$(this).css("display","none");
+				$(".open").css("display","block"); 
+				$(".textareabox").css("display","none");
+			})
+		</script>
+	</body>
+
+</html>

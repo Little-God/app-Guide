@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/font-awesome.css" />
+		<style type="text/css">
+			.confirmbtn {
+				text-decoration: none;
+			}
+			.mui-content-padded{margin-top: 0px;}
+			.chart {
+				height: 200px;
+				margin: 0px;
+				padding: 0px;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+			<div class="tltbtn mui-title">
+				<span class="geren actata">个人</span>
+				<span class="quandian">全店</span>
+			</div>
+			<span class=" mui-pull-right orange confirmbtn share">战绩榜</span>
+		</header>
+		<div class="mui-content">
+			<div id="canvas">
+				<!--<canvas id="weekcan"></canvas>-->
+				<div class="mui-content-padded">
+					<div class="chart" id="lineChart"></div>
+				</div>
+			</div>
+			<ul class="sta-ul">
+				<li class="">
+					<div class="todaynum">0.00</div>
+					<div class="txt">今日销量</div>
+				</li>
+				<li class="noafter">
+					<div class="todayorder">0</div>
+					<div class="txt">今日订单</div>
+				</li>
+				<li class="">
+					<div class="weeknum">0.00</div>
+					<div class="txt">近七天销售</div>
+				</li>
+				<li class="noafter">
+					<div class="weekorder">0</div>
+					<div class="txt">近七天订单</div>
+				</li>
+				<li class="">
+					<div class="monthnum">0.00</div>
+					<div class="txt">近三十天销售</div>
+				</li>
+				<li class="noafter">
+					<div class="monthorder">0</div>
+					<div class="txt">近三十天销售</div>
+				</li>
+				<li class="">
+					<div class="allnumber">0.00</div>
+					<div class="txt">累计销售</div>
+				</li>
+				<li class="noafter">
+					<div class="allorder">0</div>
+					<div class="txt">累计订单</div>
+				</li>
+				<li class="">
+					<div class="bangnum">0</div>
+					<div class="txt">绑定会员总数</div>
+				</li>
+				<li class="noafter">
+					<div class="toadd">0</div>
+					<div class="txt">今日新增绑定会员</div>
+				</li>
+				<li class="">
+					<div class="weekadd">0</div>
+					<div class="txt">近七天新增绑定会员</div>
+				</li>
+				<li class="noafter">
+					<div class="monthadd">0</div>
+					<div class="txt">近三十天新增绑定会员</div>
+				</li>
+			</ul>
+		</div>
+
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			$('.tltbtn span').click(function() {
+				$(this).addClass('actata').siblings().removeClass('actata');
+			})
+		</script>
+
+		<script src="../js/echarts-all.js"></script>
+		<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			// H5 plus事件处理
+			var shares = null;
+			var Intent = null,
+				File = null,
+				Uri = null,
+				main = null;
+			var ws = null;
+			// H5 plus事件处理
+
+			mui.init({
+				swipeBack: false //启用右滑关闭功能
+			});
+			var lineChart;
+			//打卡记录数
+			var callback = {
+				sumWeek: function(x_array, y_array) {
+					var option = {
+						//legend: {
+						//	data: ['打卡量']
+						//},
+						grid: {
+							x: 15,
+							x2: 5,
+							y: 30,
+							y2: 25
+						},
+						toolbox: {
+							show: false,
+							feature: {
+								mark: {
+									show: true
+								},
+								dataView: {
+									show: true,
+									readOnly: false
+								},
+								magicType: {
+									show: true,
+									type: ['line', 'bar']
+								},
+								restore: {
+									show: true
+								},
+								saveAsImage: {
+									show: true
+								}
+							}
+						},
+						calculable: false,
+						xAxis: [{
+							type: 'category',
+							data: x_array
+						}],
+						yAxis: [{
+							type: 'value',
+							splitArea: {
+								show: true
+							},
+						}],
+						series: [{
+							name: '打卡数',
+							type: 'line',
+							data: y_array
+						}],
+					};
+					lineChart = echarts.init(document.getElementById('lineChart'));
+					lineChart.setOption(option);
+				}	
+			}
+
+			mui.plusReady(function() {
+				sumWeek(callback);
+			})
+
+			//统计一周打卡数
+			function sumWeek(callback) {
+				var db = getDatabase();
+				var today = parseDate(new Date());
+				var before = getBeforeDate(new Date(), 7);
+				var x_arr = new Array();
+				for(i = 0; i < 7; i++) {
+					x_arr.push(getBeforeDate(new Date(), 6 - i))
+				}
+
+				db.transaction(function(tx) {
+					tx.executeSql(
+						'select count(1) as count,startDate from event where startDate >= ? and startDate <= ? group by startDate;', [before, today],
+						function(tx, results) {
+							var len = results.rows.length;
+							var y_arr = new Array();
+							var tmp_arr = new Array();
+							for(i = 0; i < len; i++) {
+								var startDate = results.rows.item(i).startDate;
+								tmp_arr.push(results.rows.item(i).startDate);
+								y_arr.push({
+									name: results.rows.item(i).startDate,
+									value: results.rows.item(i).count
+								});
+							}
+							for(i = 0; i < 7; i++) {
+								var startDate = x_arr[i];
+								if(tmp_arr.indexOf(startDate) > -1) {
+
+								} else {
+									y_arr.push({
+										name: startDate,
+										value: 0
+									});
+								}
+							}
+							var x_array = new Array();
+							var y_array = new Array();
+							y_arr = y_arr.sort(by("name"));
+							for(i = 0; i < y_arr.length; i++) {
+								x_array.push(y_arr[i].name.substring(5));
+								y_array.push(y_arr[i].value);
+							}
+							callback.sumWeek(x_array, y_array);
+						},
+						function(tx, error) {});
+				})
+			}
+
+		</script>
+
+	</body>
+
+</html>

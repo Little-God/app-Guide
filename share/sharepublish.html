@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			.sharebox{position: relative;}
+			p{font-size: 20px;margin:30px 0 20px 0;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+			<h1 class="mui-title bold">发布成功</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<p class="mui-text-center">快和小伙伴分享</p>
+			<ul class="shareicon">
+				<li>
+					<div class="iconfont icon-weixin" style="background: #09bb07;">
+						
+					</div>
+					微信好友
+				</li>
+				<li>
+					<div class="iconfont icon-pengyouquan" style="background: #09bb07;">
+						
+					</div>
+					朋友圈
+				</li>
+				<li>
+					<div class="iconfont icon-qq" style="background: #4a90e2;">
+						
+					</div>
+					QQ好友
+				</li>
+				<li>
+					<div class="iconfont icon-kongjian" style="background: #f3d82b;">
+						
+					</div>
+					QQ空间
+				</li>
+				<li>
+					<div class="iconfont icon-lianjie" style="background: #fb6622;">
+						
+					</div>
+					复制链接
+				</li>
+				<li> 
+					<div class="iconfont icon-102" style="background:#4a90e2;">
+						
+					</div>
+					我的客户
+				</li>
+			</ul>
+			
+			<div class="sharepublishbtn mui-flex">
+				<div class="mui-flex1 successinfo mui-action-back" tourl="">
+					<span class="infobgbox">查看详情</span>
+				</div>
+				<div class="mui-flex1 mui-action-back">
+					<span class="continuebox">继续发布</span>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+		        view=new App();
+		        //主列表点击事件
+		        mui('body').on('tap', '.successinfo', function() {
+					view.AppCloseWindow('publishgroup.html');
+					view.AppCloseWindow('selectimg.html');
+				});
+				mui('body').on('tap', '.mui-flex1', function() {
+					view.AppCloseWindow(this.getAttribute('tourl'));
+				});
+				
+		    });
+		</script>
+	</body>
+
+</html>

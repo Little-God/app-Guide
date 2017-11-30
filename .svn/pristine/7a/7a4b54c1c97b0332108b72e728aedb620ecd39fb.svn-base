@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>全部订单</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<style>
+			html,
+			body {
+				background-color: #efeff4;
+			}
+			
+			.mui-card-media {
+				color: initial;
+			}
+			
+			.mui-card-link {
+				color: #FF5607;
+				text-decoration: underline !important;
+			}
+			
+			.mui-card-content img {
+				width: 60px !important;
+				height: 60px;
+			}
+			
+			.mui-card-header img {
+				border-radius: 55px;
+				margin-top: 5px;
+			}
+			
+			.mui-card-header {
+				min-height: 64px;
+			}
+			.mui-bar-nav~.mui-content {
+				padding-top: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
+			<div class="mui-scroll" id="orderData">
+				<!--<div class="mui-card">
+					<div class="mui-card-header  mui-card-media">
+						<img class="mui-pull-left" src="http://dcloudio.github.io/mui/assets/img/shuijiao.jpg">
+						<div class="mui-media-body">
+							<div class="mui-col-xs-8 mui-pull-left ">
+								<h4>唯一</h4>
+								<p>2014.15.26 08:29</p>
+							</div>
+
+							<h4 class="mui-pull-left" style="margin-top: 10px;">已关闭 </h4>
+						</div>
+
+					</div>
+					<div class="mui-card-content">
+						<div class="mui-card-content-inner mui-card-media">
+							<img class="mui-pull-right" src="http://dcloudio.github.io/mui/assets/img/shuijiao.jpg">
+							<div class="mui-media-body">
+								<h6>订单号：20170214223888954528</h6>
+								<h6>总金额：0.00元</h6>
+								<h6>共1件商品</h6>
+							</div>
+						</div>
+					</div>
+					<div class="mui-card-footer">
+						<a class="mui-card-link">提醒付款</a>
+						<a class="mui-card-link">备注</a>
+						<a class="mui-card-link">关闭订单</a>
+					</div>
+				</div>-->
+			</div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/app.js"></script>
+		<script>
+			var view = null;
+			mui.init({
+				swipeBack: false,
+				keyEventBind: {
+					backbutton: false //关闭back按键监听
+				},
+				pullRefresh: {
+					container: '#pullrefresh',
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('');
+				view = new App();
+				document.getElementById('orderData').innerHTML="";
+				pullupRefresh();
+			});
+			mui('#orderData').on('tap', '.mui-card-content', function() {
+					var orderId = this.getAttribute('data-sn');
+					var extras = {
+						orderSn: orderId
+					};
+					view.AppCreateWindow("../orderInfo.html", null, null, extras);
+			});
+			mui('#orderData').on('tap', 'a', function() {
+				var action = this.getAttribute('data-action');
+				console.log(this.getAttribute('data-action'));
+				if(action == 'delivery') {
+					var orderSn = this.getAttribute('data-sn');
+					var extras = {
+						order_sn: orderSn
+					};
+					view.AppCreateWindow("../delivery.html", null, null, extras);
+				} else if(action == 'orderNote') {
+					var orderSn = this.getAttribute('data-sn');
+					var extras = {
+						order_sn: orderSn
+					};
+					view.AppCreateWindow("../orderInfo.html", null, null, extras);
+				} else if(action == 'contactBuyer') {
+					var buyerID = this.getAttribute('data-buyerId');
+					var buyerName = this.getAttribute('data-buyerName');
+					var extras = {
+						buyer_id: buyerID,
+						buyer_name: buyerName,
+					};
+					view.AppCreateWindow("../../member/chat-im.html", null, null, extras);
+				}
+			});
+			var currpage= 1;
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				var uinfo = plus.storage.getItem("uinfo");
+				console.log(uinfo);
+				var uarr = JSON.parse(uinfo);
+
+					view.AppHttpService({
+						action: 'Order/order_list',
+						data: {
+							guideId: uarr.guideId,
+							userToken: uarr.userToken,
+							roleType: uarr.userType,
+							keyword: "",
+							currpage:currpage,
+							rp:5,
+							status:20
+						}
+					}, function(response) {
+						if(response.code == '200') {
+							mui.each(response.data, function(index, _data) {
+								document.getElementById('orderData').innerHTML += '<div class="mui-card" data-sn="'+_data.order_sn+'">' +
+									'<div class="mui-card-header  mui-card-media">' +
+									'<img class="mui-pull-left" src="'+_data.head_portrait+'">' +
+									'<div class="mui-media-body">' +
+									'<div class="mui-col-xs-8 mui-pull-left ">' +
+									'<h4>'+_data.user_name+'</h4>' +
+									'<p>'+_data.created_time+'</p>' +
+									'</div>' +
+									'<h4 class="mui-pull-left" style="margin-top: 10px;">待发货 </h4>' +
+									'</div>' +
+									'</div>' +
+									'<div class="mui-card-content"  data-sn="' + _data.order_sn + '">' +
+									'<div class="mui-card-content-inner mui-card-media">' +
+									'<img class="mui-pull-right" src="'+_data.image+'">' +
+									'<div class="mui-media-body">' +
+									'<h6>订单号：'+_data.order_sn+'</h6>' +
+									'<h6>总金额：'+_data.order_price+'元</h6>' +
+									'<h6>共'+_data.goods_num+'件商品</h6>' +
+									'</div>' +
+									'</div>' +
+									'</div>' +
+									'<div class="mui-card-footer">' +
+									'<a data-action="contactBuyer" data-buyerId="' + _data.buyer_id + '" data-buyerName="' + _data.user_name + '" class="mui-card-link">联系买家</a>' +
+								'<a data-action="delivery"  data-sn="' + _data.order_sn + '" class="mui-card-link">发货</a>' +
+								'<a data-action="orderNote" data-sn="' + _data.order_sn + '" class="mui-card-link">备注</a>' +
+									'</div>' +
+									'</div>';
+							});
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(false); //参数为true代表没有更多数据了。
+							currpage++;
+						} else if(response.code == '201') {
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true); //参数为true代表没有更多数据了。
+						} else {
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true); //参数为true代表没有更多数据了。
+							plus.nativeUI.toast("更新失败," + response.message);
+						}
+					});
+				
+			}
+		</script>
+	</body>
+
+</html>

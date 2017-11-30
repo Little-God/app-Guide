@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			body,.mui-content{background: white;}
+			header{border-bottom: 1px solid  gainsboro !important;}
+			.mui-table-view{top: 20px ;}
+			.mui-table-view:before,.mui-table-view:after{height: 0px;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   	<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">会员卡信息</h1>
+		    <span class="mui-pull-right orange confirmbtn">编辑</span>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<!--卡片内容-->
+		    <div class="card">
+		    	<div class="username">那崽儿</div>
+		    	<div class="cardnum">117730006482754</div>
+		    	<div class="membertype">
+		    		<span class="vipname">普通会员</span><span class="br">|</span><span class="jifennum">0</span><span class="jifentxt">积分</span>
+		    	</div>
+		    </div>
+		    <!--姓名手机号-->
+		    <ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<span class="mui-pull-left">姓名</span>
+					<span id="username" class="mui-pull-right">那崽儿</span>
+				</li>
+				<li class="mui-table-view-cell">
+					<span class="mui-pull-left">手机号</span>
+					<span id="yanzheng" class="mui-pull-right">
+						(<span class="yztxt">已验证</span>)
+					</span>
+					<span class="mui-pull-right">15088639157</span>
+				</li>
+			</ul>
+		</div>
+		
+		
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

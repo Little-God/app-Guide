@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<style type="text/css">
+			header,#title{color: white ;}
+			#header{background: rgba(255, 86, 7, 1) !important;}
+			.mui-content>.mui-table-view:first-child{margin-top: 0;}
+			#sel{margin-top: 30px;border-bottom: 1px solid gainsboro;}
+			.right li{height: 30px;padding-left: 10px;font-size: 14px;line-height: 30px;}
+			.li-name{line-height: 30px;float: left;padding-left: 10px;}
+			.mui-nopad{padding: 0;}
+			.li-right{overflow: hidden;border-bottom: 1px solid gainsboro;padding: 10px 10px 10px 0;}
+			.mui-table-view-cell:after{height: 0px;}
+			.mui-table-view{border-bottom: 1px solid gainsboro;}
+			.mui-table-view:after{height: 0px;}
+			.leftbtn{line-height: 30px;color: #cbcbd0;}
+			.iconstyle{font-size: 30px;color:#767676;line-height: 30px;padding: 10px;}
+			#userHead{height: 50px; width: 50px;border-radius: 50px;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav" id="header">
+		    <h1 class="mui-title bold" id="title">我的</h1>
+		    <div class="mui-pull-right set" style="line-height: 44px;" tourl="set/set.html">设置</div>
+		</header>
+		
+		<!--内容-->
+		<div class="mui-content">
+			<!--账户头像信息等-->
+		    <ul class="mui-table-view">
+			    <li class="mui-table-view-cell"  tourl="set/personalInfo.html">
+		        	 <div class="left mui-pull-left">
+			            <img id="userHead" src="">
+			         </div>
+			        <div class="right mui-pull-left">
+			        	<ul>
+			        		<li id="nikename"  class="bold" id="name" ></li>
+			        		<li id="storename"></li>
+			        	</ul>
+			        </div>
+			        <span class="mui-icon mui-icon-forward mui-pull-right" style="line-height: 60px;color: #cbcbd0;"></span>
+			    </li>
+			</ul>
+			
+			<!--业绩~权限列表-->
+			<ul class="mui-table-view" id="sel">
+			    <li class="mui-table-view-cell mui-nopad"  tourl="../workbench/statistic.html">
+		        	 <div class="left mui-pull-left">
+		        	 	<div  class=" iconfont icon-11wodeyeji iconstyle"></div>
+			        </div>
+			        <div class="li-right">
+			        	<div class="li-name">我的业绩</div>
+			        	<span class="mui-icon mui-icon-forward mui-pull-right leftbtn"></span>
+			        </div>
+			    </li>
+			     <!--<li class="mui-table-view-cell mui-nopad"  tourl="myAppraise.html">
+		        	 <div class="left mui-pull-left">
+		        	 	<div  class=" iconfont icon-pingjia iconstyle"></div>
+			        </div>
+			        <div class="li-right">
+			        	<div class="li-name">我的评价</div>
+			        	<span class="mui-icon mui-icon-forward mui-pull-right leftbtn"></span>
+			        </div>
+			    </li>-->
+			     <li class="mui-table-view-cell mui-nopad" tourl="mypower.html">
+		        	 <div class="left mui-pull-left">
+		        	 	<div  class=" iconfont icon-quanxian iconstyle"></div>
+			        </div>
+			        <div class="li-right" style="border: none;">
+			        	<div class="li-name">我的权限</div>
+			        	<span class="mui-icon mui-icon-forward mui-pull-right leftbtn" ></span>
+			        </div>
+			    </li>
+			    
+			    <li class="mui-table-view-cell mui-nopad" tourl="myEvaluate.html">
+		        	 <div class="left mui-pull-left">
+		        	 	<div  class=" iconfont icon-quanxian iconstyle"></div>
+			        </div>
+			        <div class="li-right" style="border: none;">
+			        	<div class="li-name">我的评价</div>
+			        	<span class="mui-icon mui-icon-forward mui-pull-right leftbtn" ></span>
+			        </div>
+			    </li>
+			</ul>
+
+			<!--<ul class="mui-table-view" style="margin-top: 30px;">
+			    <li class="mui-table-view-cell mui-nopad">
+			    	<div class="left mui-pull-left">
+		        	 	<div  class=" iconfont icon-lipin iconstyle"></div>
+			        </div>
+			        <div class="li-right" style="border: none;">
+			        	<div class="li-name">聚客有礼</div>
+			        	<span class="mui-icon mui-icon-forward mui-pull-right leftbtn"></span>
+			        </div>
+			    </li>
+			    <li class="mui-table-view-cell mui-nopad" style="border-top: 1px solid gainsboro;">
+			    	<div class="left mui-pull-left">
+		        	 	<div  class=" iconfont icon-liaotian iconstyle"></div>
+			        </div>
+			        <div class="li-right" style="border: none;">
+			        	<div class="li-name">聚客助手</div>
+			        	<span class="mui-icon mui-icon-forward mui-pull-right leftbtn"></span>
+			        </div>
+			    </li>
+			</ul>-->
+			
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function(){
+				plus.navigator.setStatusBarBackground('#FF5607');
+		        view=new App();
+		        var uinfo = plus.storage.getItem("uinfo");
+		        if(uinfo!=null)
+		        {
+		        	var uarr = JSON.parse(uinfo);
+				    document.getElementById('nikename').innerHTML =uarr.userNike;
+				    document.getElementById('storename').innerHTML =uarr.userStoreName;
+				    document.getElementById('userHead').src =uarr.userHead;
+		        }
+				
+		        //主列表点击事件
+				mui('body').on('tap', '.mui-table-view-cell', function() {
+					var tourl=this.getAttribute('tourl');
+					console.log(tourl);
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				document.getElementById("header").addEventListener('tap', function(e) {
+					view.AppCreateWindow("set/set.html");
+				});
+			});
+		</script>
+	</body>
+
+</html>

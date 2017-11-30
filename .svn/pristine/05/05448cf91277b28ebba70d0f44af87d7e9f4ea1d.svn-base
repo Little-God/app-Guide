@@ -1,0 +1,205 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>工作台主页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			header,
+			#h1 {
+				color: white;
+				text-decoration: underline;
+				font-size: 14px;
+				font-weight: bold;
+			}
+			
+			.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body {
+				font-size: 12px;
+			}
+			
+			#wb-header,
+			.navbtn {
+				background: rgba(255, 86, 7, 1) !important;
+			}
+			
+			.navbtn li {
+				text-align: center;
+				padding: 20px 0;
+				color: white;
+			}
+			
+			.mui-bar-nav {
+				-webkit-box-shadow: none;
+			}
+			
+			.navbtn li div:first-of-type {
+				font-size: 34px;
+				padding-bottom: 20px;
+			}
+			
+			.navnum {
+				text-align: center;
+				color: rgb(132, 132, 132);
+				background: white;
+				margin-top: 10px;
+			}
+			
+			.navnum li div:first-of-type {
+				font-weight: bold;
+				font-size: 18px;
+				padding: 10px 0;
+			}
+			
+			.navnum li div:last-of-type {
+				color: #C0C0C0;
+				padding-bottom: 10px;
+			}
+			/*字体图标按钮*/
+			
+			#iconbtn {
+				margin-top: 10px;
+			}
+			
+			#iconbtn li {
+				background: white !important;
+				height: 90px;
+			}
+			
+			#iconbtn span {
+				font-size: 46px;
+				padding: 20px 0;
+			}
+			
+			#iconbtn a {
+				padding: 24px 0;
+			}
+			.mui-grid-view.mui-grid-9 .mui-table-view-cell {
+			    padding: 4px 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--顶部-->
+		<header class="mui-bar mui-bar-nav" id="wb-header">
+			<h1 id="h1" class="mui-title">Leeyoung <span class="mui-icon mui-icon-arrowdown"></span></h1>
+			<div class="iconfont icon-lingdang mui-pull-right" style="line-height: 44px;font-size: 24px;" tourl="../messagecenter.html"></div>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-flex navbtn">
+				<li class="mui-flex1 scanbtn" tourl="../scan/scanStorage.html">
+					<div class="iconfont icon-saoma"></div>
+					<div class="icontxt">入库</div>
+				</li>
+				<li class="mui-flex1 shopbtn" tourl="../shop/goodsList.html">
+					<div class="iconfont icon-shangpin"></div>
+					<div class="icontxt">商品</div>
+				</li>
+				<li class="mui-flex1 orderbtn" tourl="../order/orderList.html">
+					<div class="iconfont icon-iconfonticon2"></div>
+					<div class="icontxt">订单</div>
+				</li>
+				<li class="mui-flex1 shouqianbtn" tourl="../cashier/cashier.html">
+					<div class="iconfont icon-shouqian"></div>
+					<div class="icontxt">收银</div>
+				</li>
+			</ul>
+			<!--订单数量统计-->
+			<ul class="mui-flex navnum">
+				<li class="mui-flex1" tourl="../workbench/statistic.html">
+					<div class="sevendorder">0</div>
+					<div class="icontxt">近7天订单</div>
+				</li>
+				<li class="mui-flex1" tourl="../workbench/statistic.html">
+					<div class="">0</div>
+					<div class="icontxt">近7天新增会员</div>
+				</li>
+				<li class="mui-flex1" tourl="../workbench/statistic.html">
+					<div class="">0.00</div>
+					<div class="icontxt">近7天销售额</div>
+				</li>
+			</ul>
+			<!--图标按钮等-->
+
+			<ul class="mui-table-view mui-grid-view mui-grid-9" id="iconbtn">
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" tourl="invitemember.html">
+					<a href="javascript:void(0)">
+						<span class="iconfont icon-yaoqing" style="color: #f26d5f;"></span>
+						<div class="mui-media-body">邀请会员</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" tourl="">
+					<a href="javascript:void(0)">
+						<span class="iconfont icon-ziyuan" style="color: #fcaf17;"></span>
+						<div class="mui-media-body">预约管理</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" tourl="">
+					<a href="javascript:void(0)">
+						<span class="iconfont icon-paidan" style="color: #9c76f0;"></span>
+						<div class="mui-media-body">快速发货</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" tourl="../share/share.html">
+					<a href="javascript:void(0)">
+						<span class="iconfont icon-saoma2" style="color: #d4237a;"></span>
+						<div class="mui-media-body">提货码验证</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" tourl="../share/share.html">
+					<a href="javascript:void(0)">
+						<span class="iconfont icon-fenxiang" style="color: #d4237a;"></span>
+						<div class="mui-media-body">分享中心</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3" tourl="../order/goodsRejected.html">
+					<a href="javascript:void(0)">
+						<span class="iconfont icon-tui14" style="color: #6194f1;"></span>
+						<div class="mui-media-body">退货管理</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media mui-col-xs-3 mui-col-sm-3"  tourl="../scan/scanInventory.html">
+					<a href="javascript:void(0)">
+						<span class="iconfont icon-ccgl-kucunpandian-2" style="color: #4DCC33;"></span>
+						<div class="mui-media-body">库存盘点</div>
+					</a>
+				</li>
+			</ul>
+
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('#FF5607');
+				view = new App();
+				//主列表点击事件
+				mui('.mui-table-view,.mui-flex').on('tap', 'li', function() {
+					var tourl = this.getAttribute('tourl');
+					console.log(tourl);
+					if(tourl == "null" || tourl == "" || !tourl) {
+						console.log("无页面");
+					} else {
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				mui('body').on('tap', '.icon-lingdang', function() {
+					var tourl = this.getAttribute('tourl');
+					console.log(tourl);
+					if(tourl == "null" || tourl == "" || !tourl) {
+						console.log("无页面");
+					} else {
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

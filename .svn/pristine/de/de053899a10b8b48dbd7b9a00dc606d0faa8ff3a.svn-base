@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>邀请导购</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/style.css" />
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">邀请导购</h1>
+		</header>
+		<div class="mui-content">
+			<p class="prompt">直接使用聚客导购APP扫描下方二维码或分享链接给导购，根据提示注册加入门店</p>
+			<p class="invitetxt">邀请码</p>
+			<p class="invitecode bold">A4QKcUAQ</p>
+			<div class="code">
+				<img src="" id="imgcode" />
+			</div>
+			<button id="share" type="button" class="mui-btn mui-btn-danger bold">点击分享激情连接</button>
+			<p class="refresh">每20分钟自动刷新一次</p>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+				plus.webview.currentWebview().append('http://www.juktetz.com/vmall.php/Store/qrCodeOfSales?salesId='+uarr.guideId);
+				//plus.runtime.openURL('http://www.juktetz.com/vmall.php/Store/qrCodeOfSales?salesId=');
+			});
+		</script>
+	</body>
+
+</html>

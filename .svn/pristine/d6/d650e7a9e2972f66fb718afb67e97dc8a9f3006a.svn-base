@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.mui-table-view.mui-grid-view {
+			    padding: 0 40px 10px 0;
+			}
+			.mui-popover .mui-media-body{
+				font-size: 12px!important;
+				color: #999!important;
+			}
+			.mui-popover.mui-popover-action .mui-table-view .mui-table-view-cell::after {
+			    height: 0px;
+			}
+			.iconfont{
+				font-size: 35px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+			</button>
+			<h1 class="mui-title">活动分享</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<div class="mui-card">
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<h4>满减活动<span class="mui-badge mui-badge-danger">NEW</span></h4>
+						<h3>新春活动满减开始啦</h3>
+						<p>2017.02.16 16:00 - 2017.02.16 16:00</p>
+					</div>
+				</div>
+				<div class="mui-card-footer">
+					<a class="mui-card-link">预览</a>
+					<a class="mui-card-link" href="#sharepop">分享</a>
+				</div>
+			</div>
+			<div class="mui-card">
+				<div class="mui-card-content">
+					<div class="mui-card-content-inner">
+						<h4>满减活动<span class="mui-badge mui-badge-danger">NEW</span></h4>
+						<h3>新春活动满减开始啦</h3>
+						<p>2017.02.16 16:00 - 2017.02.16 16:00</p>
+					</div>
+				</div>
+				<div class="mui-card-footer">
+					<a class="mui-card-link">预览</a>
+					<a class="mui-card-link" href="#sharepop">分享</a>
+				</div>
+			</div>
+			<!--分享弹出框-->
+			<div id="sharepop" class="mui-popover mui-popover-action mui-popover-bottom">
+				<ul class="mui-table-view">
+					<p class="sharetitle">分享</p>
+					<ul class=" mui-table-view mui-grid-view">
+						<li class="mui-table-view-cell mui-media mui-col-xs-3">
+							<a href="#">
+								<div class="mui-obj" style="background: #10BD0E;"><i class="iconfont">&#xe610;</i></div>
+								<div class="mui-media-body">微信好友</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-3">
+							<a href="#">
+								<div class="mui-obj" style="background: #10BD0E"><i class="iconfont">&#xe644;</i></div>
+								<div class="mui-media-body">朋友圈</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-3">
+							<a href="#">
+								<div class="mui-obj" style="background: #2C91FF"><i class="iconfont">&#xe668;</i></div>
+								<div class="mui-media-body">QQ好友</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-3">
+							<a href="#">
+								<div class="mui-obj" style="background: #FFCF00;"><i class="iconfont">&#xe643;</i></div>
+								<div class="mui-media-body">QQ空间</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-3">
+							<a href="#">
+								<div class="mui-obj" style="background: #EC971F;"><i class="iconfont" style="font-size: 25px;">&#xe617;</i></div>
+								<div class="mui-media-body">复制链接</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media mui-col-xs-3">
+							<a href="#">
+								<div class="mui-obj" style="background: #2C91FF;"><i class="iconfont">&#xe62d;</i></div>
+								<div class="mui-media-body">我的客户</div>
+							</a>
+						</li>
+					</ul>
+				</ul>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<a href="#sharepop"><b>取消</b></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				//主列表点击事件
+				mui('body').on('tap', '.look', function() {
+					if(this.getAttribute('tourl') == "null" || this.getAttribute('tourl') == "") {
+
+					} else {
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

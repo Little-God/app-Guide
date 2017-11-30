@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			#btnleft {
+				font-size: 18px;
+				line-height: 44px;
+			}
+			
+			#btnright {
+				font-size: 18px;
+				line-height: 44px;
+			}
+			
+			#loginheader {
+				background: #f64848;
+				color: white;
+			}
+			
+			.mui-input-group {
+				background: transparent;
+			}
+			
+			.mui-input-group:after,
+			.mui-input-group:before {
+				height: 0;
+			}
+			
+			.mui-input-row {
+				margin: 10px 5% 0 5%;
+				width: 90%;
+				display: -webkit-flex;
+				border: 1px solid #c5c3c3;
+				border-radius: 3px;
+				background: white !important;
+			}
+			
+			.mui-input-group input {
+				border: none;
+			}
+			
+			#w-pwd {
+				line-height: 40px;
+				font-size: 14px;
+				margin-left: -70px;
+				padding: 0 5px;
+				color: #f64848;
+			}
+			
+			.mui-input-row:after {
+				height: 0 !important;
+			}
+			
+			.mui-icon-eye {
+				display: none;
+			}
+			
+			#sub {
+				width: 90%;
+				text-align: center;
+				margin: 10px 5% 0 5%;
+				color: white;
+				background: #c5c3c3;
+				height: 40px;
+				border: none;
+			}
+			
+			#pwdclear {
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--顶部-->
+		<header class="mui-bar mui-bar-nav" id="loginheader">
+			<span class="mui-icon mui-icon-back mui-pull-left mui-action-back"></span>
+			<div class="mui-pull-left" style="width: 1px;height: 18px;border-left: 1px solid #d83e3e;margin: 12px;"></div>
+			<span class="mui-pull-left" id="btnleft">登录</span>
+			<span class="mui-pull-right" id="btnright">商家入驻</span>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<!--表单-->
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<input type="text" id="username" class="mui-input-clear" maxlength="11" placeholder="请输入手机号" value="" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+				</div>
+				<div class="mui-input-row">
+					<input type="password" id="pwd" class="mui-input-password" placeholder="6-18位密码" value="">
+					<span id="w-pwd">忘记密码</span>
+					<span name="pwd" id="pwdclear" class="mui-icon mui-icon-clear" style="font-size: 20px;position: absolute;z-index: 1;top: 10px;right: 0;width: 38px; height: 38px; text-align: center;color: #999;"></span>
+				</div>
+				<!--登录按钮-->
+				<button type="button" id="sub" class="mui-btn mui-btn-outlined">登录</button>
+			</form>
+		</div>
+	</body>
+	<script src="js/mui.min.js"></script>
+	<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/md5.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" charset="utf-8">
+		mui.init();
+		mui.plusReady(function() {
+			var view = new App();
+			var phone = document.getElementById("username");
+			var pwd = document.getElementById("pwd");
+			var wpwd = document.getElementById("w-pwd");
+			var pwdclear = document.getElementById("pwdclear");
+			var sub = document.getElementById("sub");
+			phone.addEventListener("input", function() {
+				if(phone.value.length == 11 && pwd.value.length >= 6) {
+					sub.style.background = '#f64848';
+				} else {
+					sub.style.background = '#c5c3c3';
+				}
+			});
+			phone.addEventListener("blur", function() {
+				if(phone.value.length == 11 && pwd.value.length >= 6) {
+					sub.style.background = '#f64848';
+				} else {
+					sub.style.background = '#c5c3c3';
+				}
+			});
+			//密码
+			pwd.addEventListener("focus", function() {
+				wpwd.style.display = "none";
+				pwdclear.style.display = "block";
+			});
+			pwd.addEventListener("blur", function() {
+				wpwd.style.display = "block";
+				pwdclear.style.display = "none";
+				if(phone.value.length == 11 && pwd.value.length >= 6) {
+					sub.style.background = '#f64848';
+				} else {
+					sub.style.background = '#c5c3c3';
+				}
+			});
+			pwd.addEventListener("input", function() {
+				if(phone.value.length == 11 && pwd.value.length >= 6) {
+					sub.style.background = '#f64848';
+				} else {
+					sub.style.background = '#c5c3c3';
+				}
+			});
+			//清除按键
+			pwdclear.addEventListener('tap', function() {
+				pwd.value = "";
+			});
+
+			sub.addEventListener('tap', function() {
+				if(phone.value.length == 0) {
+					mui.toast("请输入手机号");
+				} else if(phone.value.length < 11) {
+					mui.toast("请输入正确的手机号");
+				} else if(pwd.value.length == 0) {
+					mui.toast("请输入密码");
+				} else if(pwd.value.length < 6) {
+					mui.toast("密码至少6位");
+				} else if(navigator.onLine) {
+					view.UserLogin(phone.value,pwd_MD5(pwd.value));
+				}
+			})
+		});
+	</script>
+
+</html>

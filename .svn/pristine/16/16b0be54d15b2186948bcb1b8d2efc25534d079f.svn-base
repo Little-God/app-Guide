@@ -1,0 +1,227 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link href="../css/style.css" rel="stylesheet" />
+		<style type="text/css">
+			#bcid {
+				width: 100%;
+				height: 480px;
+				background: #000000;
+				/*z-index: 50;*/
+				padding: 0px;
+				margin: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title" id="pageTitle">门店盘点</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="stocksAmount">盘点数据</button>
+		</header>
+		<div class="mui-content">
+			<div id="bcid">
+
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/main.js"></script>
+		<script type="text/javascript">
+			window.addEventListener('refresh', function(e) {
+				location.reload();
+				//document.getElementById('indexHeader').innerHTML = 'Hello World';  
+			})
+			mui.init({
+				beforeback: function() {
+					clearView();
+					var list = plus.webview.currentWebview().opener();
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新  
+					mui.fire(list, 'refresh');
+					//返回true，继续页面关闭逻辑  
+					return true;
+				}
+			});
+			var view = null;
+			var tipsTxtView = null;
+			var inputTxtView = null;
+			var uarr, areaId = null,
+				areaName = null;
+			mui.plusReady(function() {
+				//				var height = plus.screen.resolutionHeight*plus.screen.scale;
+				//			    console.log("当前屏幕高度:"+height);
+				//			    console.log(plus.screen.resolutionHeight+"px");
+				//			   // document.getElementById("bcid").style.height=plus.screen.resolutionHeight+"px";
+				//			    document.getElementById("bcid").style.height=document.body.offsetHeight+"px";
+				startRecognize();
+				view = new App();
+				var uinfo = plus.storage.getItem("uinfo");
+				uarr = JSON.parse(uinfo);
+				var self = plus.webview.currentWebview();
+				areaId = self.areaId;
+				areaName = self.areaName
+				document.getElementById('pageTitle').innerHTML = self.areaName + "-盘点"
+				document.getElementById("stocksAmount").addEventListener('tap', function(e) {
+					clearView();
+					var extras = {
+						areaId: areaId,
+						areaName: areaName
+					};
+					view.AppCreateWindow("inventoryData.html", null, null, extras);
+				});
+			});
+			var scan = null;
+
+			function onmarked(type, result) {
+				var text = '未知: ';
+				switch(type) {
+					case plus.barcode.QR:
+						text = 'QR: ';
+						break;
+					case plus.barcode.EAN13:
+						text = 'EAN13: ';
+						break;
+					case plus.barcode.EAN8:
+						text = 'EAN8: ';
+						break;
+				}
+				scan.cancel();
+				console.log(result);
+				checkStock(result);
+
+			}
+
+			function checkStock(barcode, size, skucode) {
+				view.AppHttpService({
+					action: 'Goods/store_inventory',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						storeId: uarr.userBelong,
+						code: barcode,
+						size: size,
+						goodsSku: skucode
+					}
+				}, function(response) {
+					var btnArray = ['否', '是'];
+					if(response.code == '200') {
+						mui.confirm('匹配成功，是否记录？', btnArray, function(e) {
+							if(e.index == 1) {
+								insertData(response.data.stockSku, response.data.color, response.data.size, response.data.barcode);
+							}
+							scan.start();
+						})
+					} else if(response.code == '201') {
+						mui.confirm('刚刚扫到的商品条码没找到,是否手动输入条码和尺码试试？', '请选择', btnArray, function(e) {
+							if(e.index == 1) {
+								inputStockSku();
+							} else {
+								scan.start();
+							}
+						})
+					} else {
+						mui.toast(response.message);
+						scan.start();
+					}
+
+				});
+			}
+
+			function insertData(stocksSku, goodsColor, goodsSpec, barCode) {
+				console.log(barCode);
+				var sql = "select * from stockInventory where stockSku='" + stocksSku + "' and size='" + goodsSpec + "';";
+				view.DBquery(sql, function(len, stocksData) {
+					if(len > 0) {
+						var sql = "update stockInventory set num = num + 1 where  stockSku='" + stocksSku + "' and size='" + goodsSpec + "';";
+						view.DBDML(sql, function() {
+							mui.toast("盘点记录成功!");
+						}, function(error) {
+							console.log(error.message);
+						});
+					} else {
+						var sql = "insert into stockInventory(stockSku,num,goodsColor, size, barCode,areaId,areaName) values('" + stocksSku + "',1,'" + goodsColor + "','" + goodsSpec + "','" + barCode + "','" + areaId + "','" + areaName + "')";
+						view.DBDML(sql, function() {
+							mui.toast("盘点记录成功!");
+						}, function(error) {
+							console.log(error.message);
+						});
+					}
+					scan.start();
+				}, function(error) {
+					console.log(error.message);
+				});
+			}
+
+			function startRecognize() {
+				scan = new plus.barcode.Barcode('bcid');
+				scan.onmarked = onmarked;
+				scan.start();
+				createView();
+			}
+
+			function createView() {
+
+				tipsTxtView = new plus.nativeObj.View('tips', {
+					top: '56px',
+					left: '0px',
+					height: '20px',
+					width: '100%'
+				}); // 创建原生View控件
+				tipsTxtView.drawText('请将优惠券条码放入框内，即可自动扫描', {}, {
+					size: '14px',
+					color: '#ffffff'
+				}); // 绘制文本
+				tipsTxtView.show();
+
+				inputTxtView = new plus.nativeObj.View('tips', {
+					top: '400px',
+					left: '5px',
+					height: '20px',
+					width: '100%'
+				}); // 创建原生View控件
+				inputTxtView.drawText('无法识别？手动输入', {}, {
+					size: '14px',
+					color: '#ffffff'
+				}); // 绘制文本
+				inputTxtView.addEventListener("click", InputClick, false); // 监听原生无法输入View控件click事件
+				inputTxtView.show();
+
+			}
+			// 监听无法输入事件函数
+			function InputClick(e) {
+				console.log("点击无法输入原生控件：" + JSON.stringify(e));
+				inputStockSku();
+			}
+
+			function inputStockSku() {
+				var btnArray = ['取消', '确定'];
+				mui.prompt('请先输入商品条码尺码', '条码和尺码之间用空格隔开', "温馨提示", btnArray, function(e) {
+					if(e.index == 1) {
+						console.log(e.value);
+						var stock = e.value.split(" ");
+						mui.confirm('你刚刚是输入的是货号:' + stock[0] + '与尺码:' + stock[1] + '？', '请确认', btnArray, function(e) {
+							if(e.index == 1) {
+								checkStock("", stock[0], stock[1]);
+							}
+						})
+					}
+				});
+			}
+			// 销毁原生View控件
+			function clearView(e) {
+				tipsTxtView.clear();
+				inputTxtView.clear();
+				scan.close();
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,350 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.chart {
+				height: 200px;
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			.tltbtn {
+				border: 2px solid #ff5b0f;
+				width: 120px !important;
+				height: 34px;
+				line-height: 34px;
+				border-radius: 6px;
+				margin-top: 5px !important;
+			}
+			
+			.tltbtn span {
+				background: white;
+				color: #ff5b0f;
+				display: inline-block;
+				width: 50%;
+				float: left;
+				height: 30px;
+			}
+			
+			.actata {
+				background: #ff5b0f !important;
+				color: white !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<div class="tltbtn mui-title">
+				<span class="geren actata">个人</span>
+				<span class="quandian">全店</span>
+			</div>
+		</header>
+		<div class="mui-content">
+			<div class="chart" id="lineChart"></div>
+			<div class="mui-content">
+				<ul class="mui-table-view mui-grid-view mui-grid-9" id="statisticData">
+					<!--<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" tourl="invitemember.html">
+						<a href="javascript:void(0)">
+							<h3 class="cl-orang">12.00</h3>
+							<h5>今日销售</h5>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" tourl="">
+						<a href="javascript:void(0)">
+							<h3 class="cl-orang">12</h3>
+							<h5>今日订单</h5>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" tourl="invitemember.html">
+						<a href="javascript:void(0)">
+							<h3 class="cl-orang">12.00</h3>
+							<h5>近七天销售</h5>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" tourl="">
+						<a href="javascript:void(0)">
+							<h3 class="cl-orang">12.00</h3>
+							<h5>近七天订单</h5>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" tourl="invitemember.html">
+						<a href="javascript:void(0)">
+							<h3 class="cl-orang">12.00</h3>
+							<h5>近三十天销售</h5>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" tourl="">
+						<a href="javascript:void(0)">
+							<h3 class="cl-orang">12</h3>
+							<h5>近三十天订单</h5>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" tourl="invitemember.html">
+						<a href="javascript:void(0)">
+							<h3 class="cl-orang">12.00</h3>
+							<h5>累计销售</h5>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" tourl="">
+						<a href="javascript:void(0)">
+							<h3 class="cl-orang">12</h3>
+							<h5>累计订单</h5>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" tourl="invitemember.html">
+						<a href="javascript:void(0)">
+							<h3 class="cl-orang">12</h3>
+							<h5>绑定会员总数</h5>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" tourl="">
+						<a href="javascript:void(0)">
+							<h3 class="cl-orang">12</h3>
+							<h5>今日新增绑定会员</h5>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" tourl="invitemember.html">
+						<a href="javascript:void(0)">
+							<h3 class="cl-orang">2</h3>
+							<h5>近七天新增绑定会员</h5>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" tourl="">
+						<a href="javascript:void(0)">
+							<h3 class="cl-orang">12</h3>
+							<h5>近三十天新增绑定会员</h5>
+						</a>
+					</li>-->
+
+				</ul>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/main.js"></script>
+		<script src="../js/echarts-all.js"></script>
+		<script type="text/javascript">
+			var uarr, sttime = new Array(),
+				fanst = new Array(),
+				salet = new Array(),
+				lineChart;
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				var uinfo = plus.storage.getItem("uinfo");
+				uarr = JSON.parse(uinfo);
+				var etime = new Date().format('yyyy-MM-dd');
+				var stime = new Date().DateAdd('d', -7).format('yyyy-MM-dd');
+				getsaleTrend(stime, etime);
+				getfansTrend(stime, etime);
+				lineChart = echarts.init(document.getElementById('lineChart'));
+				loadStatiTxt();
+
+			});
+
+			function loadStatiTxt() {
+				view.AppHttpService({
+					action: 'Guide/achievement',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						roleType: uarr.userType
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						document.getElementById('statisticData').innerHTML = '<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3">' +
+							'<a href="javascript:void(0)">' +
+							'<h3 class="cl-orang">'+response.data.oneday.total_price+'</h3>' +
+							'<h5>今日销售</h5>' +
+							'</a>' +
+							'</li>' +
+							'<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" >' +
+							'<a href="javascript:void(0)">' +
+							'<h3 class="cl-orang">'+response.data.oneday.total_num+'</h3>' +
+							'<h5>今日订单</h5>' +
+							'</a>' +
+							'</li>' +
+							'<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3">' +
+							'<a href="javascript:void(0)">' +
+							'<h3 class="cl-orang">'+response.data.sevenday.total_price+'</h3>' +
+							'<h5>近七天销售</h5>' +
+							'</a>' +
+							'</li>' +
+							'<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3">' +
+							'<a href="javascript:void(0)">' +
+							'<h3 class="cl-orang">'+response.data.sevenday.total_num+'</h3>' +
+							'<h5>近七天订单</h5>' +
+							'</a>' +
+							'</li>' +
+							'<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3">' +
+							'<a href="javascript:void(0)">' +
+							'<h3 class="cl-orang">'+response.data.thiryday.total_price+'</h3>' +
+							'<h5>近三十天销售</h5>' +
+							'</a>' +
+							'</li>' +
+							'<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3">' +
+							'<a href="javascript:void(0)">' +
+							'<h3 class="cl-orang">'+response.data.thiryday.total_num+'</h3>' +
+							'<h5>近三十天订单</h5>' +
+							'</a>' +
+							'</li>' +
+							'<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3">' +
+							'<a href="javascript:void(0)">' +
+							'<h3 class="cl-orang">'+response.data.total.total_price+'</h3>' +
+							'<h5>累计销售</h5>' +
+							'</a>' +
+							'</li>' +
+							'<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" >' +
+							'<a href="javascript:void(0)">' +
+							'<h3 class="cl-orang">'+response.data.total.total_num+'</h3>' +
+							'<h5>累计订单</h5>' +
+							'</a>' +
+							'</li>' +
+							'<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" >' +
+							'<a href="javascript:void(0)">' +
+							'<h3 class="cl-orang">'+response.data.thiryday.member+'</h3>' +
+							'<h5>绑定会员总数</h5>' +
+							'</a>' +
+							'</li>' +
+							'<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3">' +
+							'<a href="javascript:void(0)">' +
+							'<h3 class="cl-orang">'+response.data.oneday.member+'</h3>' +
+							'<h5>今日新增绑定会员</h5>' +
+							'</a>' +
+							'</li>' +
+							'<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" >' +
+							'<a href="javascript:void(0)">' +
+							'<h3 class="cl-orang">'+response.data.sevenday.member+'</h3>' +
+							'	<h5>近七天新增绑定会员</h5>' +
+							'</a>' +
+							'</li>' +
+							'<li class="mui-table-view-cell mui-media mui-col-xs-6 mui-col-sm-3" >' +
+							'<a href="javascript:void(0)">' +
+							'<h3 class="cl-orang">'+response.data.thiryday.member+'</h3>' +
+							'<h5>近三十天新增绑定会员</h5>' +
+							'</a>' +
+							'</li>';
+					} else {
+						mui.toast(response.message);
+					}
+
+				})
+			}
+
+			function getOption(stime, fanst, salet) {
+				var chartOption = {
+					legend: {
+						data: ['近七天销售', '近七天加粉']
+					},
+					grid: {
+						x: 35,
+						x2: 10,
+						y: 30,
+						y2: 25
+					},
+					toolbox: {
+						show: false,
+						feature: {
+							mark: {
+								show: true
+							},
+							dataView: {
+								show: true,
+								readOnly: false
+							},
+							magicType: {
+								show: true,
+								type: ['line', 'bar']
+							},
+							restore: {
+								show: true
+							},
+							saveAsImage: {
+								show: true
+							}
+						}
+					},
+					calculable: false,
+					xAxis: [{
+						type: 'category',
+						data: stime
+					}],
+					yAxis: [{
+						type: 'value',
+						splitArea: {
+							show: true
+						}
+					}],
+					series: [{
+						name: '近七天销售',
+						type: 'line',
+						data: salet
+					}, {
+						name: '近七天加粉',
+						type: 'line',
+						data: fanst
+					}]
+				};
+				return chartOption;
+			}
+
+			function getfansTrend(stime, etime) {
+				view.AppHttpService({
+					action: 'Guide/fansTrend',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						startTime: stime,
+						endTime: etime,
+						roleType: uarr.userType
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						mui.each(response.data, function(index, _data) {
+							fanst.push(_data);
+						});
+						lineChart.setOption(getOption(sttime, fanst, salet));
+					} else {
+						mui.toast(response.message);
+					}
+
+				})
+			}
+
+			function getsaleTrend(stime, etime) {
+				view.AppHttpService({
+					action: 'Guide/saleTrend',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						startTime: stime,
+						endTime: etime,
+						roleType: uarr.userType
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						mui.each(response.data, function(index, _data) {
+							sttime.push(index);
+							salet.push(_data);
+						});
+						lineChart.setOption(getOption(sttime, fanst, salet));
+					} else {
+						mui.toast(response.message);
+					}
+				})
+			}
+		</script>
+	</body>
+
+</html>

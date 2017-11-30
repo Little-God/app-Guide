@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.ulinfo {
+				border-left: none;
+				border-right: none;
+				margin-top: 1px !important;
+			}
+			
+			.right li {
+				line-height: 50px;
+			}
+			
+			.mui-icon-forward {
+				color: #cbcbd0;
+				font-size: 21px;
+			}
+			
+			.icon-plus {
+				font-size: 14px;
+				position: relative;
+				top: -1px;
+				color: red;
+			}
+			
+			#share {
+				padding: 8px 0;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+			<h1 class="mui-title bold">会员信息</h1>
+		</header>
+		<div class="mui-content">
+			<!--账户头像信息等-->
+			<dl class="mui-table-view ulinfo">
+				<dd class="dd">
+					<div class="left mui-pull-left">
+						<div class="tou">
+
+						</div>
+					</div>
+					<div class="right mui-pull-left">
+						<ul>
+							<li id="name">
+								那崽儿
+								<span class="iconfont icon-iconfontiocnnan lj"></span>
+								<span class="iconfont icon-duigoutuijian gou"></span>
+								<span class="iconfont icon-icon61 lj"></span>
+							</li>
+						</ul>
+					</div>
+					<div class="mui-pull-right memberremark" tourl="remarks.html">
+						<span class="remark mui-pull-left">姓名备注</span>
+						<span class="mui-pull-left iconfont icon-bi"></span>
+					</div>
+				</dd>
+			</dl>
+			<!--会员卡信息-->
+			<ul class="mui-table-view addtypebox" tourl="membercardinfo.html">
+				<li class="mui-table-view-cell">
+					<span class="mui-pull-left">会员卡信息</span>
+					<span class="mui-pull-right mui-icon mui-icon-forward"></span>
+					<span class="mui-pull-right">
+						<span class="vipname">普通会员</span><span class="br">|</span><span class="jifennum">0</span><span class="jifentxt">积分</span>
+					</span>
+				</li>
+			</ul>
+			<!--标签添加-->
+			<dl class="mui-table-view addtypebox">
+				<dd class="dd">
+					<div class="labeltxt">标签</div>
+					<div class="addlabelbox">
+						<div class="addlabel">
+							<span class="iconfont icon-plus bold"></span>
+							<span class="addtxt">添加</span>
+						</div>
+					</div>
+					</li>
+			</dl>
+
+			<!--记录优惠券-->
+			<ul class="mui-table-view addtypebox">
+				<li class="mui-table-view-cell">
+					<span class="mui-pull-left">消费记录</span>
+					<span class="mui-pull-right mui-icon mui-icon-forward"></span>
+					<span class="mui-pull-right" style="color: #AAAAAA;">
+						无购物记录
+					</span>
+				</li>
+				<li class="mui-table-view-cell" tourl="coupon.html">
+					<span class="mui-pull-left">剩余优惠券</span>
+					<span class="mui-pull-right mui-icon mui-icon-forward"></span>
+					<span class="mui-pull-right">
+						1张
+					</span>
+				</li>
+			</ul>
+			<!--会员卡信息-->
+			<ul class="mui-table-view addtypebox">
+				<li class="mui-table-view-cell">
+					<span class="mui-pull-left">补充会员信息</span>
+					<span class="mui-pull-right mui-icon mui-icon-forward"></span>
+					<span class="mui-pull-right" style="color: #AAAAAA;">
+						点击可编辑
+					</span>
+				</li>
+			</ul>
+			<button id="share" type="button" class="mui-btn mui-btn-danger">发送消息</button>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				document.getElementById("share").addEventListener('tap', function(e) {
+					view.AppCreateWindow("chat-im.html");
+				});
+				//主列表点击事件
+				mui('body').on('tap', '.addtypebox', function() {
+					if(this.getAttribute('tourl') == "null" || this.getAttribute('tourl') == "") {
+
+					} else {
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				mui('body').on('tap', '.memberremark', function() {
+					if(this.getAttribute('tourl') == "null" || this.getAttribute('tourl') == "") {
+
+					} else {
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				mui('body').on('tap', '.mui-table-view-cell', function() {
+					if(this.getAttribute('tourl') == "null" || this.getAttribute('tourl') == "") {
+
+					} else {
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

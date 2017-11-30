@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!--标准mui.css-->
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<!--App自定义的css-->
+		<!--<link rel="stylesheet" type="text/css" href="../css/app.css"/>-->
+		<style type="text/css">
+			.mui-table-view-cell.mui-collapse .mui-collapse-content-one {
+				margin: 11px -15px -11px;
+				padding: 8px 15px;
+				background: #fff;
+			}
+			
+			.mui-table-view-cell.mui-collapse .mui-collapse-content-two {
+				margin: 11px -15px -11px;
+				padding: 8px 15px;
+				background: #fff;
+			}
+			
+			.mui-table-view-cell.mui-active {
+				background-color: #fff;
+			}
+			
+			.mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell {
+				padding-left: 15px;
+			}
+			
+			.mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell:after {
+				left: 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">折叠面板</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-collapse">
+					<a class="mui-navigate-right" href="#">
+						<h4>精品童衣</h4></a>
+					<div class="mui-collapse-content">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">衬衫</a>
+								<div class="mui-collapse-content-one" style="display: none;">
+									<ul class="mui-table-view">
+										<li class="mui-table-view-cell mui-collapse">
+											<a class="mui-navigate-right fold-two" href="#">小寸衫</a>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">运动上衣</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">T恤</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">冲锋衣</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">裙子</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">小西服</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">卫衣</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">风衣</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">针织衫</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">羽绒服</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">夹克</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">自营童衣</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-collapse">
+					<a class="mui-navigate-right" href="#">
+						<h4>时尚童裤</h4></a>
+					<div class="mui-collapse-content">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">运动裤</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">牛仔裤</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">休闲裤</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">亲子装</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">西裤</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">短裤</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">喇叭裤</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">自营童裤</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-collapse">
+					<a class="mui-navigate-right" href="#">
+						<h4>潮流童鞋</h4></a>
+					<div class="mui-collapse-content">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">运动鞋</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">帆布鞋</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">皮鞋</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">凉鞋</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">学步鞋</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">雨鞋</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">亲子鞋</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">自营童鞋</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-collapse">
+					<a class="mui-navigate-right" href="#">
+						<h4>儿童配件</h4></a>
+					<div class="mui-collapse-content">
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">儿童帽子</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">儿童袜子</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">儿童眼镜</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">儿童书包</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">儿童背心</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">打底裤</a>
+							</li>
+							<li class="mui-table-view-cell mui-collapse">
+								<a class="mui-navigate-right fold-one" href="#">家居服</a>
+							</li>
+						</ul>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script>
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+
+			var c = true;
+			mui(".mui-content").on('tap', '.fold-one', function() {
+				if(c == true) {
+					this.parentNode.childNodes[3].style.display = "block";
+					c = false;
+				} else {
+					this.parentNode.childNodes[3].style.display = "none";
+					c = true;
+				}
+
+			})
+			var d = true;
+			mui(".mui-content").on('tap', '.fold-two', function() {
+				if(d == true) {
+					this.parentNode.childNodes[3].style.display = "block";
+					d = false;
+				} else {
+					this.parentNode.childNodes[3].style.display = "none";
+					d = true;
+				}
+
+			})
+		</script>
+	</body>
+
+</html>

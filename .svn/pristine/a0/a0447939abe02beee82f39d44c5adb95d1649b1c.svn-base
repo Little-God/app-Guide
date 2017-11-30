@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			#bcid {
+				width: 100%;
+				height: 480px;
+				background: #000000;
+				/*z-index: 50;*/
+				padding: 0px;
+				margin: 0px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title" style="color: #333333;">扫一扫</h1>
+		</header>
+		<div class="mui-content">
+			<div id="bcid">
+
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			//barcode模块
+			var parentView = null;
+			mui.init({
+				beforeback: function() {
+					clearView();
+				}
+			});
+			var tipsTxtView = null;
+			var inputTxtView = null;
+			var sanType = 1;
+			mui.plusReady(function() {
+				//				var height = plus.screen.resolutionHeight*plus.screen.scale;
+				//			    console.log("当前屏幕高度:"+height);
+				//			    console.log(plus.screen.resolutionHeight+"px");
+				//			    document.getElementById("bcid").style.height=plus.screen.resolutionHeight+"px";
+				//			    document.getElementById("bcid").style.height=document.body.offsetHeight+"px";
+				parentView = plus.webview.currentWebview().opener();
+				startRecognize();
+				console.log(parentView.id);
+				//页面扫描成功之后跳转
+			});
+			var scan = null;
+
+			function onmarked(type, result) {
+				var text = '未知: ';
+				switch(type) {
+					case plus.barcode.QR:
+						text = 'QR: ';
+						break;
+					case plus.barcode.CODE39:
+						text = 'CODE39: ';
+						break;
+					case plus.barcode.CODE128:
+						text = 'CODE128: ';
+						break;
+				}
+				scan.cancel();
+				var btnArray = ['取消', '确定'];
+				mui.confirm('扫描识别' + result + '，确认？', 'Hello MUI', btnArray, function(e) {
+					if(e.index == 1) {
+						JumpView(result);
+					}else{
+						scan.start();
+					}
+				})
+			}
+
+			function startRecognize() {
+				scan = new plus.barcode.Barcode('bcid');
+				scan.onmarked = onmarked;
+				startScan();
+				createView();
+			}
+
+			function startScan() {
+				scan.start();
+			}
+
+			function createView() {
+				tipsTxtView = new plus.nativeObj.View('actiontips', {
+					top: '56px',
+					left: '0px',
+					height: '20px',
+					width: '100%'
+				}); // 创建原生View控件
+				tipsTxtView.drawText('将条码放入框内，即可自动扫描', {}, {
+					size: '14px',
+					color: '#ffffff'
+				}); // 绘制文本
+				tipsTxtView.show();
+
+				inputTxtView = new plus.nativeObj.View('inputips', {
+					top: '420px',
+					left: '0px',
+					height: '20px',
+					width: '100%'
+				}); // 创建原生View控件
+				inputTxtView.drawText('无法识别？手动输入', {}, {
+					size: '14px',
+					color: '#ffffff'
+				}); // 绘制文本
+				inputTxtView.addEventListener("click", InputClick, false); // 监听原生无法输入View控件click事件
+				inputTxtView.show();
+			}
+			// 监听无法输入事件函数
+			function InputClick(e) {
+				console.log("点击无法输入原生控件：" + JSON.stringify(e));
+				var btnArray = ['取消', '确定'];
+				mui.prompt('请先输入条码数字', '', "温馨提示", btnArray, function(e) {
+					if(e.index == 1) {
+						JumpView(e.value);
+					}
+				});
+			}
+			// 销毁原生View控件
+			function clearView(e) {
+				tipsTxtView.clear();
+				inputTxtView.clear();
+				scan.close();
+			}
+
+			function JumpView(barcode) {
+				console.log("扫描获取确认值："+barcode);
+				if(parentView.id== 'delivery.html') {
+					parentView.evalJS("setDeliverySn('" + barcode + "')");
+				}
+				clearView();
+				mui.back();
+			}
+		</script>
+	</body>
+
+</html>

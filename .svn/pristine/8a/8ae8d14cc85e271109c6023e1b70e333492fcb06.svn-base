@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style>
+			.mui-media-body {
+				line-height: 42px;
+			}
+			
+			.mui-media img {
+				border-radius: 22px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cl-orang"></span><span class="vipitem orange mui-action-back backsize cl-orang">返回</span>
+			<h1 class="mui-title bold">选择导购</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<div class="mui-input-row mui-search  mui-content-padded">
+				<input type="search" class="mui-input-clear" placeholder="搜索">
+			</div>
+			<ul class="mui-table-view" id="guideData">
+				<!--<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;" class="">
+						<img class="mui-media-object mui-pull-left" src="../images/psb.jpg">
+						<div class="mui-media-body">
+							幸福
+						</div>
+					</a>
+				</li>-->
+			</ul>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var view = null;
+			mui.init();
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('');
+				var uinfo = plus.storage.getItem("uinfo");
+				uarr = JSON.parse(uinfo);
+				view = new App();
+				view.AppHttpService({
+					action: 'Guide/guide_list',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						storeId: uarr.userBelong,
+						rp: '10'
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						mui.each(response.data, function(index, _data) {
+							document.getElementById("guideData").innerHTML += '<li data-id="' + _data['spg_id'] + '" data-name="' + _data['spg_nike_name'] + '" class="mui-table-view-cell mui-media">' +
+								'<a href="javascript:;" class="">' +
+								'<img class="mui-media-object mui-pull-left" src="' + _data['head_portrait'] + '">' +
+								'<div class="mui-media-body">' + _data['spg_nike_name'] + '</div>' +
+								'</a>' +
+								'</li>';
+						});
+					} else {
+						mui.toast(response.message);
+					}
+				});
+				//选择 返回
+				mui('.mui-table-view').on('tap', 'li', function() {
+					var guideID = this.getAttribute('data-id');
+					var guideName = this.getAttribute('data-name');
+					var praentView = plus.webview.getWebviewById("confrimOrder");
+					praentView.evalJS("getSelect('" + guideID + "','" + guideName + "','guide')");
+					mui.back();
+				});
+			});
+		</script>
+	</body>
+
+</html>

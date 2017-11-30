@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			html,body,.mui-content{height: 100%;}
+			#slider,#sliderSegmentedControl{background: #F9F9F9;margin: 0px;width: 100%;}
+			#sliderProgressBar{background: #ff5607;}
+			#sliderSegmentedControl .mui-active{color: #ff5e13;}
+			.mui-control-item{font-size: 14px;text-decoration: underline;width: 30% !important;}
+			.mui-slider-item{border: none !important;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   	<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">选择导购</h1>
+		</header>
+		<div class="mui-content">
+		    
+			<!--划动选项卡-->
+			<div id="slider" class="mui-slider" style="height: 100%;">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item mui-active" href="#item1mobile">
+							当前活动
+						</a>
+					<a class="mui-control-item" href="#item2mobile">
+							客户优惠券
+						</a>
+					<a class="mui-control-item" href="#item3mobile">
+							导购优惠券
+						</a>
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+						<!--当前活动选项卡内容-->
+						<div class="couponbox">
+							<div class="couponboxup">
+						    	<div class="titbig">满29元减5元优惠券</div>
+						    	<div class="titthin">新会员送券</div>
+						    </div>
+						    <div class="couponboxdown">
+						    	使用期限:<span class="time">2016.10.17</span>-<span class="timed">2018.10.17</span>
+						    	<div class="mui-pull-right">
+						    		选择
+						    	</div>
+							</div>
+					    </div>
+					</div>
+					<div id="item2mobile" class="mui-slider-item mui-control-content">
+						<!--客户优惠券选项卡内容-->
+						<div class="couponbox">
+							<div class="couponboxup">
+						    	<div class="titbig">满28元减5元优惠券</div>
+						    	<div class="titthin">新会员送券</div>
+						    </div>
+						    <div class="couponboxdown">
+						    	使用期限:<span class="time">2016.10.17</span>-<span class="timed">2018.10.17</span>
+						    	<div class="mui-pull-right">
+						    		选择
+						    	</div>
+							</div>
+					    </div>
+					</div>
+					<div id="item3mobile" class="mui-slider-item mui-control-content">
+						<!--导购优惠券选项卡内容-->
+						<div class="couponbox">
+							<div class="couponboxup">
+						    	<div class="titbig">满27元减5元优惠券</div>
+						    	<div class="titthin">新会员送券</div>
+						    </div>
+						    <div class="couponboxdown">
+						    	使用期限:<span class="time">2016.10.17</span>-<span class="timed">2018.10.17</span>
+						    	<div class="mui-pull-right">
+						    		选择
+						    	</div>
+							</div>
+					    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

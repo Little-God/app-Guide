@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>扫码付款</title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style>
+			body {
+				background: #d6023d;
+			}
+			
+			.paytitle {
+				color: #fff;
+				padding: 15px;
+			}
+			
+			.text-center {
+				text-align: center;
+			}
+			
+			.renovate {
+				font-size: 14px;
+				text-align: right;
+			}
+			
+			.pay-title {
+				width: 100%;
+				height: 90px;
+				padding: 23px;
+			}
+			
+			.pay-content {
+				background: #Dfdfdf;
+				height: 240px;
+			}
+			
+			.pay-title-price {
+				color: #d6023d;
+				text-align: center;
+				font-size: 26px;
+			}
+			
+			.revisepay {
+				text-align: center;
+				font-size: 14px;
+			}
+			
+			.revisepay span {
+				color: #d6023d;
+			}
+			
+			.QRcode {
+				width: 160px;
+				height: 160px;
+			}
+			
+			.changepaystyle {
+				color: #fff;
+				text-align: center;
+			}
+			
+			.QRimg {
+				margin: 0 auto;
+				width: 160px;
+				padding-top: 35px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-row paytitle">
+			<div class="mui-col-xs-4">取消</div>
+			<div class="mui-col-xs-4 text-center">收款</div>
+			<div class="mui-col-xs-4 renovate">刷新支付结果</div>
+		</div>
+		<div class="mui-content" style="width: 90%;height: 330px;margin: 20px auto;">
+			<div class="pay-title">
+				<p class="pay-title-price">￥108.00</p>
+				<p class="revisepay">实际应收，<span>改价</span></p>
+			</div>
+			<div class="pay-content">
+				<div class="QRimg"><img src="../images/QRcode.jpg" class="QRcode" /></div>
+			</div>
+		</div>
+		<p class="changepaystyle">支付宝支付，更换</p>
+
+		<!--修改价格弹出框-->
+		<div class="setpricebox">
+			<div class="setprice">
+				<dl>
+					<dd>修改订单价格</dd>
+					<dd>订单原价：￥<span class="oldprice">0.00</span></dd>
+					<dd>改后价格：￥<span class="newprice">0.00</span></dd>
+				</dl>
+				<div class="conditionset">
+					<span placeholder="请输入修改的价格" unit="元">按金额修改</span><span placeholder="请输入修折扣" unit="折">按折扣修改</span>
+				</div>
+				<div class="setinputbox">
+					<input type="text" name="setbox" id="setbox" value="" placeholder="请输入修改的价格" />
+					<span style="border-left: 1px solid #A3A3A3;height: 20px;display: inline-block;position: relative;top: 5px;"></span>
+					<span class="unit">
+		    				元
+		    			</span>
+				</div>
+				<div class="setbuttom">
+					<div class="mui-flex">
+						<div class="mui-flex1 qx">
+							取消
+						</div>
+						<div class="" style="height: 35px;width: 1px;border-left: 1px solid #CCCCCC;"></div>
+						<div class="mui-flex1">
+							确定
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--支付方式弹出框-->
+		<div class="mui-popup mui-popup-in" style="display:none">
+			<div class="mui-popup-inner">
+				<div class="mui-popup-title">请选择支付方式</div>
+				<div class="mui-popup-text">
+					<ul class="mui-table-view mui-table-view-radio">
+						<li class="mui-table-view-cell mui-media removepadd">
+							<a class="mui-navigate-right">
+								<img class="mui-media-object mui-pull-left" src="../images/unionpay.png">
+								<div class="mui-media-body  mui-row">
+									<div class="mui-pull-left mui-col-xs-4">现金支付</div><br>
+									<p class="mui-ellipsis mui-col-xs- mui-pull-left">使用门店pos机收银</p>
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media removepadd">
+							<a class="mui-navigate-right">
+								<img class="mui-media-object mui-pull-left" src="../images/weipay.png">
+								<div class="mui-media-body">
+									<div class="mui-pull-left">微信支付</div>
+									<p class="mui-ellipsis mui-col-xs-10 mui-pull-left">使用微信扫描二维码支付</p>
+								</div>
+							</a>
+						</li>
+						<li class="mui-table-view-cell mui-media removepadd">
+							<a class="mui-navigate-right">
+								<img class="mui-media-object mui-pull-left" src="../images/alypay.png">
+								<div class="mui-media-body">
+									<div class="mui-pull-left">支付宝支付</div>
+									<p class="mui-ellipsis mui-col-xs-11 mui-pull-left">使用支付宝扫描二维码支付</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="mui-popup-buttons">
+				<span class="mui-popup-button" id="paycancel">取消</span>
+				<span class="mui-popup-button mui-popup-button-bold">確定</span>
+			</div>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script type="text/javascript">
+		//		改价弹出框
+		var revisepay = document.getElementsByClassName("setpricebox")[0];
+		document.getElementsByClassName("revisepay")[0].onclick = function() {
+			revisepay.style.display = "block";
+		}
+		document.getElementsByClassName("qx")[0].onclick = function() {
+			revisepay.style.display = "none";
+		}
+
+		//		更换支付方式
+		var paystyle = document.getElementsByClassName("mui-popup-in")[0];
+		document.getElementsByClassName("changepaystyle")[0].onclick = function() {
+			paystyle.style.display = "block";
+		}
+		document.getElementById("paycancel").onclick = function() {
+			paystyle.style.display = "none";
+		}
+
+		//		点击刷新支付结果
+		document.getElementsByClassName("renovate")[0].addEventListener('tap', function() {
+			mui.toast('正在更新支付结果');
+			setTimeout(function(){mui.toast('微信未支付');},2000)
+		});
+	</script>
+
+</html>

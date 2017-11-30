@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>会员</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style>
+			#segmentedControl {
+				width: 90%;
+				margin: auto;
+				text-align: center;
+			}
+			
+			.df-nav-ico {
+				color: #ff821c;
+				position: absolute;
+				right: 20px;
+				top: 12px;
+				font-size: 18px;
+			}
+			
+			.mui-segmented-control-positive.mui-segmented-control-inverted .mui-control-item.mui-active {
+				border-bottom: 2px solid #ff821c;
+				color: #ff821c;
+				font-weight: bold;
+			}
+			
+			.df-table-statistics {
+				padding: 10px 15px;
+				background: white;
+				border: 1px solid lightgrey
+			}
+			
+			.df-table-statistics-cell {
+				-webkit-box-flex: 1;
+				width: 0;
+				text-align: center;
+			}
+			
+			.df-table-statistics-action {
+				margin: 20px 10px;
+				font-size: 20px;
+			}
+			
+			.iconleft {
+				color: #ff821c;
+				font-size: 24px;
+				margin: 0 10px;
+				line-height: 40px;
+			}
+			
+			.df-card-nav {
+				background-color: #efeff4;
+				background-image: url(../images/my.png);
+				background-repeat: no-repeat;
+				position: relative;
+				height:33px;
+				width: 100%;
+				background-size: 45% 105%;
+			}
+			
+			.df-card-nav-item {
+				color: #999;
+				display: inline-block;
+				width: 50px;
+				height: 29px; 
+				line-height: 33px;
+				padding-left: 20px;
+			}
+			
+			#searchbox {
+				text-align: center;
+			}
+			
+			#search {
+				background: white;
+				width: 96%;
+				margin: 8px 2%;
+				height: 28px;
+				font-size: 12px;
+				text-align: left;
+				padding: 5px 13px;
+			}
+			
+			#search::-webkit-input-placeholder,
+			.storename {
+				text-align: center;
+			}
+			
+			.mui-control-content {
+				height: 380px;
+			}
+			.member-content:last-child{
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<div id="segmentedControl" class="mui-segmented-control mui-segmented-control-inverted mui-segmented-control-positive">
+				<a class="mui-control-item mui-active" href="#itemMember">会员</a>
+				<a class="mui-control-item" href="#itemLabel">标签</a>
+				<a class="mui-control-item" href="#itemMsg">消息</a>
+			</div>
+			<span id="labelAction" class="iconfont icon-iconbangzu df-nav-ico"></span>
+		</header>
+		<div class="mui-content">
+			<div id="itemMember" class="mui-control-content mui-active">
+				<div id="scroll" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="mui-card">
+							<div class="mui-card-content">
+								<ul class="mui-table-view mui-table-view-chevron">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right">
+											<span class="iconfont icon-mofabang mui-pull-left iconleft"></span>
+											<div class="mui-media-body">
+												会员筛选
+												<p class="mui-ellipsis">会员人数过多？不知道怎么管理？试试筛选.</p>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="mui-card">
+							<div class="df-card-nav">
+								<a class="df-card-nav-item" style="color: #333;" href="#allmemberData"><span>全部</span></a>
+								<a class="df-card-nav-item" href="#mymemberData"><span>我的</span></a>
+							</div>
+							<div class="mui-card-content">
+								<ul class="df-table-statistics mui-flex">
+									<li class="df-table-statistics-cell">
+										<h4>34</h4>
+										<p>会员总数</p>
+									</li>
+									<li class="df-table-statistics-action">
+										<span>=</span>
+									</li>
+									<li class="df-table-statistics-cell">
+										<h4>11</h4>
+										<p>开单</p>
+									</li>
+									<li class="df-table-statistics-action">
+										<span>+</span>
+									</li>
+									<li class="df-table-statistics-cell">
+										<h4>23</h4>
+										<p>未开单</p>
+									</li>
+									<li class="df-table-statistics-action">
+										<p style="font-size: 24px">|</p>
+									</li>
+									<li class="df-table-statistics-cell">
+										<h4>7</h4>
+										<p>售后</p>
+									</li>
+								</ul>
+								<div style="background-color: #DCDCDC;">
+									<input id="search" type="search" class="mui-input-clear" placeholder="使用微信昵称、备注姓名、手机号、会员卡号搜索会员">
+								</div>
+								<ul class="mui-table-view member-content" id="allmemberData">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right">
+											<img class="mui-media-object mui-pull-left" src="../images/psb.jpg">
+											<div class="mui-media-body">
+												李刚<span class="iconfont icon-duigoutuijian"></span><span class="iconfont icon-icon61"></span>
+												<p class="mui-ellipsis">黄金会员|0积分</p>
+											</div>
+										</a>
+									</li>
+								</ul>
+								<ul class="mui-table-view member-content" id="mymemberData">
+									<li class="mui-table-view-cell mui-media">
+										<a class="mui-navigate-right">
+											<img class="mui-media-object mui-pull-left" src="../images/psb.jpg">
+											<div class="mui-media-body">
+												小黄人<span class="iconfont icon-duigoutuijian"></span><span class="iconfont icon-icon61"></span>
+												<p class="mui-ellipsis">王者会员|1亿积分</p>
+											</div>
+										</a>
+									</li>
+								</ul>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="itemLabel" class="mui-control-content">
+				<ul id="labelData" class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-left mui-disabled">
+							<a class="mui-btn mui-btn-red">删除</a>
+						</div>
+						<div class="mui-slider-right mui-disabled">
+							<a class="mui-btn mui-btn-red">删除</a>
+						</div>
+						<div class="mui-slider-handle">
+							<a class="mui-navigate-right">
+								<span class="mui-media-object mui-pull-left iconfont icon-biaoqian3  cl82c458 ft40"></span>
+								<div class="mui-media-body" style="line-height: 44px;">
+									CBD（3）
+								</div>
+							</a>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-left mui-disabled">
+							<a class="mui-btn mui-btn-red">删除</a>
+						</div>
+						<div class="mui-slider-right mui-disabled">
+							<a class="mui-btn mui-btn-red">删除</a>
+						</div>
+						<div class="mui-slider-handle">
+							<a class="mui-navigate-right">
+								<span class="mui-media-object mui-pull-left iconfont icon-biaoqian3  cl82c458 ft40"></span>
+								<div class="mui-media-body" style="line-height: 44px;">
+									CBD（3）
+								</div>
+							</a>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-left mui-disabled">
+							<a class="mui-btn mui-btn-red">删除</a>
+						</div>
+						<div class="mui-slider-right mui-disabled">
+							<a class="mui-btn mui-btn-red">删除</a>
+						</div>
+						<div class="mui-slider-handle">
+							<a class="mui-navigate-right">
+								<span class="mui-media-object mui-pull-left iconfont icon-biaoqian3  cl82c458 ft40"></span>
+								<div class="mui-media-body" style="line-height: 44px;">
+									CBD（3）
+								</div>
+							</a>
+						</div>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="mui-slider-left mui-disabled">
+							<a class="mui-btn mui-btn-red">删除</a>
+						</div>
+						<div class="mui-slider-right mui-disabled">
+							<a class="mui-btn mui-btn-red">删除</a>
+						</div>
+						<div class="mui-slider-handle">
+							<a class="mui-navigate-right">
+								<span class="mui-media-object mui-pull-left iconfont icon-biaoqian3  cl82c458 ft40"></span>
+								<div class="mui-media-body" style="line-height: 44px;">
+									CBD（3）
+								</div>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div id="itemMsg" class="mui-control-content">
+				<div class="mui-card">
+					<div class="mui-card-content">
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell mui-media" id="msgMass">
+								<a class="mui-navigate-right">
+									<span class="iconfont icon-huiyuanqunfa mui-pull-left iconleft"></span>
+									<div class="mui-media-body">
+										会员群发
+										<p class="mui-ellipsis">批量给我的会员发消息</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="mui-card">
+					<div class="mui-card-content">
+						<ul class="mui-table-view mui-table-view-chevron" id="msgData">
+							<li class="mui-table-view-cell mui-media">
+								<a class="mui-navigate-right">
+									<img class="mui-media-object mui-pull-left" src="../images/psb.jpg">
+									<div class="mui-media-body">
+										余梅<span class="iconfont icon-duigoutuijian"></span><span class="iconfont icon-icon61"></span>
+										<span class="mui-h5 mui-pull-right">2017/05/06 12:25</span>
+										<p class="mui-ellipsis">发送图片</p>
+									</div>
+								</a>
+							</li>
+							<li class="mui-table-view-cell mui-media">
+								<a class="mui-navigate-right">
+									<img class="mui-media-object mui-pull-left" src="../images/psb.jpg">
+									<div class="mui-media-body">
+										余梅<span class="iconfont icon-duigoutuijian"></span><span class="iconfont icon-icon61"></span>
+										<p class="mui-ellipsis">发送图片</p>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var view, uarr, currpage = '1';
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				view = new App();
+				var uinfo = plus.storage.getItem("uinfo");
+				uarr = JSON.parse(uinfo);
+				loadMember("", currpage, 6);
+				loadlabel();
+			});
+			//顶部标签切换操作图标切换
+			mui('#segmentedControl').on('tap', '.mui-control-item', function() {
+				var labelCur = this.getAttribute("href");
+				if(labelCur == '#itemMsg') {;
+				}
+			});
+			//会员列表的点击世界
+			mui('#memberData').on('tap', 'li', function() {
+				var userId = this.getAttribute('data-userId');
+				var extras = {
+					userId: userId
+				};
+				view.AppCreateWindow("memberInfo.html", null, null, extras);
+			});
+			//消息列表
+			mui('#msgData').on('tap', 'li', function() {
+				var goodId = this.getAttribute('data-goodId');
+				var extras = {
+					goodId: goodId
+				};
+				view.AppCreateWindow("goodInfo.html", null, null, extras);
+			});
+			//标签列表
+			mui('#labelData').on('tap', 'li', function() {
+				var goodId = this.getAttribute('data-goodId');
+				var extras = {
+					goodId: goodId
+				};
+				view.AppCreateWindow("goodInfo.html", null, null, extras);
+			});
+            document.getElementById("msgMass").addEventListener('tap', function(e) {
+				view.AppCreateWindow("msgMassType.html");
+			});
+			function loadMember(keywords, currpage, rp) {
+				view.AppHttpService({
+					action: 'Member/lists',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+						roleType: uarr.userBelong,
+						keywords: keywords,
+						currpage: currpage,
+						rp: rp,
+					}
+				}, function(response) {
+					if(response.code == '201') {
+						//							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+					} else if(response.code == '200') {
+						if(currpage == '1') {
+							document.getElementById("memberData").innerHTML = "";
+		                }
+						currpage++;
+						mui.each(response.data.list, function(index, _data) {
+							document.getElementById("memberData").innerHTML += '<li data-userId="' + _data['user_id'] + '" class="mui-table-view-cell mui-media">' +
+								'<a class="mui-navigate-right">' +
+								'<img class="mui-media-object mui-pull-left" src="' + _data['head_portrait'] + '">' +
+								'<div class="mui-media-body">' +
+								'' + _data['user_name'] + '<span class="iconfont icon-duigoutuijian"></span><span class="iconfont icon-icon61"></span>' +
+								'<p class="mui-ellipsis">' + _data['exp'] + '|' + _data['integral_total'] + '积分</p>' +
+								'</div>' +
+								'</a>' +
+								'</li>';
+						});
+						//							mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+					}
+				});
+			}
+
+			function loadlabel() {
+				view.AppHttpService({
+					action: 'Member/label_list',
+					data: {
+						guideId: uarr.guideId,
+						userToken: uarr.userToken,
+					}
+				}, function(response) {
+					if(response.code == '200') {
+						mui.each(response.data.list, function(index, _data) {
+							document.getElementById("labelData").innerHTML += '<li class="mui-table-view-cell">' +
+								'<div class="mui-slider-left mui-disabled">' +
+								'<a class="mui-btn mui-btn-red">删除</a>' +
+								'</div>' +
+								'<div class="mui-slider-right mui-disabled">' +
+								'<a class="mui-btn mui-btn-red">删除</a>' +
+								'</div>' +
+								'<div class="mui-slider-handle">' +
+								'<a class="mui-navigate-right">' +
+								'<span class="mui-media-object mui-pull-left iconfont icon-biaoqian3  cl82c458 ft40"></span>' +
+								'<div class="mui-media-body" style="line-height: 44px;">CBD（3）' +
+								'</div>' +
+								'</a>' +
+								'</div>' +
+								'</li>';
+						});
+						//mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+					}
+				});
+			}
+			
+			mui('.df-card-nav').on('tap', '.df-card-nav-item', function() {
+				var href = this.getAttribute('href').split("#")[1];
+				if(href=="allmemberData"){
+					this.parentNode.style.backgroundImage="url(../images/all.png)";
+					clearclass();
+					this.style.color="#333";
+					document.getElementById(href).style.display="block";
+					document.getElementById("mymemberData").style.display="none";
+				}else{
+					this.parentNode.style.backgroundImage="url(../images/my.png)";
+					clearclass();
+					this.style.color="#333";
+					document.getElementById(href).style.display="block";
+					document.getElementById("allmemberData").style.display="none";
+				}
+			});
+			function clearclass(){
+				var it = document.getElementsByClassName("df-card-nav-item");
+				for(var i=0;i<it.length;i++){
+					it[i].style.color="#999";
+				}
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			html,
+			body,
+			.mui-content {
+				height: 100%;
+			}
+			
+			.username {
+				text-align: center;
+				padding: 40px 0 0px 0;
+				font-size: 14px;
+			}
+			
+			.storename {
+				color: #AAAAAA;
+				font-size: 14px;
+			}
+			
+			#imgcode {
+				width: 100%;
+			}
+			
+			.code {
+				margin-bottom: 20px;
+			}
+			
+			.other {
+				display: inline-block;
+				height: 30px;
+				border-radius: 15px;
+				background: red;
+				padding: 0 10px;
+				line-height: 30px;
+				color: white;
+			}
+			
+			.mui-backdrop {
+				display: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+			<h1 class="mui-title bold">邀请会员</h1>
+			<span class="iconfont icon-fenxiang1 mui-pull-right" style="font-size: 26px;margin-top: 10px;" tourl=""></span>
+		</header>
+		<div class="mui-content"></div>
+		<!--分享遮罩层-->
+		<div class="mui-backdrop">
+			<div class="sharebox">
+				<div class="bgbox">
+					<p class="mui-text-center">分享</p>
+					<ul class="shareicon">
+						<li>
+							<div class="iconfont icon-weixin" style="background: #09bb07;">
+
+							</div>
+							微信好友
+						</li>
+						<li>
+							<div class="iconfont icon-pengyouquan" style="background: #09bb07;">
+
+							</div>
+							朋友圈
+						</li>
+						<li>
+							<div class="iconfont icon-qq" style="background: #4a90e2;">
+
+							</div>
+							QQ好友
+						</li>
+						<li>
+							<div class="iconfont icon-kongjian" style="background: #f3d82b;">
+
+							</div>
+							QQ空间
+						</li>
+						<li>
+							<div class="iconfont icon-lianjie" style="background: #fb6622;">
+
+							</div>
+							复制链接
+						</li>
+						<li>
+							<div class="iconfont icon-102" style="background:#4a90e2;">
+
+							</div>
+							我的客户
+						</li>
+					</ul>
+				</div>
+				<button type="button" class="mui-btn shareqx">取消</button>
+			</div>
+
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			var abc = false;
+			mui('body').on('tap', '.icon-fenxiang1', function() {
+				$('.mui-backdrop').fadeIn();
+				$('.sharebox').animate({ 'bottom': '0px' }, 300);
+			});
+			$('.bgbox').click(function() {
+				abc = true;
+			});
+			$('.mui-backdrop').on('click', function() {
+				if(abc == false) {
+					$('.mui-backdrop').fadeOut();
+					$('.sharebox').animate({ 'bottom': '-300px' }, 300);
+				} else {
+					abc = false;
+				}
+			});
+			mui.plusReady(function() {
+				var self = plus.webview.currentWebview();
+				var baiduWV = plus.webview.create("http://www.juketz.com/vmall.php/Store/qrCodeOfSales?salesId=4", "baidu", {
+					top: "44px",
+					bottom: 0
+				});
+				self.append(baiduWV);
+
+				var oldback = mui.back;
+				mui.back = function() {
+					if(!$('.mui-backdrop').is(":hidden")) {
+						$('.mui-backdrop').fadeOut();
+						$('.sharebox').animate({ 'bottom': '-300px' }, 300);
+					} else {
+						oldback();
+					}
+				};
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.pond-content-padded {
+				margin-left: 60px !important;
+			}
+			
+			.pond-content-padded label~input:before {
+				right: 15px;
+				content: '\e583';
+				font-family: Muiicons;
+				font-size: inherit;
+				line-height: 1;
+				position: absolute;
+				top: 50%;
+				display: inline-block;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				text-decoration: none;
+				color: #bbb;
+				-webkit-font-smoothing: antialiased;
+			}
+			
+			.icon-barcode {
+				position: absolute;
+				right: 0px;
+				font-size: 30px;
+				color: #2c91ff;
+				line-height: 40px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">发布商品-上传图片</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="nextStep">下一步</button>
+		</header>
+		<div class="mui-content" id="stockData">
+			<!--h4-->
+			<!--<div class="mui-card">
+				<div class="mui-card-header mui-card-media">
+					<img src="../images/logo.png">
+					<div class="mui-media-body">
+						货号：ADK56-1
+						<p>颜色：蓝色12</p>
+					</div>
+				</div>
+				<div class="mui-card-content">
+					<form class="mui-input-group ">
+					<div class="mui-content-padded">
+						<div class="mui-input-row pond-content-padded">
+							<label>尺码</label>
+							<input type="text" name="goodSize" class="mui-input-clear" placeholder="请输入尺码" data-input-clear="5">
+						</div>
+						<div class="mui-input-row mui-password">
+							<label>条码</label>
+							<input type="text" name="goodsBarcode" class="mui-input-clear" placeholder="请输入条码" data-input-clear="5"><span class="iconfont icon-tiaoxingma icon-barcode"></span>
+						</div>
+						<div class="mui-input-row pond-content-padded">
+							<label>库存</label>
+							<input type="text" class="mui-input-clear" name="goodAmount" placeholder="请输入商品的库存" data-input-clear="5">
+						</div>
+					</div>
+				</form>
+				</div>
+			</div>-->
+
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/main.js"></script>
+		<script type="text/javascript">
+			var view = null,
+				self, obj;
+			mui.init({});
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('');
+				view = new App();
+				self = plus.webview.currentWebview();
+				initStockData();
+
+			});
+			document.getElementById("nextStep").addEventListener('tap', function(e) {
+				var sizes = document.getElementsByName("goodSize"); 
+				console.log("当前货号个数：" + sizes.length);
+				var self = plus.webview.currentWebview();
+				goodinfo = self.goodinfo;
+				var stocks = new Array();
+				var j = 0,
+					k = 0;
+				c = 0;
+				var skuSize = new Array();
+				for(i = 0; i < sizes.length; i++) {
+					var stock = sizes[i].parentNode.parentNode;
+					console.log(stock.parentNode.innerHTML);
+					console.log("货号:" + stock.getAttribute("data-stock"));
+					if(i > 0) {
+						c = i - 1;
+						var prestock = sizes[c].parentNode.parentNode;
+						if((stock.getAttribute("data-color")) != (prestock.getAttribute("data-color"))) {
+							j++;
+							k = 0;
+						}
+					}
+					stocks[j] = {
+						"stocksSku": stock.getAttribute("data-stock"),
+						"color": stock.getAttribute("data-color"),
+						"colorValue": stock.getAttribute("data-colorc"),
+						"goodsPrice": goodinfo.goodsPrice,
+						
+						"skuImg": stock.getAttribute("data-img"),
+						"skuSize": ""
+					}
+					skuSize[k] = {
+						"size": document.getElementsByName("goodSize")[i].innerText,
+						"bar_code": document.getElementsByName("goodsBarcode")[i].value,
+						"amount": document.getElementsByName("goodAmount")[i].value,
+						"goodsTruePrice": stock.getAttribute("data-price"),
+					}
+					stocks[j].skuSize = skuSize;
+					k++;
+				}
+				goodinfo.specifications = stocks;
+				var extras = {
+					goodinfo: goodinfo
+				};
+				view.AppCreateWindow("addGoodS4.html", null, null, extras);
+			});
+			mui(".mui-content").on("tap", "h5", function() {
+				obj = this;
+				var cid = self.goodinfo.classId;
+				var extras = {
+					cateId: cid,
+				};
+				view.AppCreateWindow("cateSize.html", null, null, extras);
+			});
+			mui('.mui-content').on('tap', '.icon-barcode', function() {
+				obj = this;
+				view.AppCreateWindow("../scan/simpleScan.html");
+			});
+
+			function initStockData() {
+				mui.each(self.stock, function(index, _data) {
+					console.log(JSON.stringify(_data));
+					document.getElementById('stockData').innerHTML += '<div class="mui-card">' +
+						'<div class="mui-card-header mui-card-media">' +
+						'<img src="' + _data['skuImg'] + '">' +
+						'<div class="mui-media-body">货号：' + _data['stocksSku'] + ' <p> 颜色：' + _data['color'] + ' </p>' +
+						'</div>' +
+						'</div>' +
+						'<div class="mui-card-content">' +
+						'<form class="mui-input-group" data-stock="' + _data['stocksSku'] + '"  data-color="' + _data['color'] + '"  data-colorc="' + _data['colorValue'] + '"  data-price="' + _data['goodsTruePrice'] + '" data-img="' + _data['skuImg'] + '"">' +
+						'<div class="mui-content-padded">' +
+						'<div class="mui-input-row pond-content-padded">' +
+						'<label>尺码</label>' +
+						'<h5 name="goodSize">请选择尺码</h5>' +
+						'</div>' +
+						'<div class="mui-input-row mui-password">' +
+						'<label>条码</label>' +
+						'<input type="text" name="goodsBarcode" class="mui-input-clear" placeholder="请输入条码" data-input-clear="5"><span class="iconfont icon-tiaoxingma icon-barcode"></span>' +
+						'</div>' +
+						'<div class="mui-input-row pond-content-padded">' +
+						'<label>库存</label>' +
+						'<input type="text" class="mui-input-clear" name="goodAmount" placeholder="请输入商品的库存" value="5" data-input-clear="5">' +
+						'</div>' +
+						'</div>' +
+						'</form>' +
+						'</div>' +
+						'</div>';
+				});
+			}
+
+			function getSelect(values, type) {
+				console.log(values + ";" + type)
+				if(type == 'selectsize') {
+					var Html = "";
+					var strs = new Array(); //定义一数组 
+					strs = values.split(","); //字符分割 
+					mui.each(strs, function(index, _data) {
+						console.log(_data);
+						Html += '<div class="mui-input-row pond-content-padded">' +
+							'<label>尺码</label>' +
+							'<h5 name="goodSize">' + _data + '</h5>' +
+							'</div>' +
+							'<div class="mui-input-row mui-password">' +
+							'<label>条码</label>' +
+							'<input type="text" name="goodsBarcode" class="mui-input-clear" placeholder="请输入条码" data-input-clear="5"><span class="iconfont icon-tiaoxingma icon-barcode"></span>' +
+							'</div>' +
+							'<div class="mui-input-row pond-content-padded">' +
+							'<label>库存</label>' +
+							'<input type="text" class="mui-input-clear" name="goodAmount" placeholder="请输入商品的库存" data-input-clear="5">' +
+							'</div>';
+					});
+					console.log(obj.parentNode.parentNode.innerHTML);
+					obj.parentNode.parentNode.parentNode.innerHTML = Html;
+				} else if(type == 'barcode') {
+					console.log(values);
+					obj.previousSibling.value = values;
+				}
+
+			}
+		</script>
+	</body>
+
+</html>

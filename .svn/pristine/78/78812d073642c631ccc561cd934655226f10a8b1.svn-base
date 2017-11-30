@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			html,
+			body,
+			.mui-content {
+				height: 100%;
+				background: #fc0 url(https://qncdn.qiakr.com/mobile/numberbg.jpg) no-repeat;
+				background-size: 100% 100%;
+			}
+			
+			.storename {
+				color: #AAAAAA;
+				font-size: 14px;
+			}
+			
+			#imgcode {
+				width: 100%;
+				height: auto;
+				margin-top: 10px;
+			}
+			
+			.other {
+				display: inline-block;
+				border-radius: 15px;
+				background: red;
+				padding: 4px 15px;
+				line-height: 30px;
+				color: white;
+			}
+			
+			.mui-backdrop {
+				display: none;
+			}
+			
+			.orderinfobox {
+				width: 80%;
+				margin: 15% auto;
+				padding: 15% 15%;
+			}
+			
+			.orderinfobox .avatar {
+				position: absolute;
+				top: -30px;
+				left: 50%;
+				margin-left: -30px;
+				border: solid 2px #fff;
+			}
+			
+			.orderinfobox .uname {
+				text-align: center;
+				font-size: 14px;
+			}
+			
+			.orderinfobox .qrcode {
+				width: 100%;
+			}
+			
+			.orderinfobox .wave {
+				position: absolute;
+				bottom: -18px;
+				height: 20px;
+				background: url(https://qncdn.qiakr.com/mobile/wavebackup.png?v=2) repeat-x;
+				width: 100%;
+				left: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+			<h1 class="mui-title bold">邀请会员</h1>
+			<span class="iconfont icon-fenxiang1 mui-pull-right" style="font-size: 26px;margin-top: 10px;" tourl=""></span>
+		</header>
+		<div class="mui-content">
+			<div class="orderinfobox">
+				<img class="orderimgbox" id="userHead" src="../images/arclist/face.png" />
+				<div class="uname bold" id="userName">
+					黄瑶
+				</div>
+				<div class="storename" id="userStoreName">
+					喵果先生1号店
+				</div>
+				<div class="qrcode">
+					<img src="http://www.juketz.com/./data/two_code_short/short_qrcode_4.png" id="imgcode" />
+				</div>
+				<div style="color: #AAAAAA;text-align: center;">
+					扫一扫添加专属导购
+				</div>
+				<div class="wave"></div>
+			</div>
+			<div style="text-align: center;">
+				<div class="other">
+					更换导购
+				</div>
+			</div>
+		</div>
+
+		<!--分享遮罩层-->
+		<div class="mui-backdrop">
+			<div class="sharebox">
+				<div class="bgbox">
+					<p class="mui-text-center">分享</p>
+					<ul class="shareicon">
+						<li id="weixin" ex="WXSceneSession">
+							<div class="iconfont icon-weixin" style="background: #09bb07;">
+
+							</div>
+							微信好友
+						</li>
+						<li id="weixin" ex="WXSceneTimeline">
+							<div class="iconfont icon-pengyouquan" style="background: #09bb07;">
+
+							</div>
+							朋友圈
+						</li>
+						<li id="qq" ex="">
+							<div class="iconfont icon-qq" style="background: #4a90e2;">
+
+							</div>
+							QQ好友
+						</li>
+						<!--<li id="qq" ex="">
+							<div class="iconfont icon-kongjian" style="background: #f3d82b;">
+
+							</div>
+							QQ空间
+						</li>-->
+						<li id="copy">
+							<div class="iconfont icon-lianjie" style="background: #fb6622;">
+
+							</div>
+							复制链接
+						</li>
+						<li id="myUser">
+							<div class="iconfont icon-102" style="background:#4a90e2;">
+
+							</div>
+							我的客户
+						</li>
+					</ul>
+				</div>
+				<button type="button" class="mui-btn shareqx">取消</button>
+			</div>
+
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/main.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			var abc = false;
+			mui('body').on('tap', '.icon-fenxiang1', function() {
+				$('.mui-backdrop').fadeIn();
+				$('.sharebox').animate({ 'bottom': '0px' }, 300);
+			});
+			$('.bgbox').click(function() {
+				abc = true;
+			});
+			$('.mui-backdrop').on('click', function() {
+				if(abc == false) {
+					$('.mui-backdrop').fadeOut();
+					$('.sharebox').animate({ 'bottom': '-300px' }, 300);
+				} else {
+					abc = false;
+				}
+			});
+			//分享操作
+			var shares = {};
+			mui.plusReady(function() {
+				view = new App();
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+				console.log(uinfo);
+				document.getElementById('userHead').src = view.commodUri + uarr.userHead;
+				document.getElementById('userName').innerHTML = uarr.userName ? uarr.userName : '';
+				document.getElementById('userStoreName').innerHTML = uarr.userStoreName ? uarr.userStoreName : '';
+				document.getElementById('imgcode').src = view.commodUri + uarr.ousEwm;
+				plus.share.getServices(function(s) {
+					if(s && s.length > 0) {
+						for(var i = 0; i < s.length; i++) {
+							var t = s[i];
+							shares[t.id] = t;
+						}
+					}
+					console.log(JSON.stringify(shares));
+				}, function() {
+					console.log("获取分享服务列表失败");
+				});
+				//分享链接点击事件
+				mui('.bgbox').on('tap', 'li', function() {
+					var id = this.getAttribute('id');
+					var ex = this.getAttribute('ex');
+					if(id == "weixin" || id == "qq") {
+						var share = shares[id];
+						console.log(share);
+						if(share) {
+							if(share.authenticated) {
+								shareMessage(share, view.commodUri + "vmall.php/Store/qrCodeOfSales?salesId=" + uarr.guideId, uarr.userStoreName, uarr.userNike, "_www/images/psb.jpg", ex);
+							} else {
+								share.authorize(function() {
+									shareMessage(share, view.commodUri + "vmall.php/Store/qrCodeOfSales?salesId=" + uarr.guideId, uarr.userStoreName, uarr.userNike, "_www/images/psb.jpg", ex);
+								}, function(e) {
+									console.log("认证授权失败：" + e.code + " - " + e.message);
+								});
+							}
+						} else {
+							mui.toast("无法获取分享服务，请检查参数配置，并重新打包")
+						}
+					} else {
+
+					}
+					console.log(id);
+				});
+				//重写返回
+				var oldback = mui.back;
+				mui.back = function() {
+					if(!$('.mui-backdrop').is(":hidden")) {
+						$('.mui-backdrop').fadeOut();
+						$('.sharebox').animate({ 'bottom': '-300px' }, 300);
+					} else {
+						oldback();
+					}
+				};
+			});
+		</script>
+	</body>
+
+</html>

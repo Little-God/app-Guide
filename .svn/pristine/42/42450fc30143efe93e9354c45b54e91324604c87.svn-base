@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.icon-jia {
+				width: 20px;
+				height: 20px;
+				background: #4cd964;
+				color: white;
+				display: inline-block;
+				text-align: center;
+				border-radius: 10px;
+				line-height: 23px;
+				margin-right: 20px;
+			}
+			
+			.pond-content-padded {
+				margin-left: 60px !important;
+			}
+			
+			.pond-content-padded label~input:before {
+				right: 15px;
+				content: '\e583';
+				font-family: Muiicons;
+				font-size: inherit;
+				line-height: 1;
+				position: absolute;
+				top: 50%;
+				display: inline-block;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				text-decoration: none;
+				color: #bbb;
+				-webkit-font-smoothing: antialiased;
+			}
+			.icon-barcode{position: absolute; right: 0px; font-size:30px;color:#2c91ff;line-height:40px ;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">发布商品</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="headSearch">完成</button>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<!--商品图片-->
+			<div class="shopimg" id="goodImg">
+				<div class="addimg mui-pull-left" id="addImg">
+					<span class="iconfont icon-xiangji" style="font-size: 30px;"></span>
+				</div>
+			<!--<img src="../images/arclist/face.png" />-->
+			</div>
+			<!--商品详情-->
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>名称</label>
+					<input type="text" placeholder="建议15字以内(必填)">
+				</div>
+				<div class="mui-input-row">
+					<label>品类</label>
+					<input type="text" class="mui-input-clear" placeholder="办公桌" data-input-clear="5">
+				</div>
+				<div class="mui-input-row">
+					<label>款号</label>
+					<input type="text" class="mui-input-clear" placeholder="请输入商品的款号" data-input-clear="5">
+				</div>
+
+			</form>
+			<!--商品规格-->
+			<h5></h5>
+			<div id="goodAttrr">
+			<form class="mui-input-group " >
+				<div class="mui-content-padded">
+					<div class="mui-input-row pond-content-padded">
+						<label>货号</label>
+						<input type="text" placeholder="请输入商品货号">
+					</div>
+					<div class="mui-input-row pond-content-padded">
+						<label>尺码</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入尺码" data-input-clear="5">
+					</div>
+					<div class="mui-input-row mui-password">
+						<label>条码</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入条码" data-input-clear="5"><span class="iconfont icon-tiaoxingma icon-barcode"></span>
+					</div>
+
+					<div class="mui-input-row pond-content-padded">
+						<label>库存</label>
+						<input type="text" class="mui-input-clear" placeholder="请输入商品的库存" data-input-clear="5">
+					</div>
+				</div>
+				</form>
+			
+			</div>
+			<!--添加规格-->
+			<ul class="mui-table-view addtypebox">
+				<li class="mui-table-view-cell" id="addAttrr"><span class="iconfont icon-jia"></span><span class="addtypetxt">添加规格</span></li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			document.getElementById("addAttrr").addEventListener('tap', function(e) {
+				document.getElementById("goodAttrr").innerHTML += '<form class="mui-input-group "><div class="mui-content-padded"><div class="mui-input-row pond-content-padded">' +
+					'<label>货号</label>' +
+					'<input type="text" placeholder="请输入款号">' +
+					'</div>' +
+					'<div class="mui-input-row pond-content-padded">' +
+					'<label>尺码</label>' +
+					'<input type="text" class="mui-input-clear" placeholder="请输入尺码" data-input-clear="5">' +
+					'</div>' +
+					'<div class="mui-input-row mui-password">' +
+					'<label>条码</label>' +
+					'<input type="text" class="mui-input-clear" placeholder="请输入货号条形码" data-input-clear="5"><span class="iconfont icon-tiaoxingma icon-barcode"></span>' +
+					'</div>' +
+					'<div class="mui-input-row pond-content-padded">' +
+					'<label>库存</label>' +
+					'<input type="text" class="mui-input-clear" placeholder="请输入库存" data-input-clear="5">' +
+					'</div></div></form>';
+			});
+			/*
+				 *  @desc 添加商品图片
+				 */
+				document.getElementById("addImg").addEventListener('tap', function(e) {
+					//view.AppCreateWindow("setstore.html");
+				});
+				/*
+				 *  @desc 扫描货品条码
+				 */
+				mui('.mui-content').on('tap', '.icon-barcode', function() {
+					 this.previousSibling.value="223";
+				});
+				
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" href="../css/style.css" />
+		<style type="text/css">
+			.tou{border-radius: 15px;}
+			ul{margin: 0 !important;border: none !important;}
+			.mui-bar-footer{box-shadow: none;text-align: center;line-height: 44px;font-size: 14px;color: red;background: #f9f9f9;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   	<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">果果</h1>
+		    <span class="mui-pull-right orange confirmbtn">编辑</span>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+		    <!--账户头像信息等-->
+			    <ul class="mui-table-view ulinfo">
+				    <li class="mui-table-view-cell" >
+			        	 <div class="left mui-pull-left">
+				        	<div class="tou">
+				        		
+				        	</div>
+				        </div>
+				        <div class="right mui-pull-left">
+				        	<ul>
+				        		<li id="name">唯一<span class="iconfont icon-icon61 lj"></span></li>
+				        		<li>
+				        			<span class="vipname">普通会员</span><span class="br">|</span><span class="jifennum">0</span><span class="jifentxt">积分</span>
+				        		</li>
+				        	</ul>
+				        </div>
+				        <span class="mui-icon mui-icon-forward mui-pull-right" style="line-height: 60px;color: #cbcbd0;"></span>
+				    </li>
+				</ul>
+				<div class="mui-bar mui-bar-footer">
+					<span class="iconfont icon-liaotian1" style="font-size: 20px;position: relative;top: 2px;left: -3px;"></span>群发消息
+				</div>
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

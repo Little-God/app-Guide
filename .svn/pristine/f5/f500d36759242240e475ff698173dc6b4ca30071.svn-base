@@ -1,0 +1,154 @@
+/* ***** database.js ******
+ *
+ * Description: 成都久思微信息技术有限公司封装
+ *
+ *
+ * Authors: leeyoung
+ *
+ * Version 0.0.1
+ *
+ */
+var Pdatabase = function() {
+	var base = this;
+	/**
+	 * @description 打开或者创建数据库
+	 * @author leeyoung
+	 * @return bool //false 数据库创建失败 ;true 数据库创建成功
+	 */
+	this.getDatabase = function() {
+		return openDatabase("Pdapp", "1.0", "pondering", 10000);
+	}
+
+	/**
+	 * @description 初始化数据库
+	 * @author leeyoung
+	 * @return 
+	 */
+	var dataBase = base.getDatabase();
+	this.initialize = function() {
+		dataBase.transaction(function(tx) {
+			tx.executeSql("'drop database Pdapp");
+		});
+	}
+	/**
+	 * @description 创建数据表
+	 * @author leeyoung
+	 * @return 
+	 */
+	this.createTable = function(tableName, cols) {
+		var flag = true;
+		dataBase.transaction(function(tx) {
+			tx.executeSql(
+				"create table if not exists " + tableName + "(" + cols + ")", [],
+				function(tx, result) {
+					console.log('创建' + tableName + '表成功');
+				},
+				function(tx, error) {
+					console.log('创建' + tableName + '表失败:' + error.message);
+					flag=false;
+				});
+		});
+		return flag;
+	}
+	/**
+	 * @description 删除数据表
+	 * @author leeyoung
+	 * @return 
+	 */
+	this.dropTable = function(tableName) {
+		dataBase.transaction(function(tx) {
+			tx.executeSql('drop table ' + tableName + '');
+		});
+	}
+	/**
+	 * @description 插入数据
+	 * @author leeyoung
+	 * @return 
+	 */
+	//	this.insert = function(tableName,cols,values) {
+	//		dataBase.transaction(function(tx) {
+	//			tx.executeSql(
+	//				"insert into "+tableName+" ("+cols+") values(?, ?)", [id, '徐明祥'],
+	//				function() {
+	//					alert('添加数据成功');
+	//				},
+	//				function(tx, error) {
+	//					alert('添加数据失败: ' + error.message);
+	//				});
+	//		});
+	//	}
+	/**
+	 * @description 查询数据
+	 * @author leeyoung
+	 * @return 
+	 */
+	this.query = function(tableName,successCallback,errorCallback) {
+		dataBase.transaction(function(tx) {
+			tx.executeSql(
+				"select * from " + tableName + "", [],
+				function(tx, results) { //执行成功的回调函数
+					//在这里对result 赋值数组...........
+					var dataList = new Array();
+					var len = results.rows.length;
+					console.log("数据长度:"+len);
+					for(i = 0; i < len; i++) {
+						dataList[i] = results.rows.item(i);
+					} 
+					successCallback(dataList);
+				},
+				function(tx, error) {
+					errorCallback(error)
+				});
+		});
+	}
+	/**
+	 * @description 更新数据
+	 * @author leeyoung
+	 * @return 
+	 */
+	this.update = function(id, name) {
+		dataBase.transaction(function(tx) {
+			tx.executeSql(
+				"update stu set name = ? where id= ?", [name, id],
+				function(tx, result) {},
+				function(tx, error) {
+					console.log('更新失败: ' + error.message);
+				});
+		});
+	}
+	/**
+	 * @description 删除数据
+	 * @author leeyoung
+	 * @return 
+	 */
+	this.del = function(tableName,key,keyValue,successCallback,errorCallback) {
+		dataBase.transaction(function(tx) {
+			tx.executeSql(
+				"delete from "+tableName+" where "+key+"= ?", [keyValue],
+				function(tx, result) {
+					successCallback(true);
+				},
+				function(tx, error) {
+					errorCallback('删除失败: ' + error.message);
+				});
+		});
+	}
+	/**
+	 * @description 插入货品库存
+	 * @author leeyoung
+	 * @return 
+	 */
+	this.stockInsert = function(stockCode,size,amount,successCallback,errorCallback) {
+		dataBase.transaction(function(tx) {
+			tx.executeSql(
+				"insert into stocksAmount(stockCode,size,amount) values(?,?,?)",[stockCode,size,amount],
+				function(tx) {
+					successCallback(true);
+				},
+				function(tx, error) {
+					errorCallback(error);
+				});
+		});
+	}
+
+}

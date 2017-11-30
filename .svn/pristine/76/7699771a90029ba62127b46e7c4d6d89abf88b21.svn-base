@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			.mui-content{padding:56px 8px 8px 8px !important;}
+			.mui-backdrop{display: none;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   	<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">活动分享</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+		    <div class="sharecardbox">
+		    	<div class="sharetitle">
+		    		满减活动<span class="newicon">NEW</span>
+		    	</div>
+		    	<div class="activitylabel">新春活动满减开始啦</div>
+		    	<div class="activitytimebox">
+		    		<span class="activitydate">2017.02.16 00:00</span> - <span class="activitytime">2017.03.11 23:59</span>
+		    	</div>
+		    	<div class="sharebtnbox">
+		    		<span class="look mui-pull-left" tourl="activityshow.html">预览</span>
+		    		<span class="share mui-pull-left">分享</span>
+		    	</div>
+		    </div>
+		</div>
+		<!--分享遮罩层-->
+		<div class="mui-backdrop">
+			<div class="sharebox">
+				<div class="bgbox">
+					<p class="mui-text-center">分享</p>
+					<ul class="shareicon">
+						<li>
+							<div class="iconfont icon-weixin" style="background: #09bb07;">
+								
+							</div>
+							微信好友
+						</li>
+						<li>
+							<div class="iconfont icon-pengyouquan" style="background: #09bb07;">
+								
+							</div>
+							朋友圈
+						</li>
+						<li>
+							<div class="iconfont icon-qq" style="background: #4a90e2;">
+								
+							</div>
+							QQ好友
+						</li>
+						<li>
+							<div class="iconfont icon-kongjian" style="background: #f3d82b;">
+								
+							</div>
+							QQ空间
+						</li>
+						<li>
+							<div class="iconfont icon-lianjie" style="background: #fb6622;">
+								
+							</div>
+							复制链接
+						</li>
+						<li> 
+							<div class="iconfont icon-102" style="background:#4a90e2;">
+								
+							</div>
+							我的客户
+						</li>
+					</ul>	
+				</div>
+				<button type="button" class="mui-btn shareqx">取消</button>
+			</div>
+			
+		</div>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			mui.plusReady(function(){
+		        view=new App();
+		        //主列表点击事件
+				mui('body').on('tap', '.look', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				
+		    });
+			
+			var abc=false;
+			mui('body').on('tap','.share',function(){
+				$('.mui-backdrop').fadeIn(); 
+				$('.sharebox').animate({'bottom':'0px'},300);
+			});
+			$('.bgbox').click(function(){
+				abc=true;
+			});
+			$('.mui-backdrop').on('click',function(){		
+				if(abc==false){
+					$('.mui-backdrop').fadeOut();
+					$('.sharebox').animate({'bottom':'-300px'},300);
+				}else{
+					abc=false;
+				}
+			});
+			mui.plusReady(function(){
+				var oldback = mui.back;
+				mui.back=function(){
+					if(!$('.mui-backdrop').is(":hidden")){
+						$('.mui-backdrop').fadeOut();
+						$('.sharebox').animate({'bottom':'-300px'},300);
+					}else{
+						oldback ();
+					}
+				};
+			})
+			
+		</script>
+	</body>
+
+</html>

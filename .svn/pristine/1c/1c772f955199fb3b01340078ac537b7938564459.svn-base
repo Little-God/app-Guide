@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			.confirmbtn{text-decoration: none ;}
+			.mui-table-view:before,.mui-table-view-cell:after,.mui-table-view:after{height: 0;}
+			.sortdiv .sortnum{color: white ;}
+			.mui-backdrop{display: none;}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">排行榜</h1>
+			<span class=" mui-pull-right orange confirmbtn share">分享</span>
+		</header>
+		<div class="mui-content">
+		    <div class="sortbg">
+		    	<span style="font-size: 28px;">聚客</span>排行榜
+		    	<div class="sorttime">2017-02-15</div>
+		    </div>
+		    <!--排序类型-->
+		    <div class="mui-flex sorttype">
+		    	<div class="mui-flex1 xiaoshou">
+		    		<span class="xs bd-yl">销售排行</span>
+		    	</div>
+		    	<div class="mui-flex1 jiafen">
+		    		<span class="jf">加粉排行</span>
+		    	</div>
+		    </div>
+		    <!--排序列表-->
+		    <div class="sortdiv">
+		    	 <ul class="mui-table-view ulinfo">
+				    <li class="mui-table-view-cell" >
+				    	<div class="mui-pull-left sortnum">1</div>
+			        	<div class="left mui-pull-left">
+				        	<div class="tou">
+				        		<img src=" ../images/arclist/face.png"/>
+				        	</div>
+				        </div>
+				        <div class="right mui-pull-left">
+				        	<ul>
+				        		<li id="name">leeyoung</li>
+				        		<li>
+				        			<span class="sortname">第四名</span>
+				        		</li>
+				        	</ul>
+				        </div>
+				        <span class="mui-pull-right sortpbox"><span class="sortp">0.00</span><span class="dw">元</span></span>
+				    </li>
+				</ul>
+		    </div>
+		    <div class="sortlist">
+		    	<ul class="mui-table-view ulinfo">
+				    <li class="mui-table-view-cell" >
+				    	<div class="mui-pull-left sortnum">1</div>
+			        	<div class="left mui-pull-left">
+				        	<div class="tou">
+				        		<img src=" ../images/arclist/face.png"/>
+				        	</div>
+				        </div>
+				        <div class="right mui-pull-left">
+				        	<ul>
+				        		<li id="name">leeyoung</li>
+				        		<li>
+				        			<span class="sortname">喵果(金泉路店)</span>
+				        		</li>
+				        	</ul>
+				        </div>
+				        <span class="mui-pull-right sortpbox"><span class="sortp">0.00</span><span class="dw">元</span></span>
+				    </li>
+				     <li class="mui-table-view-cell" >
+				    	<div class="mui-pull-left sortnum">2</div>
+			        	<div class="left mui-pull-left">
+				        	<div class="tou">
+				        		<img src=" ../images/arclist/face.png"/>
+				        	</div>
+				        </div>
+				        <div class="right mui-pull-left">
+				        	<ul>
+				        		<li id="name">leeyoung</li>
+				        		<li>
+				        			<span class="sortname">喵果(金泉路店)</span>
+				        		</li>
+				        	</ul>
+				        </div>
+				        <span class="mui-pull-right sortpbox"><span class="sortp">0.00</span><span class="dw">元</span></span>
+				    </li> <li class="mui-table-view-cell" >
+				    	<div class="mui-pull-left sortnum">3</div>
+			        	<div class="left mui-pull-left">
+				        	<div class="tou">
+				        		<img src=" ../images/arclist/face.png"/>
+				        	</div>
+				        </div>
+				        <div class="right mui-pull-left">
+				        	<ul>
+				        		<li id="name">leeyoung</li>
+				        		<li>
+				        			<span class="sortname">喵果(金泉路店)</span>
+				        		</li>
+				        	</ul>
+				        </div>
+				        <span class="mui-pull-right sortpbox"><span class="sortp">0.00</span><span class="dw">元</span></span>
+				    </li>
+				</ul>
+		    </div>
+		    
+		</div>
+		<!--分享遮罩层-->
+		<div class="mui-backdrop">
+			<div class="sharebox">
+				<div class="bgbox">
+					<p class="mui-text-center">分享</p>
+					<ul class="shareicon">
+						<li>
+							<div class="iconfont icon-weixin" style="background: #09bb07;">
+								
+							</div>
+							微信好友
+						</li>
+						<li>
+							<div class="iconfont icon-pengyouquan" style="background: #09bb07;">
+								
+							</div>
+							朋友圈
+						</li>
+						<li>
+							<div class="iconfont icon-qq" style="background: #4a90e2;">
+								
+							</div>
+							QQ好友
+						</li>
+						<li>
+							<div class="iconfont icon-kongjian" style="background: #f3d82b;">
+								
+							</div>
+							QQ空间
+						</li>
+						<li>
+							<div class="iconfont icon-lianjie" style="background: #fb6622;">
+								
+							</div>
+							复制链接
+						</li>
+						<li> 
+							<div class="iconfont icon-102" style="background:#4a90e2;">
+								
+							</div>
+							我的客户
+						</li>
+					</ul>	
+				</div>
+				<button type="button" class="mui-btn shareqx">取消</button>
+			</div>
+			
+		</div>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			$('.sorttype span').click(function(){
+				$(this).addClass('bd-yl').parent('div').siblings().children('span').removeClass('bd-yl');
+			})
+			$('.xs').click(function(){
+				$('.dw').text('元');
+				$('.sortp').text('0.00');
+			})
+			$('.jf').click(function(){
+				$('.dw').text('粉');
+				$('.sortp').text('0');
+			})
+			
+			var abc=false;
+			mui('body').on('tap','.share',function(){
+				$('.mui-backdrop').fadeIn(); 
+				$('.sharebox').animate({'bottom':'0px'},300);
+			});
+			$('.bgbox').click(function(){
+				abc=true;
+			});
+			$('.mui-backdrop').on('click',function(){		
+				if(abc==false){
+					$('.mui-backdrop').fadeOut();
+					$('.sharebox').animate({'bottom':'-300px'},300);
+				}else{
+					abc=false;
+				}
+			});
+			mui.plusReady(function(){
+				var oldback = mui.back;
+				mui.back=function(){
+					if(!$('.mui-backdrop').is(":hidden")){
+						$('.mui-backdrop').fadeOut();
+						$('.sharebox').animate({'bottom':'-300px'},300);
+					}else{
+						oldback ();
+					}
+				};
+			})
+			
+		</script>
+	</body>
+
+</html>

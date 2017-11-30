@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+		<style type="text/css">
+			.mui-backdrop{display: none;} 
+			.mui-content{padding-top: 43px !important;}
+			.mui-active{color: #ff5b0f !important;border-bottom: 4px solid #FF5B0F !important;}
+			.mui-backdrop .mui-btn{width: 100%;border: none;height: 40px;}
+			.mui-backdrop ul{border-radius: 3px;margin-bottom: 10px;border: none;} 
+			.mui-table-view:before,.mui-table-view:after{height: 0;}
+			.icon-dagou{color: white;}
+			.dg{color: #1485ff;}
+			#sliderSegmentedControl{width: 100%;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold"><span style="text-decoration: underline;">全店订单</span><span class="titleicon mui-icon mui-icon-arrowdown orange" style="font-size: 18px;"></span></h1>
+			<span class="mui-icon mui-icon-search mui-pull-right orange" tourl="../ordersearch.html"></span>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<!--顶部拖动栏-->
+			<div id="slider" class="mui-slider mui-fullscreen" style="top: 0;">
+				<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<div class="mui-scroll">
+						<a class="mui-control-item mui-active" href="#item1mobile" data-wid="all.html">
+							全部
+						</a>
+						<a class="mui-control-item" href="#item2mobile" data-wid="dpaid.html">
+							待支付
+						</a>
+						<a class="mui-control-item" href="#item3mobile" data-wid="dsend.html">
+							待发货
+						</a>
+						<a class="mui-control-item" href="#item4mobile" data-wid="ysend.html">
+							已发货
+						</a>
+						<a class="mui-control-item" href="#item5mobile" data-wid="dtake.html">
+							待自提
+						</a>
+						<a class="mui-control-item" href="#item6mobile" data-wid="yfinish.html">
+							已完成
+						</a>
+						<a class="mui-control-item" href="#item7mobile" data-wid="yclose.html">
+							已关闭
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--类型选择遮罩层-->
+		<!--<div class="mui-backdrop">
+			<div class="btnbox">
+				<ul class="mui-table-view">
+				    <li class="backdropli"><span>全部订单</span><span class="mui-pull-right iconfont icon-dagou dg"></span></li>
+				    <li class="backdropli"><span>我的订单</span><span class="mui-pull-right iconfont icon-dagou"></span></li>
+				</ul>
+				<button type="button" class="mui-btn">取消</button>
+			</div>
+		</div>-->
+		<script src="../../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/webviewGroup.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				var group = new webviewGroup("all.html", {
+					items: [{
+						id: "all.html",
+						url: "all.html",
+						extras: {}
+					}, {
+						id: "dpaid.html",
+						url: "dpaid.html",
+						extras: {}
+					}, {
+						id: "dsend.html",
+						url: "dsend.html",
+						extras: {}
+					}, {
+						id: "ysend.html",
+						url: "ysend.html",
+						extras: {}
+					}, {
+						id: "dtake.html",
+						url: "dtake.html",
+						extras: {}
+					}, {
+						id: "yfinish.html",
+						url: "yfinish.html",
+						extras: {}
+					}, {
+						id: "yclose.html",
+						url: "yclose.html",
+						extras: {}
+					}],
+					onChange: function(obj) {
+						var c = document.querySelector(".mui-control-item.mui-active");
+						if(c) {
+							c.classList.remove("mui-active");
+						}
+						document.querySelector(".mui-scroll .mui-control-item:nth-child(" + (parseInt(obj.index) + 1) + ")").classList.add("mui-active");
+						var cardnum=parseInt($(window).width()/70);
+					}
+				});
+				mui(".mui-scroll").on("tap", ".mui-control-item", function(e) {
+					var wid = this.getAttribute("data-wid");
+					group.switchTab(wid);
+				});
+				
+				
+				view=new App();
+		        //主列表点击事件
+				mui('body').on('tap', '.mui-icon-search', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				
+			});
+		</script>
+	</body>
+
+</html>

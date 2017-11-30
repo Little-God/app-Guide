@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.mui-bar-nav {
+				font-size: 13px;
+			}
+			
+			.mui-bar-nav label {
+				margin: 0 10px;
+				color: gray;
+				text-decoration: underline;
+			}
+			
+			dd {
+				padding: 5px 15px;
+				font-size: 13px;
+			}
+			
+			dd label {
+				color: #959595;
+			}
+			
+			.mui-content {
+				margin-bottom: 54px;
+			}
+			
+			.mui-bar-footer {
+				background: black;
+			}
+			
+			.txm {
+				color: white;
+				text-decoration: underline;
+			}
+			
+			.ordertel {
+				text-align: center;
+				margin: -30px auto 10px auto;
+				border-bottom: 1px solid #DDDDDD;
+				padding-bottom: 20px;
+				width: 90%;
+			}
+			
+			.mui-media-body div {
+				font-size: 14px;
+			}
+			
+			.little-total {
+				text-align: right;
+			}
+			
+			.order-info {
+				width: 90%;
+				margin: 10px auto 0 auto;
+				border-top: 1px solid #ddd;
+				padding-top: 8px;
+			}
+			
+			.order-info-bottom {
+				width: 90%;
+				margin: 0 auto;
+				text-align: right;
+			}
+			
+			.order-info-bottom-parent {
+				padding: 10px 0;
+			}
+			label a{
+				color:gray;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left cl-orang"></span><span class="vipitem cl-orang mui-action-back backsize">返回</span>
+			<label class="label orderinfobtn"><a class="mui-control-item cl-orang" href="#item1">订单详情</a></label>
+			<label class="label remarkbtn"><a class="mui-control-item" href="#item2">备注/<span class="remarknum">0</span></a></label>
+			<label class="label evaluatebtn">评价</label>
+			<label class="label orange confirmbtn">改价</label>
+		</header>
+		<div class="mui-content">
+			<!--订单详情-->
+			<div class="orderinfobox mui-control-content mui-active" id="item1">
+				<img class="orderimgbox" src="../images/arclist/face.png" />
+				<div class="orderinfoname">
+					黄瑶
+				</div>
+				<div class="ordertel">
+					13183881016
+				</div>
+				<dl>
+					<dd><label>订单状态：</label><span class="state cl-orang">代付款</span></dd>
+					<dd><label>订单编号：</label><span class="ordernum">20170214223888954528</span></dd>
+					<dd><label>订单类型：</label><span class="ordertype">店内开单</span></dd>
+					<dd><label>下单时间：</label> <span class="orderdata">2017.03.18</span>&nbsp;<span class="ordertime">09:53:45</span></dd>
+					<dd><label>支付方式：</label><span class="paytype">支付宝支付</span></dd>
+					<dd><label>支付时间：</label><span class="paytime">/</span></dd>
+					<dd><label>配送方式：</label><span class="mode">到店自取</span></dd>
+					<dd><label>提货人名：</label><span class="takename">黄瑶</span></dd>
+					<dd><label>自提门店：</label><span class="store">大头儿子和小头爸爸（南部店）</span></dd>
+					<dd><label>本单导购：</label><span class="guidename">leeyong</span></dd>
+					<dd><label>本单提成：</label><span class="percentage">0.00</span></dd>
+					<!--<dd><label>联系电话：</label><span class="tel"></span></dd>-->
+					<!--<dd><label class="mui-pull-left">收货地址：</label><span class="address mui-pull-left">四川省 资阳市 安岳县 龙台镇 步行街大头儿子小头爸爸品牌童装(到店自提)大头儿子和小头爸爸(安岳龙台店)</span></dd>-->
+				</dl>
+				<!--订单商品信息-->
+				<div class="mui-row order-info">
+					<p class="mui-col-xs-2">商品</p>
+					<p class="mui-col-xs-3">购买信息</p>
+					<p class="mui-col-xs-7 little-total">小计</p>
+				</div>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<div class="mui-pull-right">108.00元</div>
+							<img class="mui-media-object mui-pull-left" src="../images/dfgoods.png">
+							<div class="mui-media-body">
+								<div class="mui-col-xs-10 buy-shoptitle">2017春季新款童装17111212男童卡通印卫衣</div>
+								<div>黑色/100cm</div>
+								<div>售价：108.00元x1</div>
+							</div>
+						</a>
+					</li>
+				</ul>
+				<div class="order-info-bottom-parent">
+					<p class="order-info-bottom">商品总价：108.00元</p>
+					<p class="order-info-bottom">优惠：0.00元</p>
+					<p class="order-info-bottom">运费：0.00元</p>
+					<p class="order-info-bottom">应付总额：108.00元</p>
+				</div>
+			</div>
+			<!--备注-->
+			<div class="orderremarbox mui-control-content" id="item2">
+				<div class="textareabox">
+					<!--输入框-->
+					<textarea class="textcontent" name="textarea" maxlength="140"></textarea>
+					<!--字数监测、表情添加-->
+					<div class="emojibtn">
+						<span class="writedbox mui-pull-right"><label class="writed">0</label>/140</span>
+					</div>
+				</div>
+			</div>
+			<!--评价-->
+			<div class="evaluatebox">
+
+			</div>
+			<!--改价-->
+			<div class="setpricebox">
+				<div class="setprice">
+					<dl>
+						<dd>修改订单价格</dd>
+						<dd>订单原价：￥<span class="oldprice">0.00</span></dd>
+						<dd>改后价格：￥<span class="newprice">0.00</span></dd>
+					</dl>
+					<div class="conditionset">
+						<span placeholder="请输入修改的价格" unit="元">按金额修改</span><span placeholder="请输入修折扣" unit="折">按折扣修改</span>
+					</div>
+					<div class="setinputbox">
+						<input type="text" name="setbox" id="setbox" value="" placeholder="请输入修改的价格" />
+						<span style="border-left: 1px solid #A3A3A3;height: 20px;display: inline-block;position: relative;top: 5px;"></span>
+						<span class="unit">
+		    				元
+		    			</span>
+					</div>
+					<div class="setbuttom">
+						<div class="mui-flex">
+							<div class="mui-flex1 qx">
+								取消
+							</div>
+							<div class="" style="height: 35px;width: 1px;border-left: 1px solid #CCCCCC;"></div>
+							<div class="mui-flex1">
+								确定
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--底部按钮-->
+			<add class="mui-bar mui-bar-footer">
+				<div class="mui-flex">
+					<div class="mui-flex1 txm" id="scanpay">
+						提醒付款
+					</div>
+					<div class="" style="height: 30px;width: 1px;border-left: 1px solid #AAAAAA;margin-top: 6px;"></div>
+					<div class="mui-flex1 txm" id="closeorder">
+						关闭订单
+					</div>
+				</div>
+			</add>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script type="text/javascript">
+			document.getElementById("closeorder").onclick = function() {
+				window.location.href = "closeOrder.html";
+			}
+			document.getElementById("scanpay").onclick = function() {
+				window.location.href = "scanPay.html";
+			}
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				document.getElementById("scanBarcode").addEventListener('tap', function(e) {
+					view.AppCreateWindow("../scan/simpleScan.html");
+				});
+			});
+			
+//			订单详情和备注tab切换
+			var ordertitle = document.getElementsByClassName("mui-control-item"),
+				changeprice = document.getElementsByClassName("label")[3];
+			ordertitle[0].ontouchend = function(){
+				this.className="mui-control-item cl-orang";
+				ordertitle[1].className="mui-control-item";
+				changeprice.style.display = "inline";
+			}
+			ordertitle[1].ontouchend = function(){
+				ordertitle[0].className="mui-control-item";
+				this.className="mui-control-item cl-orang";
+				changeprice.style.display = "none";
+			}
+			
+//			改价弹出框
+			var pricepopup = document.getElementsByClassName("setpricebox")[0],
+				pricecancel = document.getElementsByClassName("qx")[0];
+			changeprice.ontouchend = function(){
+				pricepopup.style.display="block";
+			}
+			pricecancel.ontouchend = function(){
+				pricepopup.style.display="none";
+			}
+		</script>
+	</body>
+
+</html>

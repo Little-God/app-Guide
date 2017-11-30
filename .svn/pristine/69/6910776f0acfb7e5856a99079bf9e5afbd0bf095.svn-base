@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.confirmbtn {
+				text-decoration: none;
+			}
+			
+			.mui-bar-nav {
+				border-bottom: 1px solid #EEEEEE;
+			}
+			
+			.mui-navigate-right:after {
+				right: 15px;
+				content: '\e537';
+				color: #FF5607;
+			}
+			
+			.cut-off-rule {
+				height: 1px;
+				margin: 20px auto;
+				text-align: center;
+				width: 90%;
+				border-top: 1px solid #e2e2e2;
+			}
+			
+			.cut-off-rule .txt {
+				position: relative;
+				top: -12px;
+				background: #efeff4;
+				display: inline-block;
+				text-decoration: underline;
+			}
+		</style>
+	</head>
+	<body>
+		<!--下拉刷新容器-->
+		<div id="pullrefresh" class="mui-content  mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<!--全部商品按钮-->
+				<div class="searchbox">
+					<div class="search">
+						<label class="labelsearch" for="search" style="position: absolute;top: 12px;left: 50%;color: #AAAAAA;margin-left: -23px;font-size: 14px;"><span class="iconfont icon-sousuo-sousuo"></span>搜索</label>
+						<input type="search" name="search" id="search" value="" />
+					</div>
+					<div id="searchBtn" class="cl-orang cut-off-rule">
+						<span class="txt">全部商品 <span class="iconfont icon-xiajiantou"></span></span>
+					</div>
+
+				</div>
+				<!--商品列表-->
+				<ul id="goodsData" class="mui-table-view mui-table-view-chevron">
+					<!--<li class="mui-table-view-cell mui-media">
+						<a class="mui-navigate-right">
+							<img class="mui-media-object mui-pull-left" src="../images/dfgoods.png">
+							<div class="mui-media-body mui-col-xs-8 mui-ellipsis">
+								2017春季新款童装2017春季新款童装2017春季新款童装2017春季新款童装2017春季新款童装2017春季新款童装
+								<p><span class="">￥:74.00</span></p>
+							</div>
+						</a>
+					</li>-->
+				</ul>
+			</div>
+		</div>
+		<!--底部按钮-->
+		<div class="mui-bar mui-bar-footer">
+			<div class="mui-flex">
+				<div class="mui-flex1 txm" id="scanBarcode">
+					<span class="iconfont icon-tiaoxingma" style="font-size: 20px;top:1px;"></span>检索条形码
+				</div>
+				<div class="" style="height: 30px;width: 1px;border-left: 1px solid #AAAAAA;margin-top: 6px;"></div>
+				<div class="mui-flex1 txm" id="addGoods">
+					<span class="iconfont icon-plus" style="font-size: 16px;"></span>发布商品
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var index, view, uarr, currpage = '1';
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					},
+					up: {
+						contentrefresh: '正在加载...',
+						callback: pullupRefresh
+					}
+				}
+			});
+			mui.plusReady(function() {
+				//主列表点击事件
+				mui('.mui-table-view').on('tap', 'li', function() {
+					var goodId = this.getAttribute('data-goodId');
+					var extras = {
+						goodId: goodId
+					};
+					view.AppCreateWindow("goodInfo.html", null, null, extras);
+				});
+				//获得主页面webview引用；
+				view = new App();
+				var uinfo = plus.storage.getItem("uinfo");
+				uarr = JSON.parse(uinfo);
+				index = plus.webview.currentWebview().opener();
+				pullupRefresh();
+			});
+			/**
+			 * 下拉刷新具体业务实现
+			 */
+			function pulldownRefresh() {
+				setTimeout(function() {
+					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+				}, 1500);
+			}
+			/**
+			 * 上拉加载具体业务实现
+			 */
+			function pullupRefresh() {
+				setTimeout(function() {
+					view.AppHttpService({
+						action: 'goods/searching_list',
+						data: {
+							guideId: uarr.guideId,
+							userToken: uarr.userToken,
+							userBelong: uarr.userBelong,
+							goods_belong_to: 'ALL',
+							sort: 'TIME_UP',
+							goods_sell_type: 'ALL',
+							brand_id: '',
+							class_id: '',
+							search_criteria: '',
+							currpage: currpage,
+							rp: '10',
+						}
+					}, function(response) {
+						if(response.code == '201') {
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(true);
+						} else if(response.code == '200') {
+							if(currpage == '1') {
+								document.getElementById("goodsData").innerHTML = "";
+							}
+							currpage++;
+							mui.each(response.data.goodsList, function(index, _data) {
+								document.getElementById("goodsData").innerHTML += '<li data-goodId="' + _data['goodsId'] + '" class="mui-table-view-cell mui-media">' +
+									'<a class="mui-navigate-right">' +
+									'<img class="mui-media-object mui-pull-left" src="' + _data['goodsImage'] + '" onerror="javascript:this.src="../images/dfgoods.png;"">' +
+									'<div class="mui-media-body mui-col-xs-8 mui-ellipsis">' + _data['goodsName'] +
+									'<p><span class="cl-orang">￥:' + _data['goodsTruePrice'] + '</span></p>' +
+									'</div>' +
+									'</a>' +
+									'</li>';
+							});
+							mui('#pullrefresh').pullRefresh().endPullupToRefresh(false);
+						}
+					});
+				});
+			}
+			/*
+			 *  @desc 发布商品
+			 */
+			document.getElementById("addGoods").addEventListener('tap', function(e) {
+				view.AppCreateWindow("addGoodS1.html",null, null, null,"addGoodS1");
+			});
+			/*
+			 *  @desc 检索商品条码
+			 */
+			document.getElementById("scanBarcode").addEventListener('tap', function(e) {
+				var extras = {
+					scanType: 'searchGood'
+				};
+				view.AppCreateWindow("../scan/simpleScan.html", null, null, extras);
+			});
+		</script>
+	</body>
+</html>

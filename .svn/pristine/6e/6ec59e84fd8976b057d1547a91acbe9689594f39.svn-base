@@ -1,0 +1,258 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.sort{margin-top: 20px;}
+			.mui-flex1{text-align: center;margin-top: 4px;}
+			.mui-bar-footer{background: white;color: white;box-shadow: none;}
+			.mui-table-view:before,.mui-table-view-cell:after,.mui-table-view:after{height: 0;}
+			.mui-backdrop{display: none;}
+			.bgbox .shoptitlebox{width: 70%;padding: 0 10px;}
+			.pay .bgbox{margin-bottom: 0;border-radius: 0;}
+			.pay .sharebox{padding: 0;}
+			.red{background: red;color: white;border-color: red;}
+			.shopnum{border-left: 1px solid #CCCCCC;border-right: 1px solid #CCCCCC;line-height: 37px;padding: 0 12px;}
+			.mui-btn{margin-bottom: 5px;}
+			.sort span{color: #AAAAAA;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+			</button>
+			<h1 class="mui-title">商品详情</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="headSearch">更多</button>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<!--图片轮播-->
+			<div id="slider" class="mui-slider">
+				<!--轮播图片-->
+				<div class="mui-slider-group">
+					<div class="mui-slider-item mui-slider-item-duplicate">
+						<a href="#"><img src="http://dcloudio.github.io/mui/assets/img/yuantiao.jpg"></a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="http://dcloudio.github.io/mui/assets/img/shuijiao.jpg"></a>
+					</div>
+					<div class="mui-slider-item">
+						<a href="#"><img src="http://dcloudio.github.io/mui/assets/img/muwu.jpg"></a>
+					</div>
+				</div>
+				<!--轮播按钮-->
+				<div class="mui-slider-indicator">
+					<div class="mui-indicator mui-active"></div>
+					<div class="mui-indicator"></div>
+					<div class="mui-indicator"></div>
+				</div>
+			</div>
+			<!--商品标题-->
+			<div class="shoptitlebox">
+				<div class="shoptitle">
+					2017春季新款童装 17110068男童绣仙鹤夹克
+				</div>
+				<span class="cl-orang">￥196.00</span>
+			</div>
+			<!--详情-->
+			<ul class="mui-table-view sort">
+				<li class="mui-table-view-cell">配送方式<span class="mui-pull-right ">到店自提<span style="width: 1px;height: 10px;border-left: 1px solid #AAAAAA;margin: 0 5px;"></span>快递</span></li>
+				<li class="mui-table-view-cell">限购数量<span class="mui-pull-right">无限制</span></li>
+				<li class="mui-table-view-cell">能否使用优惠券<span class="mui-pull-right">能</span></li>
+			</ul>
+			
+			<!--购买按钮-->
+			<div class="mui-bar mui-bar-footer">
+				<div class="mui-flex">
+					<div class="mui-flex1">
+						<span class="shopcart">
+							加入收银台
+						</span>
+					</div>
+					<div class="mui-flex1">
+						<span class="buy">
+							立即开单
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--更多遮罩层-->
+		<div class="mui-backdrop more">
+			<div class="sharebox">
+				<div class="bgbox">
+				   <div class="imgbox" style="padding: 10px;height: 70px;overflow: hidden;" tourl="imginfo.html">
+					   	<img src="../images/arclist/face.png" style="width: 50px;height: 50px;float: left;"/>
+					   	<!--商品标题-->
+						<div class="shoptitlebox mui-pull-left">
+							<div class="shoptitle">
+								2017春季新款童装 17110068男童绣仙鹤夹克
+							</div>
+							<span class="price">￥196.00</span>
+							<span class="ticheng">提成0.00%</span>
+						</div>
+						<div class="mui-pull-right iconfont icon-arrowright" style="line-height: 50px;">
+							
+						</div>
+				   </div>
+					<ul class="mui-table-view sort">
+						<li class="mui-table-view-cell">分享</li>
+						<li class="mui-table-view-cell" tourl="inventory.html">查看库存</li> 
+						<li class="mui-table-view-cell">下载图片</li>
+						<li class="mui-table-view-cell">编辑图片</li>
+					</ul>
+				</div>
+				<button type="button" class="mui-btn shareqx">取消</button>
+			</div>
+		</div>
+		<!--开单遮罩层-->
+		<div class="mui-backdrop pay">
+			<div class="sharebox">
+			<div class="bgbox">
+			   <div class="imgbox" style="padding: 10px;height: 90px;overflow: hidden;">
+				   	<img src="../images/arclist/face.png" style="width: 60px;height: 60px;float: left;"/>
+				   	<!--商品标题-->
+					<div class="shoptitlebox mui-pull-left">
+						<div class="shoptitle">
+							2017春季新款童装 17110068男童绣仙鹤夹克
+						</div>
+						<span class="price">￥196.00</span>
+						<span class="ticheng">提成0.00%</span>
+						<div class="surplus">
+							剩余库存<span id="surplus">20</span>件
+						</div>
+					</div>
+					<div class="mui-pull-right iconfont icon-arrowright" style="line-height: 50px;">
+						
+					</div>
+			   </div>
+				<ul class="mui-table-view" style="border-top: 1px solid #EEEEEE;">
+					<li class="type">
+						<div class="colorlabel">
+							颜色
+						</div>
+						<div class="colortype">
+							<span class="mui-btn red">红色</span>
+							<span class="mui-btn">黄色</span>
+						</div>
+						<div class="colorlabel">
+							尺码
+						</div>
+						<div class="sizetype">
+							<span class="mui-btn red">80cm</span>
+							<span class="mui-btn">90cm</span>
+							<span class="mui-btn">100cm</span>
+							<span class="mui-btn">110cm</span>
+							<span class="mui-btn">120cm</span>
+							<span class="mui-btn">130cm</span>
+						</div>
+						<div class="colorlabel">
+							数量
+						</div>
+						<div class="add-minusbox" style="overflow: hidden;display: inline-block;">
+							<span class="minus mui-pull-left iconfont icon-jian">
+								
+							</span>
+							<div class="shopnum mui-pull-left">
+								1
+							</div>
+							<span class="add mui-pull-left iconfont icon-plus">
+								
+							</span>
+						</div>
+						<span class="queding">确定</span>
+					</li>
+				</ul>
+			</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			mui('body').on('tap','.pay .mui-btn',function(){
+				$(this).addClass('red').siblings().removeClass('red');
+			})
+			//更多
+			var abc=false;
+			mui('body').on('tap','.confirmbtn',function(){
+				$('.more').fadeIn(); 
+				$('.more .sharebox').animate({'bottom':'0px'},300);
+			});
+			$('.more .bgbox').click(function(){
+				abc=true;
+			});
+			$('.more').on('click',function(){		
+				if(abc==false){
+					$('.more').fadeOut();
+					$('.more .sharebox').animate({'bottom':'-300px'},300);
+				}else{
+					abc=false;
+				}
+			});
+			//开单
+			var kd=false;
+			mui('body').on('tap','.buy',function(){
+				$('.pay').fadeIn(); 
+				$('.pay .sharebox').animate({'bottom':'0px'},200);
+			});
+			$('.pay .bgbox').click(function(){
+				kd=true;
+			});
+			$('.pay').on('click',function(){		
+				if(kd==false){
+					$('.pay').fadeOut();
+					$('.pay .sharebox').animate({'bottom':'-400px'},200);
+				}else{
+					kd=false;
+				}
+			});
+			$('.queding').on('click',function(){		
+				if(kd==false){
+					$('.pay').fadeOut();
+					$('.pay .sharebox').animate({'bottom':'-400px'},200);
+				}else{
+					kd=false;
+				}
+			});
+			mui.plusReady(function(){
+				view = new App();
+				var self = plus.webview.currentWebview();
+				var goodId = self.goodId;
+				var uinfo = plus.storage.getItem("uinfo");
+				var uarr = JSON.parse(uinfo);
+		        //主列表点击事件
+				mui('body').on('tap', '.imgbox', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				mui('body').on('tap', '.mui-table-view-cell', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+			})
+			
+			
+		</script>
+	</body>
+
+</html>

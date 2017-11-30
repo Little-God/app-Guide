@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			body,.mui-content{background: white;}
+			header{border-bottom: 1px solid #EEEEEE !important;}
+			#search{border-radius: 6px;width: 88%;margin: 10px 6%;background: #f2f2f2;color: #8f8f94;height: 30px;line-height: 30px;padding: 6px;}
+			.search{position: relative;}
+			.mui-table-view:before,.mui-table-view:after{height: 0px;}
+			.mui-table-view-cell:last-child:after{height: 1px;}
+			.mui-table-view-cell:after{left: 70px;right:6% ;}
+			.mui-table-view-cell{line-height: 40px;}
+			.roundbg{margin-right: 16px;} 
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   	<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">选择导购</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<!--搜索框-->
+		    <div class="search">
+	    		<label class="labelsearch" for="search" style="position: absolute;top: 15px;left: 50%;color: #AAAAAA;margin-left: -23px;font-size: 14px;"><span class="iconfont icon-sousuo-sousuo"></span>搜索</label>
+	    		<input type="search" name="search" id="search" value=""/>
+	    	</div>
+	    	<!--导购列表-->
+	    	 <ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<div class="roundbg mui-pull-left" style="background: url(../images/arclist/face.png) no-repeat;background-size: cover;">
+					</div>
+					今日推荐回访
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="roundbg mui-pull-left" style="background: url(../images/arclist/face.png) no-repeat;background-size: cover;">
+					</div>
+					果果
+				</li>
+				<li class="mui-table-view-cell">
+					<div class="roundbg mui-pull-left" style="background: url(../images/arclist/face.png) no-repeat;background-size: cover;">
+					</div>
+					测试
+				</li>
+			</ul>
+	    	
+		</div>
+		
+		
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+			$(function(){
+				$("#search").focus(function(){
+					$(".labelsearch").css("display","none");
+				})
+				$("#search").blur(function(){
+					$(".labelsearch").css("display","block");
+				})
+			})
+		</script>
+	</body>
+
+</html>

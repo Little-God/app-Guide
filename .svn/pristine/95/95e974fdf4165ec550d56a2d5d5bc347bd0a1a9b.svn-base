@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.iconleft {
+				color: #ff821c;
+				font-size: 24px;
+				margin: 0 10px;
+				line-height: 40px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">新建群发</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-card">
+				<div class="mui-card-content">
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell mui-media" tourl="msgMassManual.html">
+							<a class="mui-navigate-right">
+								<span class="iconfont icon-caozuoshoudong mui-pull-left iconleft"></span>
+								<div class="mui-media-body">
+									手动选择会员群发
+									<p class="mui-ellipsis">会有人数过多?不知道怎么管理？试试筛...</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="mui-card">
+				<div class="mui-card-content">
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell mui-media" tourl="labelList.html">
+							<a class="mui-navigate-right">
+								<span class="iconfont icon-biaoqian1 mui-pull-left iconleft"></span>
+								<div class="mui-media-body">
+									选择标签组群发
+									<p class="mui-ellipsis">会有人数过多?不知道怎么管理？试试筛...</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="mui-card">
+				<div class="mui-card-content">
+					<ul class="mui-table-view mui-table-view-chevron">
+						<li class="mui-table-view-cell mui-media" tourl="msgMassSelectMember.html">
+							<a class="mui-navigate-right">
+								<span class="iconfont icon-sousuo1  mui-pull-left iconleft"></span>
+								<div class="mui-media-body">
+									按筛选条件群发
+									<p class="mui-ellipsis">会有人数过多?不知道怎么管理？试试筛...</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				mui('.mui-card').on('tap', 'li', function() {
+					view.AppCreateWindow(this.getAttribute('tourl'));
+				});
+
+			});
+		</script>
+	</body>
+
+</html>

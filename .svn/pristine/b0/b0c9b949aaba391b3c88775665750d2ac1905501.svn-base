@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<style type="text/css">
+			.mui-table-view-cell.mui-checkbox input[type=checkbox] {
+				position: absolute;
+				top:30%		
+			}			
+			.mui-bar-footer {
+				background: white;
+				box-shadow: none;
+			}
+
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+			</button>
+			<h1 class="mui-title">收银开单</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="cashier">立即开单</button>
+		</header>
+		<div class="mui-content">
+			<!--商品详情-->
+			<ul class="mui-table-view" id="shopCartData">
+			
+			</ul>
+			<p class="editshop mui-pull-right">共计￥<span class="allprice">121.00</span></p>
+			<!--底部按钮-->
+			<div class="mui-bar mui-bar-footer">
+				<div class="mui-flex">
+					<div class="mui-flex1 footernav" id="scanBarcode">
+						<div class="iconfont icon-saoma2" style="font-size: 20px;height: 16px;"></div>
+						<div class="cashiernavtxt">
+							扫码添加
+						</div>
+					</div>
+					<div class="cashierline"></div>
+					<div class="mui-flex1 footernav" id="addGoods">
+						<div class="iconfont icon-plus" style="font-size: 16px;height: 18px;margin-top: -2px;"></div>
+						<div class="cashiernavtxt">
+							添加商品
+						</div>
+					</div>
+					<div class="cashierline"></div>
+					<div class="mui-flex1 footernav" id="editgoods">
+						<div class="iconfont icon-bianji" style="font-size:18px;margin-top: -2px;height: 18px;"></div>
+						<div class="cashiernavtxt">
+							编辑商品
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var view = null; 
+			mui.init();
+			mui.plusReady(function() {
+				view = new App();
+				loadShopCartData();
+			});
+			//主列立即开单页面
+			document.getElementById("cashier").addEventListener('tap', function(e) {
+				var rdsObj = document.getElementsByName("goodIds");
+				var selectGoods=null;
+				var k= 0;
+				for(i = 0; i < rdsObj.length; i++) {
+					if(rdsObj[i].checked) {
+						if(k==0)
+						{
+							selectGoods=rdsObj[i].value;
+							k++;
+						}
+						else{
+							selectGoods+=","+rdsObj[i].value;
+							k++;
+						}
+					}
+				}
+                console.log(selectGoods);
+                if(selectGoods==null ||selectGoods=="")
+                {
+                	mui.toast("没选择商品，请选择商品后开单！");
+                }
+                else
+                {
+                	var extras = {
+					   openfrom: 'carshier',
+					   goods:selectGoods
+				    };
+                	view.AppCreateWindow("confirmOrder.html", null, null, extras,"confrimOrder");
+                }
+				
+			});
+			//点击扫码添加
+			document.getElementById("scanBarcode").addEventListener('tap', function(e) {
+				var extras = {
+					scanType: 'cashier'
+				};
+				view.AppCreateWindow("../scan/simpleScan.html", null, null, extras);
+			});
+			//点击添加商品
+			document.getElementById("addGoods").addEventListener('tap', function(e) {
+				view.AppCreateWindow("confirmOrder.html");
+			});
+			//点击编辑商品页面
+			document.getElementById("editgoods").addEventListener('tap', function(e) {
+				view.AppCreateWindow("editgoods.html");
+			});
+			//加载购物车列表
+			function loadShopCartData() {
+				//加载扫描数据
+				view.DBquery('select * from shopCart', function(len, shopCartData) {
+					
+					var datahtml = "";
+					mui.each(shopCartData, function(index, _data) {
+						console.log("拿到数据了:" + JSON.stringify(_data));
+						datahtml += '<li class="mui-table-view-cell mui-checkbox mui-left  mui-media">' +
+							'<input name="goodIds" type="checkbox" value="' + _data['scid'] + '">' +
+							'<div>' +
+							'<img class="mui-media-object mui-pull-left" src="' + _data['goodsImage'] + '">' +
+							'<div class="mui-media-body">' +
+							'<p class="mui-pull-right cl-orang">￥' + _data['goodPrice'] + '<br><span class="mui-pull-right cl-gray">x' + _data['goodsNum'] + '</span></p>' +
+							'<p class="mui-col-xs-8 buy-shoptitle">' + _data['goodName'] + '</p>' +
+							'<h6>尺寸：' + _data['goodsSpec'] + '<br>颜色：' + _data['goodsColor'] + '</h6>' +
+							'</div>' +
+							'</div>' +
+							'</li>';
+					});
+					document.getElementById("shopCartData").innerHTML = datahtml;
+				}, function(error) {
+					console.log(error.message);
+				});
+			}
+		</script>
+	</body>
+
+</html>

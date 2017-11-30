@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>会员</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" href="../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style>
+			html,body{height: 100%;}
+			body,.mui-content,.mui-slider-group{background-color: #f9f9f9;}
+			dd{padding: 0px ;}
+			li span{line-height: 40px;}
+			#slider{position: fixed;top: 0;}
+			.vipitem{margin:0 20px;}
+			.mui-content{padding: 44px 0 10px 0;height: 100%;}
+			.mui-segmented-control .mui-control-item{line-height: 44px;}
+			.mui-control-content .mui-loading {margin-top: 50px;}
+			.mui-slider-progress-bar{background: #ff821c;}
+			.mui-slider-item{border: none;}
+			.iconleft{color: #ff821c;font-size: 32px;font-weight: bold;margin: 0 10px;line-height: 24px;}
+			.mui-icon-forward{line-height: 50px;color: #cbcbd0;}
+			.mui-icon{line-height: 40px;color: #cbcbd0;}
+			.mui-table-view-cell{font-size: 14px;}
+			.mui-table-view-cell:after{left: 70px;}
+			.setprice{height: 180px;margin-top: -110px;}
+			#setbox{width: 100%;padding: 11px 15px;}
+		</style>
+	</head>
+
+	<body>
+			<!--顶部选项卡-->
+			<div id="slider" class="mui-slider">
+				<div id="sliderSegmentedControl" class=" mui-segmented-control mui-segmented-control-inverted">
+					<span class="vipitem activenav memberbtn">
+						会员
+					</span>
+					<span class="vipitem labelbtn">
+						标签
+					</span>
+					<span class="vipitem messagebtn">
+						消息
+					</span>
+				</div>
+				<span class="iconfont icon-iconbangzu headericon" style="color: #ff821c;position: absolute;right: 20px;top: 14px;font-size: 22px;"></span>
+			</div>
+			<!--会员-->
+			<div class="mui-content membercontent">
+				<!--留边框-->
+				<div class="contentbox">
+					<!--会员筛选-->
+					<div class="vip_sa">
+						<span class="iconfont icon-mofabang mui-pull-left iconleft"></span>
+						<div class="vipmofa mui-pull-left">
+							<dl>
+								<dd style="font-size: 18px;">会员筛选</dd>
+								<dd style="color: #bcbcbc;">会员人数过多?不知道怎么管理？试试筛...</dd>
+							</dl>
+						</div>
+						<span class="iconfont icon-arrowright mui-pull-right iconright"></span>
+					</div>
+					<!--全部num-->
+					<div class="vipbtn">
+						<div class="vipqbbtn vipqb mui-pull-left">
+							全部
+						</div>
+						<div class="vipqbbtn ddd mui-pull-left">
+							
+						</div>
+						<div class="vipmy mui-pull-left">
+							我的
+						</div>
+					</div>
+					<!--num-->
+					<div class="num">
+						<ul class="numul mui-flex">
+							<li class="mui-flex1">
+								<span class="allnum">10</span>
+								<span class="alltxt">会员总数</span>
+							</li>
+							<li class="fu">
+								<span style="font-size: 20px;">=</span>
+							</li>
+							<li class="mui-flex1">
+								<span class="allnum">5</span>
+								<span class="alltxt">开卡</span>
+							</li>
+							<li class="fu">
+								<span style="font-size: 20px;">+</span>
+							</li>
+							<li class="mui-flex1">
+								<span class="allnum">5</span>
+								<span class="alltxt">未开卡</span>
+							</li>
+							<li class="fu" style="margin: 12px 0 0 0;">
+								<span style="border: 1px solid #b3b3b3;height: 40px;display: inline-block;"></span>
+							</li>
+							<li class="mui-flex1">
+								<span class="allnum">0</span>
+								<span class="alltxt">开通会员</span>
+							</li>
+						</ul>
+					</div>
+					<!--搜索会员-->
+					<div class="searchbox">
+					    <input id="search" type="search" class="mui-input-clear" placeholder="使用微信昵称、备注姓名、手机号、会员卡号搜索会员">
+					</div>
+					<!--账户头像信息等-->
+				    <ul class="mui-table-view ulinfo" tourl="memberinfo.html">
+					    <li class="mui-table-view-cell" >
+				        	 <div class="left mui-pull-left">
+					        	<div class="tou">
+					        		
+					        	</div>
+					        </div>
+					        <div class="right mui-pull-left">
+					        	<ul>
+					        		<li id="name">四风谷<span class="iconfont icon-duigoutuijian gou"></span><span class="iconfont icon-icon61 lj"></span></li>
+					        		<li>
+					        			<span class="vipname">普通会员</span><span class="br">|</span><span class="jifennum">0</span><span class="jifentxt">积分</span>
+					        		</li>
+					        	</ul>
+					        </div>
+					        <span class="mui-icon mui-icon-forward mui-pull-right" ></span>
+					    </li>
+					</ul>
+					 
+				</div>
+			</div>
+			
+			<!--标签-->
+			<div class="mui-content labelcontent">
+				<!--访问数量列表-->
+			    <ul class="mui-table-view" style="margin-top: 3px;">
+					<li class="mui-table-view-cell">
+						<div class="roundbg">
+							<div class="iconfont icon-biaoqian"></div>
+						</div>
+						今日推荐回访(<span id="todaynum">0</span>)
+						<span class="mui-pull-right mui-icon mui-icon-forward"></span>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="roundbg">
+							<div class="iconfont icon-biaoqian"></div>
+						</div>
+						果果(<span id="usernum">1</span>)
+						<span class="mui-pull-right mui-icon mui-icon-forward"></span>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="roundbg">
+							<div class="iconfont icon-biaoqian"></div>
+						</div>
+						测试(<span id="testnum">1</span>)
+						<span class="mui-pull-right mui-icon mui-icon-forward"></span>
+					</li>
+					<li class="mui-table-view-cell">
+						<div class="roundbg">
+							<div class="iconfont icon-biaoqian"></div>
+						</div>
+						成都(<span id="citynum">3</span>)
+						<span class="mui-pull-right mui-icon mui-icon-forward"></span>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="mui-content messagecontent">
+			<!--留边框-->
+				<div class="contentbox">
+					<!--会员群发-->
+					<div class="vip_sa" tourl="mass.html">
+						<span class="iconfont icon-huiyuanqunfa mui-pull-left iconleft"></span>
+						<div class="vipmofa mui-pull-left">
+							<dl>
+								<dd style="font-size: 18px;">会员群发</dd>
+								<dd style="color: #bcbcbc;">批量给我的会员发消息</dd>
+							</dl>
+						</div>
+						<span class="iconfont icon-arrowright mui-pull-right" style="padding: 0 10px 0 0;line-height: 34px;color: #bcbcbc;"></span>
+					</div>
+				</div>
+			</div>
+			
+			<!--添加标签-->
+			<div class="setpricebox memberbackdrop">
+		    	<div class="setprice">
+		    		<h4>请输入标签名称</h4>
+		    		<p>标签不能包含','</p>
+		    		<div class="setinputbox">
+		    			<input type="text" name="setbox" id="setbox" value="" placeholder="请输入修改的价格"/>
+		    		</div>
+		    		<div class="setbuttom">
+		    			<div class="mui-flex">
+				    		<div class="mui-flex1 qx">
+				    			取消
+				    		</div>
+				    		<div class="" style="height: 35px;width: 1px;border-left: 1px solid #CCCCCC;"></div>
+				    		<div class="mui-flex1 qd">
+				    			确定 
+				    		</div>
+				    	</div>
+		    		</div>
+		    	</div>
+		    </div>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+			mui.init();
+			mui.plusReady(function(){
+		        view=new App();
+		        //主列表点击事件
+				mui('body').on('tap', '.vip_sa', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				mui('body').on('tap', '.ulinfo', function() {
+					if(this.getAttribute('tourl')=="null"||this.getAttribute('tourl')=="")
+					{
+						
+					}else{
+						view.AppCreateWindow(this.getAttribute('tourl'));
+					}
+				});
+				
+		    });
+			mui('body').on('tap','.memberbtn',function(){
+				$('.membercontent').fadeIn(300).siblings('.mui-content').fadeOut(200);
+				$(this).addClass('activenav').siblings().removeClass('activenav');
+				$('.headericon').attr('class','iconfont icon-iconbangzu headericon');
+			});
+			mui('body').on('tap','.labelbtn',function(){
+				$('.labelcontent').fadeIn(300).siblings('.mui-content').fadeOut(200);
+				$(this).addClass('activenav').siblings().removeClass('activenav');
+				$('.headericon').attr('class','iconfont icon-tubiao04 headericon');
+			});
+			mui('body').on('tap','.messagebtn',function(){
+				$('.messagecontent').fadeIn(300).siblings('.mui-content').fadeOut(200);
+				$(this).addClass('activenav').siblings().removeClass('activenav');
+				$('.headericon').attr('class','headericon'); 
+			});
+			mui('body').on('tap','.icon-tubiao04',function(){
+				$('.memberbackdrop').fadeIn(150);
+			});
+			mui('body').on('tap','.qx',function(){
+				$('.memberbackdrop').fadeOut(150);
+				$('#setbox').val('');
+			});
+			
+			$(function(){
+				$('#setbox').on('input',function(){
+					var reg=/\,|\，/;
+					if(reg.test($(this).val())){
+						$('.setinputbox').css('border-color','red');
+						return false; 
+					}else{
+						$('.setinputbox').css('border-color','#CCCCCC');
+						mui('body').on('tap','.qd',function(){
+							$('.memberbackdrop').fadeOut(150);
+						}); 
+					}
+				});
+			})
+		</script>
+
+	</body>
+
+</html>

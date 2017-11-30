@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			html{height: 100%;}
+			body,.mui-content{background: #f9f9f9;height: 100%;}
+			header{border-bottom: 1px solid #EEEEEE !important;}
+			.mui-bar-footer{background: white;box-shadow: none;}
+			.mui-table-view:after{height: 0px;}
+			.checkedbox{border: none !important;}
+			.titlebox{width: 34%;}
+			.shopnum{border-left: 1px solid #CCCCCC;border-right: 1px solid #CCCCCC;line-height: 37px;padding: 0 12px;}
+			.mui-bar-footer{padding: 0 20px;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   	<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">收银台</h1>
+		    <span class="mui-pull-right confirmbtn orange">保存</span>
+		</header>
+		<div class="mui-content">
+			<!--中间添加按钮-->
+			<div class="addshopbox" style="display: none;">
+			    <div class="addshop">
+			    	<span class="iconfont icon-plus" style="color: #AAAAAA;"></span>
+			    </div>
+			    <p>查询列表中添加</p>
+		   </div>
+		    <!--商品详情-->
+		    <ul class="mui-table-view">
+				<li class="editshop">
+					<!--勾-->
+					<div id="checkbtn" class="iconfont icon-dagou mui-pull-left goubtn"></div>
+					<!--商品图片-->
+					<div class="shopimgbox mui-pull-left">
+						<img src="../images/arclist/face.png"/>
+					</div>
+					<!--商品标题盒子-->
+					<div class="titlebox mui-pull-left">
+						<div class="buy-shoptitle">2017春季新款童装17111753男童弧形分皇嘉富豪家纺</div>
+						<div class="shopsize">
+							尺寸:<span class="">100cm</span>
+						</div>
+						<div class="shopsize">
+							颜色:<span class="">牛仔蓝</span>
+						</div>
+					</div>
+					<div class="add-minusbox mui-pull-right">
+						<span class="minus mui-pull-left iconfont icon-jian">
+							
+						</span>
+						<div class="shopnum mui-pull-left">
+							1
+						</div>
+						<span class="add mui-pull-left iconfont icon-plus">
+							
+						</span>
+					</div>
+				</li>
+				
+				<li class="editshop">
+					<!--勾-->
+					<div id="checkbtn" class="iconfont icon-dagou mui-pull-left goubtn"></div>
+					<!--商品图片-->
+					<div class="shopimgbox mui-pull-left">
+						<img src="../images/arclist/face.png"/>
+					</div>
+					<!--商品标题盒子-->
+					<div class="titlebox mui-pull-left">
+						<div class="buy-shoptitle">7春季新款童装17111753男童弧形分皇嘉富豪家纺</div>
+						<div class="shopsize">
+							尺寸:<span class="">100cm</span>
+						</div>
+						<div class="shopsize">
+							颜色:<span class="">牛仔蓝</span>
+						</div>
+					</div>
+					<div class="add-minusbox mui-pull-right">
+						<span class="minus mui-pull-left iconfont icon-jian">
+							
+						</span>
+						<div class="shopnum mui-pull-left">
+							1
+						</div>
+						<span class="add mui-pull-left iconfont icon-plus">
+							
+						</span>
+					</div>
+				</li>
+				<!--总共价格-->
+				<li class="editshop"><span class="mui-pull-right allprice">121.00</span><span class="mui-pull-right">共计￥</span></li>
+		    </ul>
+		    
+		    
+		    <!--底部全选-->
+			<div class="mui-bar mui-bar-footer">
+				<div class="allcheckedbox mui-pull-left">
+					<div id="checkbtn" class="iconfont icon-dagou mui-pull-left allbtn" style="margin: 10px 5px 0 0;"></div>
+					<span class="allcheckedtxt backsize vipite orange">全选</span>
+				</div>
+				
+				<div class="delbtn mui-pull-right backsize">
+					<div id="delicon" class="iconfont icon-shanchu orange"></div>
+					<div class="deltxt">
+						删除
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			var goulong=$(".goubtn").length;
+			//单个打钩
+			mui("body").on("click","#checkbtn",function(){
+				if($(this).hasClass("checkedbox")){
+					$(this).removeClass("checkedbox");
+					for(var i=0;i<goulong;i++){
+						if($(".goubtn").eq(i).hasClass("checkedbox")==false){
+							var fal=false;
+						}
+					}
+					if(fal==false){
+						$(".allbtn").removeClass("checkedbox");
+					}
+				}
+				else{
+					$(this).addClass("checkedbox");
+					for(var i=0;i<goulong;i++){
+						if($(".goubtn").eq(i).hasClass("checkedbox")==false){
+							var fal=false;
+						}
+					}
+					if(fal!==false){
+						$(".allbtn").addClass("checkedbox");
+					}
+				}
+			});
+			//全选按钮
+			mui("body").on("click",".allbtn",function(){
+				for(var i=0;i<goulong;i++){
+					if($(".goubtn").eq(i).hasClass("checkedbox")==false){
+						var fal=false;
+					}
+				}
+				if(fal!==false){
+					$(".icon-dagou").removeClass("checkedbox");
+				}else{
+					$(".icon-dagou").addClass("checkedbox");
+				}
+			});
+			//删除键
+			mui("body").on("click",".delbtn",function(){
+				for(var i=0;i<goulong;i++){
+					if($(".goubtn").eq(i).hasClass("checkedbox")==false){
+						var fal=false;
+					}
+				}
+				if(fal==false){
+					for(var i=0;i<goulong;i++){
+						if($(".goubtn").eq(i).hasClass("checkedbox")==true){
+							$(".goubtn").eq(i).parent().remove();
+						}
+					}
+				}
+				else{
+					$("ul").remove();
+					$(".allbtn").removeClass("checkedbox");
+				}
+			});
+			//商品数量
+			//加
+			mui("body").on("click",".add",function(){
+				var num=parseInt($(this).prev().text());
+				num+=1;
+				$(this).prev().text(num);
+			});
+			//减
+			mui("body").on("click",".minus",function(){
+				var num=parseInt($(this).next().text());
+				if(num>1){
+					num-=1;
+					$(this).next().text(num);
+				}
+			});
+		</script> 
+	</body>
+
+</html>

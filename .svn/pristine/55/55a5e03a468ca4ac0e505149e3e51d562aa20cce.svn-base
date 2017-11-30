@@ -1,0 +1,312 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.min.css" />
+		<style type="text/css">
+
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>返回
+				</button>
+			<h1 class="mui-title">发布商品-第一步</h1>
+			<button class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" id="nextStep">下一步</button>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>名称</label>
+					<input type="text" id="goodsName" placeholder="建议15字以内(必填)">
+				</div>
+				<div class="mui-input-row">
+					<label>品类</label>
+					<h4 id="procate" data-id="100055">请选择分类</h4>
+				</div>
+				<div class="mui-input-row">
+					<label>品牌</label>
+					<h4 id="goodBrand" data-id="100055">请选择品牌</h4>
+				</div>
+				<div class="mui-input-row">
+					<label>吊牌价</label>
+					<input type="number" id="tagPrice" placeholder="0.00">
+				</div>
+				<div class="mui-input-row">
+					<label>市场价</label>
+					<input type="number" id="markPrice" placeholder="0.00">
+				</div>
+				<div class="mui-input-row">
+					<label>款号</label>
+					<input type="text" class="mui-input-clear" id="goodsSPU" placeholder="请输入商品的款号" data-input-clear="5">
+				</div>
+				<div class="mui-input-row">
+					<label>上市年份</label>
+					<h4 id="marketYear" data-id="100055">请选择年份</h4>
+				</div>
+				<div class="mui-input-row">
+					<label>上市季节</label>
+					<h4 id="marketSeason" data-id="100055">请选择季节</h4>
+				</div>
+				<div class="mui-input-row">
+					<label>性别</label>
+					<h4 id="goodSex" data-id="100055">请选择性别</h4>
+				</div>
+			</form>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/mui.picker.min.js"></script>
+		<script src="../js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/main.js"></script>
+		<script type="text/javascript">
+			var view = null;
+			var good = {
+				"guideId": "",
+				"userBelong": "",
+				"userToken": "",
+				"goodsName": "",
+				"goodsPrice": "",
+				"goodsTruePrice": "",
+				"classId": "",
+				"className": "",
+				"brandId": "",
+				"brandName": "",
+				"goods_spu": "",
+				"goodsImg": "",
+				"sex": "",
+				"sexName": "",
+				"yearMarket": "",
+				"seasonMarket": "",
+				"seasonMarketName": "",
+				"specifications": ""
+			}
+			mui.init({
+				beforeback: function() {
+					//获得列表界面的webview  
+					var list = plus.webview.currentWebview().opener();
+					//触发列表界面的自定义事件（refresh）,从而进行数据刷新  
+					mui.fire(list, 'refresh');
+					//返回true，继续页面关闭逻辑  
+					return true;
+				}
+			});
+			mui.plusReady(function() {
+				plus.navigator.setStatusBarBackground('');
+				view = new App();
+			});
+			document.getElementById("nextStep").addEventListener('tap', function(e) {
+				var goodName=document.getElementById('goodsName').value;
+				var tprice=document.getElementById('tagPrice').value;
+				var mprice=document.getElementById('markPrice').value;
+				var spu=document.getElementById('goodsSPU').value;
+				if(goodName.length>2)
+				{
+					good.goodsName=goodName;
+				}
+				else{
+					mui.toast("请输入商品名称！");
+					return;
+				}
+				console.log(tprice);
+				
+				if(tprice>0)
+				{
+					good.goodsPrice=tprice;
+				}
+				else{
+					mui.toast("请输入商品吊牌价！");
+					return;
+				}
+				if(mprice>0)
+				{
+					good.goodsTruePrice=mprice;
+				}
+				else{
+					mui.toast("请输入商品市场价！");
+					return;
+				}
+				if(spu.length>2)
+				{
+					good.goods_spu=spu;
+				}
+				else{
+					mui.toast("请输入商品款号！");
+					return;
+				}
+				if(good.classId=="")
+				{
+					mui.toast("请选择商品分类！");
+					return;
+				}
+				if(good.brandId=="")
+				{
+					mui.toast("请选择商品品牌！");
+					return;
+				}
+				if(good.sex=="")
+				{
+					mui.toast("请选择商品性别！");
+					return;
+				}
+				if(good.yearMarket=="")
+				{
+					mui.toast("请选择商品上市年份！");
+					return;
+				}
+				if(good.seasonMarket=="")
+				{
+					mui.toast("请选择商品上市季节！");
+					return;
+				}
+				var extras = {
+					goodinfo: good
+				};
+				view.AppCreateWindow("addGoodS2.html",null, null, extras);
+			});
+			document.getElementById('goodSex').addEventListener('tap', function() {
+				var sexArray = [{
+					title: "女"
+				}, {
+					title: "男"
+				}, {
+					title: "通用"
+				}];
+				plus.nativeUI.actionSheet({
+					title: "请选择性别",
+					cancel: "取消",
+					buttons: sexArray
+				}, function(event) {
+					var index = event.index;
+					switch(index) {
+						case 1:
+							good.sex = '1';
+							good.sexName = '女';
+						    document.getElementById('goodSex').innerHTML='女';
+							break;
+						case 2:
+							good.sex = '2';
+							good.sexName = '男';
+							document.getElementById('goodSex').innerHTML='男';
+							break;
+						case 3:
+							good.sex = '0';
+							good.sexName = '通用';
+							document.getElementById('goodSex').innerHTML='通用';
+							break;
+					}
+				});
+			}, false);
+			document.getElementById('marketSeason').addEventListener('tap', function() {
+				var sexArray = [{
+					title: "春"
+				}, {
+					title: "夏"
+				}, {
+					title: "秋"
+				}, {
+					title: "冬"
+				}];
+				plus.nativeUI.actionSheet({
+					title: "请选择上市季节",
+					cancel: "取消",
+					buttons: sexArray
+				}, function(event) {
+					var index = event.index;
+					switch(index) {
+						case 1:
+							good.seasonMarket = '1';
+							good.seasonMarketName = '春';
+							document.getElementById('marketSeason').innerHTML='春';
+							break;
+						case 2:
+							good.seasonMarket = '2';
+							good.seasonMarketName = '夏';
+							document.getElementById('marketSeason').innerHTML='夏';
+							break;
+						case 3:
+							good.seasonMarket = '3';
+							good.seasonMarketName = '秋';
+							document.getElementById('marketSeason').innerHTML='秋';
+							break;
+						case 4:
+							good.seasonMarket = '4';
+							good.seasonMarketName = '冬';
+							document.getElementById('marketSeason').innerHTML='冬';
+							break;
+					}
+				});
+			}, false);
+			document.getElementById("marketYear").addEventListener('tap', function(e) {
+				var cdate = new Date();
+				var beginYear = cdate.DateAdd('y', -7).format('yyyy');
+				var endyear = cdate.DateAdd('y', +7).format('yyyy');
+				var optionsJson = '{"type":"month","beginYear":' + beginYear + ',"endYear":' + endyear + '}';
+				var options = JSON.parse(optionsJson);
+				/*
+				 * 首次显示时实例化组件
+				 * 示例为了简洁，将 options 放在了按钮的 dom 上
+				 * 也可以直接通过代码声明 optinos 用于实例化 DtPicker
+				 */
+				var picker = new mui.DtPicker(options);
+				picker.show(function(rs) {
+					/*
+					 * rs.value 拼合后的 value
+					 * rs.text 拼合后的 text
+					 * rs.y 年，可以通过 rs.y.vaue 和 rs.y.text 获取值和文本
+					 * rs.m 月，用法同年
+					 * rs.d 日，用法同年
+					 * rs.h 时，用法同年
+					 * rs.i 分（minutes 的第二个字母），用法同年
+					 */
+					good.yearMarket=rs.y.text;
+					document.getElementById('marketYear').innerHTML=rs.y.text;
+					/* 
+					 * 返回 false 可以阻止选择框的关闭
+					 * return false;
+					 */
+					/*
+					 * 释放组件资源，释放后将将不能再操作组件
+					 * 通常情况下，不需要示放组件，new DtPicker(options) 后，可以一直使用。
+					 * 当前示例，因为内容较多，如不进行资原释放，在某些设备上会较慢。
+					 * 所以每次用完便立即调用 dispose 进行释放，下次用时再创建新实例。
+					 */
+					picker.dispose();
+				});
+			});
+			/*
+			 *  @desc 选择商品分类
+			 */
+			document.getElementById("procate").addEventListener('tap', function(e) {
+				view.AppCreateWindow("goodCate.html");
+			});
+			/*
+			 *  @desc 选择商品品牌
+			 */
+			document.getElementById("goodBrand").addEventListener('tap', function(e) {
+				view.AppCreateWindow("authBrand.html");
+			});
+
+			function getSelect(id, name, type) {
+				console.log(id, name, type);
+				if(type == "brand") {
+					document.getElementById('goodBrand').innerHTML = name;
+					good.brandId=id;
+					good.brandName=name;
+				} else if(type == "cate") {
+					document.getElementById('procate').innerHTML = name;
+					good.classId=id;
+					good.className=name;
+				}
+			}
+		</script>
+	</body>
+
+</html>

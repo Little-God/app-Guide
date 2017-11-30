@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			.mui-table-view-cell:after{left: 15px;}
+			.red{color: red;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+		   	<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+		    <h1 class="mui-title bold">查看库存</h1>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+		    <ul class="mui-table-view sort">
+				<li class="mui-table-view-cell">红色-80cm<span class="mui-pull-right red">20</span></li>
+				<li class="mui-table-view-cell">红色-90cm<span class="mui-pull-right red">20</span></li>
+				<li class="mui-table-view-cell">红色-100cm<span class="mui-pull-right red">20</span></li>
+				<li class="mui-table-view-cell">红色-110cm<span class="mui-pull-right red">20</span></li>
+				<li class="mui-table-view-cell">红色-120cm<span class="mui-pull-right red">20</span></li>
+				<li class="mui-table-view-cell">红色-130cm<span class="mui-pull-right red">20</span></li>
+			</ul>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+		</script>
+	</body>
+
+</html>

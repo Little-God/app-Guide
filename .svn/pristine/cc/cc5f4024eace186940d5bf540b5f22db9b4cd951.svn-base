@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+	<head>
+		<script>
+			console.log("用户代理: " + navigator.userAgent.match(/(iPhone|iPod|Android|iOS)/i));
+			if(!navigator.userAgent.match(/(iPhone|iPod|Android|iOS)/i)==null){
+				navigator.userAgent.match=null;
+			}
+		</script>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/iconfont.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<style type="text/css">
+			.confirmbtn{text-decoration: none;}
+			.active{border-bottom: 1px solid red;}
+			.pricesort .uptrigon{border-bottom-color: red;}
+		</style>
+	</head>
+
+	<body>
+		<!--头部-->
+		<header class="mui-bar mui-bar-nav">
+			<span class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left orange"></span><span class="vipitem orange mui-action-back backsize">返回</span>
+			<h1 class="mui-title bold">新春活动满减开始啦</h1>
+			<span class="mui-pull-right orange confirmbtn ">分享</div>
+		</header>
+		<!--内容-->
+		<div class="mui-content">
+			<!--活动图片-->
+		    <div class="activityimg">
+		    	<img src="http://dcloudio.github.io/mui/assets/img/yuantiao.jpg"/>
+		    </div>
+		    <!--活动标题-->
+		    <div class="actinfo">
+		    	<dl>
+		    		<dd><span class="acttitle">新春活动满减开始啦</span></dd>
+		    		<dd><span class="discount">满10000.00元减20.00元&nbsp;&nbsp;满600000.00元减200.00元</span></dd>
+		    		<dd>活动时间：<span class="begindate">2017.02.16</span> - <span class="enddate">2017.03.11</span></dd>
+		    		<dd><span class="acttype">新春新活动</span></dd>
+		    	</dl>
+		    </div>
+		    <!--排序按钮-->
+		    <div class="sortbtnbox mui-flex">
+		    	<div class="mui-flex1 pricesort active">
+		    		<span>价格</span>
+		    		<div class="trigonicon mui-pull-right">
+		    			<div class="uptrigon"></div>
+		    			<div class="downtrigon"></div>
+		    		</div>
+		    	</div>
+		    	<div class="mui-flex1 timesort">
+		    		<span>上架时间</span>
+		    		<div class="trigonicon mui-pull-right">
+		    			<div class="uptrigon"></div>
+		    			<div class="downtrigon"></div>
+		    		</div>
+		    	</div>
+		    </div>
+		    <!--商品-->
+		    <ul class="actshoplist">
+		    	<li>
+		    		<div class="actshopimg">
+		    			<img src="../images/arclist/face.png"/>
+		    			<div class="newlabel">
+		    				新品
+		    			</div>
+		    		</div>
+		    		<div class="acttxtbox">
+		    			<div class="acttxt">
+		    				2017新春新款童装17165456
+		    			</div>
+		    			<div class="actprice">
+		    				<span class="newprice">￥128.00</span>&nbsp;<span class="oldprice">￥189.00</span>
+		    			</div>
+		    		</div>
+		    	</li>
+		    	<li>
+		    		<div class="actshopimg">
+		    			<img src="../images/arclist/face.png"/>
+		    			<div class="newlabel">
+		    				新品
+		    			</div>
+		    		</div>
+		    		<div class="acttxtbox">
+		    			<div class="acttxt">
+		    				2017新春新款童装17165456
+		    			</div>
+		    			<div class="actprice">
+		    				<span class="newprice">￥128.00</span>&nbsp;<span class="oldprice">￥189.00</span>
+		    			</div>
+		    		</div>
+		    	</li>
+		    	<li>
+		    		<div class="actshopimg">
+		    			<img src="../images/arclist/face.png"/>
+		    			<div class="newlabel">
+		    				新品
+		    			</div>
+		    		</div>
+		    		<div class="acttxtbox">
+		    			<div class="acttxt">
+		    				2017新春新款童装17165456
+		    			</div>
+		    			<div class="actprice">
+		    				<span class="newprice">￥128.00</span>&nbsp;<span class="oldprice">￥189.00</span>
+		    			</div>
+		    		</div>
+		    	</li>
+		    </ul>
+		    <div class="ajax">
+		    	点击加载更多
+		    </div>
+		</div>
+		<script src="../js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			var num=1;
+			mui('body').on('tap','.sortbtnbox .mui-flex1',function(){
+				num+=1;
+				var findup=$(this).find('.uptrigon');
+				var finddown=$(this).find('.downtrigon');
+				if($(this).hasClass('active')){ 
+					if(num%2==0){
+						finddown.css('border-top-color','red');
+						findup.css('border-bottom-color','darkgray'); 
+					}else{
+						finddown.css('border-top-color','darkgray');
+						findup.css('border-bottom-color','red'); 
+					}
+				}else{
+					num=1;
+					finddown.css('border-top-color','darkgray');
+					findup.css('border-bottom-color','red'); 
+					$(this).addClass('active').siblings().removeClass('active');
+					$(this).siblings().find('.uptrigon').css('border-bottom-color','darkgray');
+					$(this).siblings().find('.downtrigon').css('border-top-color','darkgray');
+				}
+			});
+		</script>
+	</body>
+
+</html>
